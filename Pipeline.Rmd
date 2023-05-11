@@ -419,9 +419,9 @@ Activate the GTDBTK environment
 conda activate gtdbtk
 ``` 
 
-I located the folder with the untar GTDBTK data (GTDBTk_data/release95) and I added the path to this file to my ~/.profile (using vi)
+I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)
 ```{bash, highlight=TRUE, eval=FALSE}
-export GTDBTK_DATA_PATH=/home/kvilleneuve/GTDBTk_data/release95
+export GTDBTK_DATA_PATH=/home/genomics/release214
 ```
 
 In the folder with all your clean and completed genomes run this command with nohup
