@@ -416,7 +416,7 @@ I ran the following to inform CheckM of where the files have been placed: `check
 
 Activate the GTDBTK environment
 ```{bash, highlight=TRUE, eval=FALSE}
-conda activate gtdbtk
+conda activate gtdbtk-2.1.1
 ``` 
 
 I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)
