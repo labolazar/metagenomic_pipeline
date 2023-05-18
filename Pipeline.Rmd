@@ -548,7 +548,7 @@ perl mebs.pl -input /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/prodigal -
 ```
 
 ```{bash, highlight=TRUE, eval=FALSE}
-python3.8 mebs_vis.py rock_assembly.tsv -o /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/rock_assembly_MEBS -im_format pdf -f pdf
+python3 mebs_vis.py rock_assembly.tsv -o /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/rock_assembly_MEBS -im_format pdf -f pdf
 ``` 
 
 # Phylogenetic tree 
