@@ -526,7 +526,7 @@ To install metabolic I copied the file `metabolic_environment.txt` file from the
 
 I created the environment using `conda env create -f metabolic_environment.yml` and then followed all the other step described in the [Github wiki](https://github.com/AnantharamanLab/METABOLIC/wiki)
 
-There alos seemed to be issues with the run_to_setup.bash. I solved this problem by changing these commands in the script : 
+There also seemed to be issues with the run_to_setup.bash. I solved this problem by changing these commands in the script : 
 ```{bash, highlight=TRUE, eval=FALSE}
 curl --silent ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz  -O ko_list.gz
 curl --silent ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz  -O profiles.tar.gz
@@ -545,20 +545,11 @@ See installation and instructions on the [Github page](https://github.com/valdea
 
 ```{bash, highlight=TRUE, eval=FALSE}
 perl mebs.pl -input /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/prodigal -type genomic -comp > rock_MAGS.tsv
+```
+
+```{bash, highlight=TRUE, eval=FALSE}
 python3.8 mebs_vis.py rock_assembly.tsv -o /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/rock_assembly_MEBS -im_format pdf -f pdf
 ``` 
-
-
-perl mebs.pl -input ~/Shotgun_Project/Metagenomic_analyses/mebs/all_genomes_faa/ -type genomic -comp > genomes.tsv
-python3.8 mebs_vis.py all.tsv -o all -im_format pdf -f pdf
-
-perl mebs.pl -input ~/Shotgun_Project/Metagenomic_analyses/mebs/second_all_genomes_faaa qq -comp > 2-all-genomes.tsv
-python3.8 mebs_vis.py 2-all-genomes.tsv -o all -im_format pdf -f pdf
-
-perl mebs.pl -input ~/Shotgun_Project/Metagenomic_analyses/mebs/3_all_genomes_faa -type genomic > 3-all-genomes.tsv
-python3.8 mebs_vis.py 3-all-genomes.tsv -o all -im_format pdf -f pdf
-
-perl mebs.pl -input ~/Shotgun_Project/Metagenomic_analyses/mebs/input_faa/ -type genomic -comp > bins.tsv
 
 # Phylogenetic tree 
 
