@@ -7,7 +7,7 @@
 
         <meta name="author" content="Karine Villeneuve" />
     
-        <meta name="date" content="2023-05-11" />
+        <meta name="date" content="2023-05-17" />
     
     <title>Protocol for metagenomic analyses</title>
 
@@ -1849,7 +1849,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <ul class="authors">
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Karine Villeneuve</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-05-11</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-05-17</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -2172,9 +2172,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2>GTDBTK</h2>
 <p><a href="https://github.com/Ecogenomics/GTDBTk">Github</a></p>
 <p>Activate the GTDBTK environment</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1"></a><span class="ex">conda</span> activate gtdbtk</span></code></pre></div>
-<p>I located the folder with the untar GTDBTK data (GTDBTk_data/release95) and I added the path to this file to my ~/.profile (using vi)</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH=</span>/home/kvilleneuve/GTDBTk_data/release95</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
+<p>I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH=</span>/home/genomics/release214</span></code></pre></div>
 <p>In the folder with all your clean and completed genomes run this command with nohup</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb33-2"><a href="#cb33-2"></a><span class="ex">gtdbtk</span> classify_wf --cpus 20 --genome_dir /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp --out_dir /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output -x fa</span></code></pre></div>
@@ -2233,7 +2233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <h3>Installing</h3>
 <p>To install metabolic I copied the file <code>metabolic_environment.txt</code> file from the <a href="https://github.com/AnantharamanLab/METABOLIC/issues/27#issuecomment-777138057">issue #27</a> on the server and renamed it <code>metabolic_environment.yml</code></p>
 <p>I created the environment using <code>conda env create -f metabolic_environment.yml</code> and then followed all the other step described in the <a href="https://github.com/AnantharamanLab/METABOLIC/wiki">Github wiki</a></p>
-<p>There alos seemed to be issues with the run_to_setup.bash. I solved this problem by changing these commands in the script :</p>
+<p>There also seemed to be issues with the run_to_setup.bash. I solved this problem by changing these commands in the script :</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1"></a><span class="ex">curl</span> --silent ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz  -O ko_list.gz</span>
 <span id="cb46-2"><a href="#cb46-2"></a><span class="ex">curl</span> --silent ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz  -O profiles.tar.gz</span>
 <span id="cb46-3"><a href="#cb46-3"></a><span class="ex">curl</span> --silent ftp://ftp.ebi.ac.uk/pub/databases/merops/current_release/pepunit.lib -O pepunit.lib</span></code></pre></div>
