@@ -9,10 +9,6 @@ output: rmdformats::robobook
 knitr::opts_chunk$set(eval = FALSE) 
 ``` 
 
-This protocol was created with the help of Maggie, Val, JD and Ian from the Baker Laboratory at the University of Texas at Austin. Most of the programs are already installed on our server thanks to Mélanie Dominique and Karine Villeneuve. 
-
-This protocol is intended to guide you through the different steps required to assemble and annotate reads from shotgun sequencing. 
-
 Some program may take some time to process, we therefor recommend running the command using a shell script with **nohup**. For example on how to use, see section `Nohup`. Furthermore, two ways of running most command are described; (**1**) for one or two samples and (**2**) for multiple samples using Bash For Loop. 
 
 Conda and all the required environment have all been previously installed by Karine Villeneuve. For further information on the Anaconda setup see section ()

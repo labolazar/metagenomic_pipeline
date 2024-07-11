@@ -1,5 +1,5 @@
 --- 
-title: "Example workflow of amplicon sequence data analysis"
+title: "Metagenomic pipeline"
 author: "Karine Villeneuve"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -16,8 +16,6 @@ github-repo: rstudio/bookdown-demo
 ---
 
 # Introduction
-
-This guide is intended to walk the user through the typical R workflow for processing raw amplicon sequencing data from paired end Illumina Miseq data into a table of exact amplicon sequence variants (ASVs) present in each sample. Please note that many other extensive documentation and tutorial pages are available for packages used in this workflow, notably [dada2]() and [phyloseq](). Therefore, for issues or for further questions about certain functions I always recommend consulting the available R documentation and if available the relevant github issues sites for answers. 
 
 This guide assumes the following : 
 
