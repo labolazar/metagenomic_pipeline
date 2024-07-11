@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Protocol for metagenomic analyses</title>
+  <meta name="description" content="Protocol for metagenomic analyses" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Protocol for metagenomic analyses" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Protocol for metagenomic analyses" />
+  
+  
+  
+
+<meta name="author" content="Karine Villeneuve" />
+
+
+<meta name="date" content="2024-07-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="pre-assembly.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Workflow for amplicon sequence analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="pre-assembly.html"><a href="pre-assembly.html#pre-scripted-method"><i class="fa fa-check"></i><b>2.1</b> Pre-Scripted method</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="pre-assembly.html"><a href="pre-assembly.html#interleave"><i class="fa fa-check"></i><b>2.1.1</b> Interleave</a></li>
+<li class="chapter" data-level="2.1.2" data-path="pre-assembly.html"><a href="pre-assembly.html#trim-check-quality-with-fastqc-and-convert-to-fasta-format"><i class="fa fa-check"></i><b>2.1.2</b> Trim, check quality with FastQc and convert to Fasta format</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="pre-assembly.html"><a href="pre-assembly.html#the-scripts"><i class="fa fa-check"></i><b>2.2</b> The scripts</a></li>
+<li class="chapter" data-level="2.3" data-path="pre-assembly.html"><a href="pre-assembly.html#manually"><i class="fa fa-check"></i><b>2.3</b> Manually</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="pre-assembly.html"><a href="pre-assembly.html#unzip"><i class="fa fa-check"></i><b>2.3.1</b> Unzip</a></li>
+<li class="chapter" data-level="2.3.2" data-path="pre-assembly.html"><a href="pre-assembly.html#interleaving"><i class="fa fa-check"></i><b>2.3.2</b> Interleaving</a></li>
+<li class="chapter" data-level="2.3.3" data-path="pre-assembly.html"><a href="pre-assembly.html#sickle"><i class="fa fa-check"></i><b>2.3.3</b> Sickle</a></li>
+<li class="chapter" data-level="2.3.4" data-path="pre-assembly.html"><a href="pre-assembly.html#quality-check-with-fastqc"><i class="fa fa-check"></i><b>2.3.4</b> Quality check with Fastqc</a></li>
+<li class="chapter" data-level="2.3.5" data-path="pre-assembly.html"><a href="pre-assembly.html#fastq-to-fasta"><i class="fa fa-check"></i><b>2.3.5</b> Fastq to Fasta</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="assembly.html"><a href="assembly.html#idba"><i class="fa fa-check"></i><b>3.1.1</b> IDBA</a></li>
+<li class="chapter" data-level="3.1.2" data-path="assembly.html"><a href="assembly.html#megahit"><i class="fa fa-check"></i><b>3.1.2</b> Megahit</a></li>
+<li class="chapter" data-level="3.1.3" data-path="assembly.html"><a href="assembly.html#metaspades"><i class="fa fa-check"></i><b>3.1.3</b> Metaspades</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="assembly.html"><a href="assembly.html#post-assembly-stat"><i class="fa fa-check"></i><b>3.2</b> Post assembly-stat</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>4</b> Binning</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="binning.html"><a href="binning.html#mapping"><i class="fa fa-check"></i><b>4.1</b> Mapping</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="binning.html"><a href="binning.html#scons-wrapper-genome-mapping"><i class="fa fa-check"></i><b>4.1.1</b> Scons Wrapper (genome mapping)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="binning.html"><a href="binning.html#depth-file"><i class="fa fa-check"></i><b>4.2</b> Depth file</a></li>
+<li class="chapter" data-level="4.3" data-path="binning.html"><a href="binning.html#create-bins"><i class="fa fa-check"></i><b>4.3</b> Create bins</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>4.3.1</b> MetaBAT2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bin-quality.html"><a href="bin-quality.html"><i class="fa fa-check"></i><b>5</b> Bin quality</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="bin-quality.html"><a href="bin-quality.html#checkm"><i class="fa fa-check"></i><b>5.1</b> Checkm</a></li>
+<li class="chapter" data-level="5.2" data-path="bin-quality.html"><a href="bin-quality.html#installing-checkm"><i class="fa fa-check"></i><b>5.2</b> Installing Checkm</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bin-cleaning.html"><a href="bin-cleaning.html"><i class="fa fa-check"></i><b>6</b> Bin cleaning</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bin-cleaning.html"><a href="bin-cleaning.html#vizbin"><i class="fa fa-check"></i><b>6.1</b> Vizbin</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="taxonomy.html"><a href="taxonomy.html"><i class="fa fa-check"></i><b>7</b> Taxonomy</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="taxonomy.html"><a href="taxonomy.html#gtdbtk"><i class="fa fa-check"></i><b>7.1</b> GTDBTK</a></li>
+<li class="chapter" data-level="7.2" data-path="taxonomy.html"><a href="taxonomy.html#basic-rapid-ribosomal-rna-predictor-barrnap"><i class="fa fa-check"></i><b>7.2</b> BAsic Rapid Ribosomal RNA Predictor (Barrnap)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>8</b> Metabolic pathway</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#dram"><i class="fa fa-check"></i><b>8.1</b> DRAM</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#installing"><i class="fa fa-check"></i><b>8.1.1</b> Installing</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#metabolic"><i class="fa fa-check"></i><b>8.2</b> Metabolic</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#installing-1"><i class="fa fa-check"></i><b>8.2.1</b> Installing</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#mebs"><i class="fa fa-check"></i><b>8.3</b> Mebs</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>9</b> Phylogenetic tree</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#downloading-reference-genomes"><i class="fa fa-check"></i><b>9.1</b> Downloading reference genomes</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#bash-script"><i class="fa fa-check"></i><b>9.1.1</b> Bash script</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#gtotree"><i class="fa fa-check"></i><b>9.2</b> GToTree</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="nohup.html"><a href="nohup.html"><i class="fa fa-check"></i><b>10</b> Nohup</a></li>
+<li class="chapter" data-level="11" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html"><i class="fa fa-check"></i><b>11</b> Other tips and tricks</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#moving-files-using-scp"><i class="fa fa-check"></i><b>11.1</b> Moving files using SCP</a></li>
+<li class="chapter" data-level="11.2" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#renaiming-files"><i class="fa fa-check"></i><b>11.2</b> Renaiming files</a></li>
+<li class="chapter" data-level="11.3" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#extract-scaffhold-based-on-nane-and-coordinates-using-samtools"><i class="fa fa-check"></i><b>11.3</b> Extract scaffhold based on nane and coordinates using samtools</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Protocol for metagenomic analyses</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Protocol for metagenomic analyses</h1>
+<p class="author"><em>Karine Villeneuve</em></p>
+<p class="date"><em>2024-07-11</em></p>
+</div>
+<div id="introduction" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This guide is intended to walk the user through the typical R workflow for processing raw amplicon sequencing data from paired end Illumina Miseq data into a table of exact amplicon sequence variants (ASVs) present in each sample. Please note that many other extensive documentation and tutorial pages are available for packages used in this workflow, notably <a href="">dada2</a> and <a href="">phyloseq</a>. Therefore, for issues or for further questions about certain functions I always recommend consulting the available R documentation and if available the relevant github issues sites for answers.</p>
+<p>This guide assumes the following :</p>
+<ol style="list-style-type: decimal">
+<li><p>The user has access to the server Titan from the Lazar lab (See section [Remote login] for more details).<br />
+</p></li>
+<li><p>The user has an active VPN access.</p></li>
+<li><p>The paired-end fastq files from Illumina Miseq sequencing were transferred to the user’s home directory.</p></li>
+<li><p>The user has followed the <code>Introduction to linux</code> guide and is comfortable with basic command line functions such as :</p>
+<ul>
+<li>listing files inside a current directory (<code>ls</code>) ;</li>
+<li>moving from one directory to the other (<code>cd</code>) ;</li>
+<li>creating new directory (<code>mkdir</code>) ; and</li>
+<li>moving / copying (<code>mv</code>/<code>cp</code>) files from one directory to the other.</li>
+</ul></li>
+</ol>
+<div id="setting-up-your-environment" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Setting up your environment<a href="index.html#setting-up-your-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Keeping your files organized is a skill that has a high long-term payoff. As you are in the thick of an analysis, you may underestimate how many files/folders you have floating around. But a short time later, you may return to your files and realize your organization was not as clear as you hoped, which can ultimately lead to significantly slower research progress. Furthermore, one must keep in mind that someone unfamiliar with your project should be able to look at your computer files and understand in detail what you did and why.</p>
+<p>While there’s a lot of ways to keep your files organized, and there’s not a “one size fits all” organizational solution, below we propose a simple organizational scheme which is project-oriented, maintainable and ultimately follows consistent patterns for amplicon sequence analysis. Please note that the proposed workflow assumes such organization.</p>
+<pre><code>┌─ ~ -------------------------------- Your home directory
+│   ├── chapter1_metagenomics_aquifer ------ Project with a short but meaningfull name 
+│       ├── 01_raw_data --------------- Raw files (i.e. fastq files generated by sequencing)
+│       ├── 02_pre-assembly -----------
+│       ├── 03_assembly ---------------
+│       ├── 04_filtered_contigs -------
+│       ├── 05_ -------
+------------------ Project-specific final datasets for publication
+│       ├── 03_assembly
+│       ├── figures ----------------- Project-specific final figures for publication
+│       └── scripts ----------------- Project-specific scripts
+└──────────────────────────────────────────────────────────────────</code></pre>
+<p>Further reading about organizing files and foldes :</p>
+<ul>
+<li><p><a href="https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/organizing-your-project.html">Organizing your project</a> by the Johns Hopkins Data Science Lab</p></li>
+<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424#s9">A Quick Guide to Organizing Computational Biology Projects</a> by William Stafford Noble, 2009</p></li>
+<li><p><a href="https://www.reddit.com/r/bioinformatics/comments/3rdlhf/help_how_do_you_organize_your_projectsfiles/">Reddit post</a></p></li>
+<li><p><a href="https://www.mdc-berlin.de/research-data-management/organizing-your-data">Organizing your data</a> by The Max Delbrück Center</p></li>
+</ul>
+</div>
+<div id="download-fastqs-files-from-illumina-basespace-sequence-hub" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Download fastqs files from Illumina BaseSpace Sequence Hub<a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Open the link found in the email sent by Geneviève Bourret.</p>
+<p>If this is your first time downloading your fastqs create a new BaseSpace Sequence Hub account using the email address to which the email from Geneviève was addressed (normally this would be your UQAM’s email)</p></li>
+<li><p>On the pop-up window informing you that the CERMO-FC has shared the following item with you click <code>ACCEPT</code>.</p></li>
+<li><p>Click on the <code>PROJECTS</code> tab in the upper section of the page.</p></li>
+<li><p>Select your project and then click on the second round logo from the left which looks like a blank page and in the drop-down menu select <code>DOWNLOAD</code> then <code>PROJECT</code>.</p></li>
+<li><p>If required, download the Illumina Basespace downloader by clicking <code>INSTALL DOWNLOAD</code> and follow the instructions. Otherwise simply click <code>DOWNLOAD</code> to begin downloading your fastqs.</p></li>
+<li><p>Once the download is complete you will find inside the folder a folder for each of your sample inside which the forward and reverse read are both found in another folder. Instead of going into each folder individually and copying the fastqs manually we can use the terminal to do the job for us. From a new local terminal window navigate to the folder containing all the folders and execute the following command after having modified <code>/path/to/directory/where/to/move/fastqs</code> to the actual path where you wish to move your fastqs.</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">find</span> ./ <span class="at">-name</span> <span class="st">&quot;*.gz&quot;</span> <span class="at">-exec</span> cp <span class="at">-prv</span> <span class="st">&quot;{}&quot;</span> <span class="st">&quot;/path/to/directory/where/to/move/fastqs&quot;</span> <span class="st">&quot;;&quot;</span></span></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li><p>Finally you can transfer your fastqs to your assigned server using any File Transfer Protocol (FTP) clients (such as <a href="https://filezilla-project.org/">FileZilla</a> or <a href="https://cyberduck.io/">Cyberduck</a>) or using the SCP (secure copy) command-line utility.</p>
+<p>For SCP you can copy an entire folder by opening a new local terminal window and navigating to the directory containing the folder with the fastqs. From that directory execute the following command. You will then be asked to enter the password for your user on the server.</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> name_of_foler_with_fastqs username@server.bio.uqam.ca:/path/to/copy/folder</span></code></pre></div>
+
+<p>This protocol was created with the help of Maggie, Val, JD and Ian from the Baker Laboratory at the University of Texas at Austin. Most of the programs are already installed on our server thanks to Mélanie Dominique and Karine Villeneuve.</p>
+<p>This protocol is intended to guide you through the different steps required to assemble and annotate reads from shotgun sequencing.</p>
+<p>Some program may take some time to process, we therefor recommend running the command using a shell script with <strong>nohup</strong>. For example on how to use, see section <code>Nohup</code>. Furthermore, two ways of running most command are described; (<strong>1</strong>) for one or two samples and (<strong>2</strong>) for multiple samples using Bash For Loop.</p>
+<p>Conda and all the required environment have all been previously installed by Karine Villeneuve. For further information on the Anaconda setup see section ()</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="pre-assembly.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

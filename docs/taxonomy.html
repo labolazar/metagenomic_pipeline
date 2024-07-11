@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Taxonomy | Protocol for metagenomic analyses</title>
+  <meta name="description" content="7 Taxonomy | Protocol for metagenomic analyses" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Taxonomy | Protocol for metagenomic analyses" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Taxonomy | Protocol for metagenomic analyses" />
+  
+  
+  
+
+<meta name="author" content="Karine Villeneuve" />
+
+
+<meta name="date" content="2024-07-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bin-cleaning.html"/>
+<link rel="next" href="metabolic-pathway.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Workflow for amplicon sequence analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="pre-assembly.html"><a href="pre-assembly.html#pre-scripted-method"><i class="fa fa-check"></i><b>2.1</b> Pre-Scripted method</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="pre-assembly.html"><a href="pre-assembly.html#interleave"><i class="fa fa-check"></i><b>2.1.1</b> Interleave</a></li>
+<li class="chapter" data-level="2.1.2" data-path="pre-assembly.html"><a href="pre-assembly.html#trim-check-quality-with-fastqc-and-convert-to-fasta-format"><i class="fa fa-check"></i><b>2.1.2</b> Trim, check quality with FastQc and convert to Fasta format</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="pre-assembly.html"><a href="pre-assembly.html#the-scripts"><i class="fa fa-check"></i><b>2.2</b> The scripts</a></li>
+<li class="chapter" data-level="2.3" data-path="pre-assembly.html"><a href="pre-assembly.html#manually"><i class="fa fa-check"></i><b>2.3</b> Manually</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="pre-assembly.html"><a href="pre-assembly.html#unzip"><i class="fa fa-check"></i><b>2.3.1</b> Unzip</a></li>
+<li class="chapter" data-level="2.3.2" data-path="pre-assembly.html"><a href="pre-assembly.html#interleaving"><i class="fa fa-check"></i><b>2.3.2</b> Interleaving</a></li>
+<li class="chapter" data-level="2.3.3" data-path="pre-assembly.html"><a href="pre-assembly.html#sickle"><i class="fa fa-check"></i><b>2.3.3</b> Sickle</a></li>
+<li class="chapter" data-level="2.3.4" data-path="pre-assembly.html"><a href="pre-assembly.html#quality-check-with-fastqc"><i class="fa fa-check"></i><b>2.3.4</b> Quality check with Fastqc</a></li>
+<li class="chapter" data-level="2.3.5" data-path="pre-assembly.html"><a href="pre-assembly.html#fastq-to-fasta"><i class="fa fa-check"></i><b>2.3.5</b> Fastq to Fasta</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="assembly.html"><a href="assembly.html#idba"><i class="fa fa-check"></i><b>3.1.1</b> IDBA</a></li>
+<li class="chapter" data-level="3.1.2" data-path="assembly.html"><a href="assembly.html#megahit"><i class="fa fa-check"></i><b>3.1.2</b> Megahit</a></li>
+<li class="chapter" data-level="3.1.3" data-path="assembly.html"><a href="assembly.html#metaspades"><i class="fa fa-check"></i><b>3.1.3</b> Metaspades</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="assembly.html"><a href="assembly.html#post-assembly-stat"><i class="fa fa-check"></i><b>3.2</b> Post assembly-stat</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>4</b> Binning</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="binning.html"><a href="binning.html#mapping"><i class="fa fa-check"></i><b>4.1</b> Mapping</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="binning.html"><a href="binning.html#scons-wrapper-genome-mapping"><i class="fa fa-check"></i><b>4.1.1</b> Scons Wrapper (genome mapping)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="binning.html"><a href="binning.html#depth-file"><i class="fa fa-check"></i><b>4.2</b> Depth file</a></li>
+<li class="chapter" data-level="4.3" data-path="binning.html"><a href="binning.html#create-bins"><i class="fa fa-check"></i><b>4.3</b> Create bins</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>4.3.1</b> MetaBAT2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="bin-quality.html"><a href="bin-quality.html"><i class="fa fa-check"></i><b>5</b> Bin quality</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="bin-quality.html"><a href="bin-quality.html#checkm"><i class="fa fa-check"></i><b>5.1</b> Checkm</a></li>
+<li class="chapter" data-level="5.2" data-path="bin-quality.html"><a href="bin-quality.html#installing-checkm"><i class="fa fa-check"></i><b>5.2</b> Installing Checkm</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bin-cleaning.html"><a href="bin-cleaning.html"><i class="fa fa-check"></i><b>6</b> Bin cleaning</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bin-cleaning.html"><a href="bin-cleaning.html#vizbin"><i class="fa fa-check"></i><b>6.1</b> Vizbin</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="taxonomy.html"><a href="taxonomy.html"><i class="fa fa-check"></i><b>7</b> Taxonomy</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="taxonomy.html"><a href="taxonomy.html#gtdbtk"><i class="fa fa-check"></i><b>7.1</b> GTDBTK</a></li>
+<li class="chapter" data-level="7.2" data-path="taxonomy.html"><a href="taxonomy.html#basic-rapid-ribosomal-rna-predictor-barrnap"><i class="fa fa-check"></i><b>7.2</b> BAsic Rapid Ribosomal RNA Predictor (Barrnap)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>8</b> Metabolic pathway</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#dram"><i class="fa fa-check"></i><b>8.1</b> DRAM</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#installing"><i class="fa fa-check"></i><b>8.1.1</b> Installing</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#metabolic"><i class="fa fa-check"></i><b>8.2</b> Metabolic</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#installing-1"><i class="fa fa-check"></i><b>8.2.1</b> Installing</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#mebs"><i class="fa fa-check"></i><b>8.3</b> Mebs</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>9</b> Phylogenetic tree</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#downloading-reference-genomes"><i class="fa fa-check"></i><b>9.1</b> Downloading reference genomes</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#bash-script"><i class="fa fa-check"></i><b>9.1.1</b> Bash script</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#gtotree"><i class="fa fa-check"></i><b>9.2</b> GToTree</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="nohup.html"><a href="nohup.html"><i class="fa fa-check"></i><b>10</b> Nohup</a></li>
+<li class="chapter" data-level="11" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html"><i class="fa fa-check"></i><b>11</b> Other tips and tricks</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#moving-files-using-scp"><i class="fa fa-check"></i><b>11.1</b> Moving files using SCP</a></li>
+<li class="chapter" data-level="11.2" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#renaiming-files"><i class="fa fa-check"></i><b>11.2</b> Renaiming files</a></li>
+<li class="chapter" data-level="11.3" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#extract-scaffhold-based-on-nane-and-coordinates-using-samtools"><i class="fa fa-check"></i><b>11.3</b> Extract scaffhold based on nane and coordinates using samtools</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Protocol for metagenomic analyses</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="taxonomy" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Taxonomy<a href="taxonomy.html#taxonomy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="gtdbtk" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> GTDBTK<a href="taxonomy.html#gtdbtk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://github.com/Ecogenomics/GTDBTk">Github</a></p>
+<p>Activate the GTDBTK environment</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="taxonomy.html#cb34-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
+<p>I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="taxonomy.html#cb35-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
+<p>In the folder with all your clean and completed genomes run this command with nohup</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="taxonomy.html#cb36-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb36-2"><a href="taxonomy.html#cb36-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
+<p>Once it is done running, you can open the folder called <code>gtdbk_output</code> and copy the folder <code>gtdbtk.bac120.summary.tsv</code> to your local computer in order to open it with excel. Use this folder to identify the phylum, class, order, family and genus that you need to download in order to construct your tree.</p>
+</div>
+<div id="basic-rapid-ribosomal-rna-predictor-barrnap" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> BAsic Rapid Ribosomal RNA Predictor (Barrnap)<a href="taxonomy.html#basic-rapid-ribosomal-rna-predictor-barrnap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://github.com/tseemann/barrnap">Github</a></p>
+<p>Barrnap predicts the location of ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea (5S,5.8S,23S,16S), metazoan mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S). You can run barrnap on both the assembled contigs (community) and MAGs.</p>
+<p>Add the name of the sample at the beginning of every contig and change the file type to <code>.fna</code>. Then for each of your file, change the space between the name and the scaffhold number to an underscore</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="taxonomy.html#cb37-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span>
+<span id="cb37-2"><a href="taxonomy.html#cb37-2" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/ /_/g&#39;</span> <span class="pp">*</span>.fna</span></code></pre></div>
+<p>Run barrnap</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="taxonomy.html#cb38-1" tabindex="-1"></a><span class="ex">barrnap</span> 1kb.fasta.fna <span class="op">&gt;</span> barrnap_hits.txt <span class="at">--threads</span> 20</span></code></pre></div>
+<p>One very useful tool or parsing GFF files is called BEDtool (to install:sudo apt install bedtools). There are many different utilities in bedtools. Here we will want to use the “getfasta” option, which will allow us to supply the fasta file and the barrnap GFF file to obtain the rRNA sequences. Note that the GFF file has the coordinates of where the rRNA genes are encoded, so between the GFF file and the .FNA file we have all the information we need.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="taxonomy.html#cb39-1" tabindex="-1"></a><span class="ex">bedtools</span> getfasta <span class="at">-fi</span> 1kb.fasta.fna <span class="at">-bed</span> barrnap_hits.gff <span class="at">-fo</span> out.rRNA.fasta</span></code></pre></div>
+<p>Use NCBI-BLAST to classify the rRNA sequences identified by barrnap.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bin-cleaning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="metabolic-pathway.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/Pipeline.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
