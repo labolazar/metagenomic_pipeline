@@ -19,7 +19,7 @@ github-repo: rstudio/bookdown-demo
 
 This guide assumes the following : 
 
-(1) The user has access to the server Titan from the Lazar lab (See section [Remote login] for more details).  
+(1) The user has access to servers from the Lazar lab.   
 (2) The user has an active VPN access. 
 (3) The paired-end fastq files from Illumina Miseq sequencing were transferred to the user's home directory.
 (4) The user has followed the `Introduction to linux` guide and is comfortable with basic command line functions such as : 
