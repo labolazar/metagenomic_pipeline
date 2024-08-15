@@ -4,18 +4,15 @@ In metagenomics, binning is the process of grouping reads or contigs and assigni
 
 [Comparision of different binning tools](https://bitbucket.org/berkeleylab/metabat/wiki/Home)
 
-## Mapping 
+**1. Mapping**
 
 Mapping allows you to get a rough count of the total number of reads mapping to each contig, also referred to as the depth file or read coverage. This information is required for most binning algorithm. Raw reads from each sample are mapped to the contigs (assembled reads).The idea being that if two contigs come from the same genome in your sample, so the same organism, then they would have been sequenced roughly to the same depth, they would have a similar coverage and they go together. It gets even better if you have multiple samples that vary a bit and you sequence all of them. You do your assembly on one of the samples, then you can take the reads from the other samples, map to that genome (metagenomic assembly) and you can use that as additional information. 
 
-Start by creating a new directory with all your assembled contigs and your interleave.trim.fastq. Different tools exists for mapping reads to genomic sequences. Here we are using `Scons wrapper`. 
+Different tools exists for mapping reads to genomic sequences. Here we are using [Scons Wrapper ](https://github.com/imrambo/genome_mapping) which maps FASTQ reads against an assembly (e.g. genome) in FASTA format using BWA-MEM. This wrapper does not produce huge intermediate files (e.g. unfiltered SAM). 
 
-### Scons Wrapper (genome mapping)
-[Github](https://github.com/imrambo/genome_mapping)
+<font color='red'>I am currently looking for a way to loop this. Tried specifying only the input folder and the sampleids as proposed in the README but it does not work. Therefore these steps must be repeated for every sample. .</font>
 
-This wrapper maps **FASTQ** reads against an assembly (e.g. genome) in **FASTA** format using BWA-MEM. This wrapper does not produce huge intermediate files (e.g. unfiltered SAM). 
-
-For each sample, create a folder and copy into this folder these two files : the **long contig.fa** (1000 or 2000 bp) and the **trim and interleaved fastq** (fastq after sickle)
+For each sample, create a new folder in the directory `05_binning` and inside each folder copy the filtered assembled contigs and the interleaved-trimed FASTQ for that sample.
 
 1. Go to your home directory and clone the git repository 
 
@@ -27,6 +24,8 @@ git clone https://github.com/imrambo/genome_mapping.git
 ```{bash, highlight=TRUE, eval=FALSE}
 conda activate scons_map
 ```
+
+`sampleids` **must** be the exact name as the `fastq` or `fastq.gz` file
 
 3. Run a dry run to ensure everything runs smoothly (you must run this from the `genome_mapping` directory)
 ```{bash, highlight=TRUE, eval=FALSE}
@@ -47,9 +46,7 @@ scons --fastq_dir=/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/ --assemb
 
 In the specified output directory you will find a `.sorted.bam` which contains the depth information required for mmgenome and metabat. 
 
-<font color='red'>Currently looking for a way to loop this. Tried specifying only the input folder and the sampleids as proposed in the README but it does not work. `sampleids` **must** be the exact name as the `fastq` or `fastq.gz` file.</font>
-
-## Depth file
+**2. Generate depth file**
 
 The depth allows you to know how many sequence you can align with certain sections of your contigs. Section with very little depth (few sequences) are not reputable to use. We use the script `jgi_summarize_bam_contig_depths`.  
 
@@ -62,7 +59,7 @@ for i in *.sorted.bam
 done 
 ```
 
-## Create bins  
+**3. Create bins**
 
 ### MetaBAT2 
 
@@ -90,7 +87,7 @@ done
 `minCVsum` : assigning number of tetranucleotide frequency graphs, don’t grab negative numbers 
 `-m` : min size of contig to be considered for binning
 
-# Bin quality  {.tabset}
+**4. Check quality**
 ## Checkm
 [Github](https://github.com/Ecogenomics/CheckM/wiki)
 
@@ -130,15 +127,25 @@ I decompressed the file using `sudo tar -xf checkm_data_2015_01_16.tar.gz`.
 I changed the File Ownership to root `sudo chown -R root /usr/local/lib/checkm` and Group Ownership to me `sudo chgrp kvilleneuve /usr/local/lib/checkm`. 
 I ran the following to inform CheckM of where the files have been placed: `checkm data setRoot /usr/local/lib/checkm`
 
+**5. Metagenome assembled genome statistics**
 
-# Bin cleaning 
+```{bash}
+#!/bin/bash
+for i in *.fa
+  do  python /home/genomics/quast-5.2.0/quast.py $i -o /home/genomics/karine/stleonard/E4-2/quast_out/$i --threads 48 --no-check --no-plots --no-html --no-icarus
+done
+```
 
-## Vizbin 
+```{bash, eval=FALSE}
+for folder in *; do
+    (cd "$folder" && report.txt)  
+    mv "$folder/report.txt" "${folder}_report.txt"
+done
+```
 
-# Taxonomy 
+**6. Taxonomy**
 
-## GTDBTK
-[Github](https://github.com/Ecogenomics/GTDBTk)
+[GTDBTK](https://github.com/Ecogenomics/GTDBTk)
 
 Activate the GTDBTK environment
 ```{bash, highlight=TRUE, eval=FALSE}
@@ -159,25 +166,3 @@ gtdbtk classify_wf --cpus 20 --genome_dir /home/kvilleneuve/Shotgun_Project/saum
 
 
 Once it is done running, you can open the folder called `gtdbk_output` and copy the folder `gtdbtk.bac120.summary.tsv` to your local computer in order to open it with excel. Use this folder to identify the phylum, class, order, family and genus that you need to download in order to construct your tree. 
-
-## BAsic Rapid Ribosomal RNA Predictor (Barrnap) 
-[Github](https://github.com/tseemann/barrnap)
-
-Barrnap predicts the location of ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea (5S,5.8S,23S,16S), metazoan mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S). You can run barrnap on both the assembled contigs (community) and MAGs. 
-
-Add the name of the sample at the beginning of every contig and change the file type to `.fna`. Then for each of your file, change the space between the name and the scaffhold number to an underscore
-
-```{bash, highlight=TRUE, eval=FALSE}
-for i in *.fa ; do  perl -lne 'if(/^>(\S+)/){ print ">$ARGV $1"} else{ print }' $i > $i.fna ; done
-sed -i 's/ /_/g' *.fna
-```
-Run barrnap
-```{bash, highlight=TRUE, eval=FALSE}
-barrnap 1kb.fasta.fna > barrnap_hits.txt --threads 20
-```
-One very useful tool or parsing GFF files is called BEDtool (to install:sudo apt install bedtools). There are many different utilities in bedtools. Here we will want to use the "getfasta" option, which will allow us to supply the fasta file and the barrnap GFF file to obtain the rRNA sequences. Note that the GFF file has the coordinates of where the rRNA genes are encoded, so between the GFF file and the .FNA file we have all the information we need. 
-```{bash, highlight=TRUE, eval=FALSE}
-bedtools getfasta -fi 1kb.fasta.fna -bed barrnap_hits.gff -fo out.rRNA.fasta
-```
-
-Use NCBI-BLAST to classify the rRNA sequences identified by barrnap. 

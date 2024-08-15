@@ -34,7 +34,7 @@ done
 ```
 
 - **Output** : For each **sample** given as input (not file) the script generates a new file ending in `.interleave.fastq`. 
-- Create a new directory called `interleave` and move all the `.interleave.fastq` in this new directory. Move into this new directory or downstream analysis. 
+- Create a new directory called `interleave` and move all the `.interleave.fastq` in this new directory. Move into this new directory for downstream analysis. 
 
 View the top of the new interleaved files to make sure your reads alternate between R1 and R2. Replace sample-name with the name of the sample you want to verify. For sample sequenced on the NovaSeq replace `@M` for `@A`. 
 ```{bash, eval=FALSE}
@@ -43,8 +43,9 @@ grep @M sample-name.interleave.fastq | head
 
 **3. Trim**
 
-[Sickle](https://github.com/najoshi/sickle) is a tool that uses sliding windows along with quality and length thresholds to determine when quality is sufficiently low to trim the 3’-end of reads and also determines when the quality is sufficiently high enough to trim the 5’-end of reads. Create a bash script called `run_sickle.sh` with the following commands and execute the script using nohup. 
+[Sickle](https://github.com/najoshi/sickle) is a tool that uses sliding windows along with quality and length thresholds to determine when quality is sufficiently low to trim the 3’-end of reads and also determines when the quality is sufficiently high enough to trim the 5’-end of reads. 
 
+Create a bash script called `run_sickle.sh` with the following commands and execute the script using nohup. 
 ```{bash}
 #!/bin/bash
 for i in *.interleave.fastq
@@ -61,7 +62,6 @@ done
 [FastQc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides a modular set of analyses which you can use to get a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
 
 Create a new folder directory called `fastqc` which is where the HTLM output of FastQc will be saved. Create a bash script called `run_fastqc.sh` with the following commands and execute the script using nohup. 
-
 ```{bash}
 #!/bin/bash 
 fastqc *.interleave.fastq.trim.fastq --outdir=fastqc

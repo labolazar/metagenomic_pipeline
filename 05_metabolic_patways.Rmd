@@ -51,7 +51,7 @@ DRAM.py distill -i annotation/annotations.tsv -o summaries --trna_path annotatio
 
 2. Metabolic
 
-[METABOLIC](https://github.com/AnantharamanLab/METABOLIC)(METabolic And BiogeOchemistry anaLyses In miCrobes) enables the prediction of metabolic and biogeochemical functional trait profiles to any given genome datasets.
+[METABOLIC](https://github.com/AnantharamanLab/METABOLIC) (METabolic And BiogeOchemistry anaLyses In miCrobes) enables the prediction of metabolic and biogeochemical functional trait profiles to any given genome datasets.
 
 a) Activate environment 
 ```{bash, eval=FALSE}
@@ -66,13 +66,7 @@ perl /home/genomics/METABOLIC/METABOLIC-G.pl -in /home/genomics/user/07_metaboli
 
 3. MEBS
 
-[MEBS](https://github.com/valdeanda/mebs)(Multigenomic Entropy-Based Score) allows the user to synthesizes genomic information into a single informative value. This entropy score can be used to infer the likelihood that microbial taxa perform specific metabolic-biogeochemical pathways. 
+[MEBS] (https://github.com/valdeanda/mebs)(Multigenomic Entropy-Based Score) allows the user to synthesizes genomic information into a single informative value. This entropy score can be used to infer the likelihood that microbial taxa perform specific metabolic-biogeochemical pathways. 
 
-a) MEBS takes as input amino acid sequences in FASTA format.  
-```{bash, eval=FALSE}
-perl mebs.pl -input /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/prodigal -type genomic -comp > rock_MAGS.tsv
-```
+For the moment MEBS shoudl be installed on the user's local computer. See [manual](https://valdeanda.github.io/mebs/README-1.html) for installation and instructions. 
 
-```{bash, highlight=TRUE, eval=FALSE}
-python3 mebs_vis.py rock_assembly.tsv -o /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/rock_assembly_MEBS -im_format pdf -f pdf
-``` 

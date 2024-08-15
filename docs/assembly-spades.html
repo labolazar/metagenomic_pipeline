@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Assembly SPAdes | Protocol for metagenomic analyses</title>
+  <meta name="description" content="3 Assembly SPAdes | Protocol for metagenomic analyses" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Assembly SPAdes | Protocol for metagenomic analyses" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Assembly SPAdes | Protocol for metagenomic analyses" />
+  
+  
+  
+
+<meta name="author" content="Karine Villeneuve" />
+
+
+<meta name="date" content="2024-08-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pre-process.html"/>
+<link rel="next" href="barrnap.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Metagenomic sequencing data analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
+<li class="chapter" data-level="3" data-path="assembly-spades.html"><a href="assembly-spades.html"><i class="fa fa-check"></i><b>3</b> Assembly SPAdes</a></li>
+<li class="chapter" data-level="4" data-path="barrnap.html"><a href="barrnap.html"><i class="fa fa-check"></i><b>4</b> Barrnap</a></li>
+<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>5.0.1</b> MetaBAT2</a></li>
+<li class="chapter" data-level="5.1" data-path="binning.html"><a href="binning.html#installing-checkm"><i class="fa fa-check"></i><b>5.1</b> Installing Checkm</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>6</b> Metabolic pathway</a></li>
+<li class="chapter" data-level="7" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic tree</a></li>
+<li class="chapter" data-level="8" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>8</b> Using nohup and other tips and tricks</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html#bash-scripting-using-nohup"><i class="fa fa-check"></i><b>8.1</b> Bash scripting using nohup</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html"><i class="fa fa-check"></i><b>9</b> Other tips and tricks</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#moving-files-using-scp"><i class="fa fa-check"></i><b>9.1</b> Moving files using SCP</a></li>
+<li class="chapter" data-level="9.2" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#renaiming-files"><i class="fa fa-check"></i><b>9.2</b> Renaiming files</a></li>
+<li class="chapter" data-level="9.3" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#extract-scaffhold-based-on-nane-and-coordinates-using-samtools"><i class="fa fa-check"></i><b>9.3</b> Extract scaffhold based on nane and coordinates using samtools</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Protocol for metagenomic analyses</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="assembly-spades" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Assembly SPAdes<a href="assembly-spades.html#assembly-spades" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>1. Running SPAdes</strong></p>
+<p><a href="https://github.com/ablab/spades">SPAdes</a> - St. Petersburg genome assembler - is a versatile toolkit designed for assembling and analyzing sequencing data from Illumina and IonTorrent technologies. SPAdes package provides pipelines for DNA assembly of isolates and single-cell bacteria, as well as of metagenomic and transcriptomic data.</p>
+<p>Before running SPAdes you need to add the location of the program to your path with the following command :</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="assembly-spades.html#cb10-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span>/home/SCRIPT/SPAdes-3.15.5-Linux/bin:<span class="va">$PATH</span></span></code></pre></div>
+<p>SPAdes takes as input paired-end reads, mate-pairs and single (unpaired) reads in FASTA and FASTQ (can be gzipped) formats. From the directory <code>03_trim_interleave</code> create a bash script called <code>run_spades.sh</code> with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where you want to output the results from SPAdes.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="assembly-spades.html#cb11-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb11-2"><a href="assembly-spades.html#cb11-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq </span>
+<span id="cb11-3"><a href="assembly-spades.html#cb11-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metaspades.py</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/spades_out/<span class="va">$i</span> <span class="at">-t</span> 40 </span>
+<span id="cb11-4"><a href="assembly-spades.html#cb11-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>For each file given to SPAdes, the program will generate in the specified directory (here <code>spades_out</code>) a new folder with the full sample name (which should be quite long at this point) and inside each folder the assembled fasta file (called <code>contigs.fasta</code>).</p>
+<p>The following section allows the user to rename each folder created by SPAdes to a shorter name and then paste this name in front of each <code>contigs.fasta</code> file.</p>
+<p><strong>2. Rename SPAdes folder output</strong></p>
+<ol style="list-style-type: lower-alpha">
+<li>Create a csv file called <code>rename_folders.csv</code>. In the file for each folder write the old file name followed by the new file name separated by a comma. Example :</li>
+</ol>
+<pre class="verbose"><code>old_file_name,new_file_name
+sample_1_R1.fastq.interleave.fastq.trim.fastq,sample_01
+sample_2_R1.fastq.interleave.fastq.trim.fastq,sample_02
+sample_3_R1.fastq.interleave.fastq.trim.fastq,sample_03
+sample_10_R1.fastq.interleave.fastq.trim.fastq,sample_10
+sample_11_R1.fastq.interleave.fastq.trim.fastq,sample_11</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Convert csv to unix format using <code>dos2unix</code> :</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="assembly-spades.html#cb13-1" tabindex="-1"></a><span class="ex">dos2unix</span> rename_folders.csv</span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Rename folders using <code>awk</code> :</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="assembly-spades.html#cb14-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">&#39;,&#39;</span> <span class="st">&#39;system(&quot;mv &quot; $1 &quot; &quot; $2)&#39;</span> rename_folders.csv</span></code></pre></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>From the directory containing all the renamed folders (here <code>spades_out</code>) use the following <em>for loop</em> to (1) go through every folder and find a file called <code>contigs.fasta</code> ; (2) add to the beginning of this file name it’s current directory name ; (3) move the file one folder up :</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="assembly-spades.html#cb15-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb15-2"><a href="assembly-spades.html#cb15-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">contigs.fasta</span><span class="kw">)</span>  </span>
+<span id="cb15-3"><a href="assembly-spades.html#cb15-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/contigs.fasta&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_contigs.fasta&quot;</span></span>
+<span id="cb15-4"><a href="assembly-spades.html#cb15-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Move all the <code>_contigs.fasta</code> file to the directory <code>04_contigs</code> and move into this directory.</li>
+</ol>
+<p><strong>3. Post assembly statistics</strong></p>
+<ol style="list-style-type: lower-alpha">
+<li>To count how many contigs were generated we use <code>grep</code> to count (<code>-c</code>) the occurrences of the symbol <code>&gt;</code> (every contig starts with this symbol) :</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="assembly-spades.html#cb16-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;&gt;&quot;</span> <span class="pp">*</span>.fasta</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Use <a href="https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbmap-guide/">BBMap</a> to filter out short contigs (&lt; 1000 base pairs).</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="assembly-spades.html#cb17-1" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> <span class="pp">*</span>.fasta <span class="kw">;</span> <span class="cf">do</span> <span class="ex">~/bbmap/reformat.sh</span> in=<span class="va">$file</span> out=1kbp_<span class="va">$file</span> minlength=1000 <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<p>Use grep once again to count how many contigs passed filtering. For downstream analysis your samples should have at least 5000 base pairs.</p>
+<p><strong>4. Other assemblers</strong></p>
+<p>These are other assemblers that were useful in the past but that we do not use anymore as SPAdes always the best results.</p>
+<p><a href="https://github.com/loneknightpy/idba">IDBA</a>. The output is a directory ending in <code>assembly</code> for each sample. In this directory you will find the contig file.<br />
+For DNA</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="assembly-spades.html#cb18-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb18-2"><a href="assembly-spades.html#cb18-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb18-3"><a href="assembly-spades.html#cb18-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">idba_ud</span> <span class="at">-l</span> <span class="at">-r</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/idba/<span class="va">$i</span> <span class="at">--pre_correction</span> <span class="at">--mink</span> 65 <span class="at">--maxk</span> 115 <span class="at">--step</span> 10 <span class="at">--seed_kmer</span> 55 <span class="at">--num_threads</span> 40 </span>
+<span id="cb18-4"><a href="assembly-spades.html#cb18-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>For RNA</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="assembly-spades.html#cb19-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb19-2"><a href="assembly-spades.html#cb19-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb19-3"><a href="assembly-spades.html#cb19-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">idba_tran</span> <span class="at">-l</span> <span class="at">-r</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/idba/<span class="va">$i</span> <span class="at">--pre_correction</span> <span class="at">--mink</span> 65 <span class="at">--maxk</span> 115 <span class="at">--step</span> 10 <span class="at">--seed_kmer</span> 55 <span class="at">--num_threads</span> 40 </span>
+<span id="cb19-4"><a href="assembly-spades.html#cb19-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p><a href="https://github.com/voutcn/megahit">Megahit</a></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="assembly-spades.html#cb20-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb20-2"><a href="assembly-spades.html#cb20-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb20-3"><a href="assembly-spades.html#cb20-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">megahit</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">--k-list</span> 21,33,55,77,99,121 <span class="at">--min-count</span> 2 <span class="at">--verbose</span> <span class="at">-t</span> 40 <span class="at">-o</span> /home/genomics/user/03_trim_interleave/Megahit/<span class="va">$i</span> <span class="at">--out-prefix</span> megahit_<span class="va">$i</span>  </span>
+<span id="cb20-4"><a href="assembly-spades.html#cb20-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>More ressources :</p>
+<ul>
+<li><a href="https://angus.readthedocs.io/en/2019/recovering-rep-genomes-from-mgs.html">About co-assembly</a></li>
+<li><a href="https://linsalrob.github.io/ComputationalGenomicsManual/CrossAssembly/">Cross-Assembly pipeline</a></li>
+<li><a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-3918-9">Further reading</a></li>
+</ul>
+<hr />
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pre-process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="barrnap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02_assembly.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

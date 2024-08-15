@@ -1,4 +1,4 @@
-# Assembly 
+# Assembly SPAdes
 
 **1. Running SPAdes**
 
@@ -18,13 +18,13 @@ for i in *.fastq
 done
 ``` 
 
-For each file given to SPAdes, the program will generate in specified directory (here `spades_out`) a new folder with the full sample name (which should be quite long at this point) and inside each folder the assembled fasta file (called `contigs.fasta`). 
+For each file given to SPAdes, the program will generate in the specified directory (here `spades_out`) a new folder with the full sample name (which should be quite long at this point) and inside each folder the assembled fasta file (called `contigs.fasta`). 
 
-The following section will allow the user to rename each folder created by SPAdes to a shorter name and then be paste this name in front of each `contigs.fasta` file.
+The following section allows the user to rename each folder created by SPAdes to a shorter name and then paste this name in front of each `contigs.fasta` file.
 
 **2. Rename SPAdes folder output**
 
-a) Start by by first creating csv file called `rename_folders.csv` containing for each folder the old file name and the new file name separated by a comma. Here is an example : 
+a) Create a csv file called `rename_folders.csv`. In the file for each folder write the old file name followed by the new file name separated by a comma. Example : 
 
 ```{verbose}
 old_file_name,new_file_name
@@ -46,7 +46,7 @@ c) Rename folders using `awk` :
 awk -F',' 'system("mv " $1 " " $2)' rename_folders.csv
 ```
 
-d) From the directory containing all the renamed folders (here `spades_out`) use the following *for loop* to (1) go through every folder and find a file called `contigs.fasta`, (2) add to the beginning of this file name it's current directory name, and (3) move the file one folder up : 
+d) From the directory containing all the renamed folders (here `spades_out`) use the following *for loop* to (1) go through every folder and find a file called `contigs.fasta` ; (2) add to the beginning of this file name it's current directory name ; (3) move the file one folder up : 
 
 ```{bash, eval=FALSE}
 for folder in *; do
@@ -71,11 +71,11 @@ b) Use [BBMap](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tool
 for file in *.fasta ; do ~/bbmap/reformat.sh in=$file out=1kbp_$file minlength=1000 ; done
 ``` 
 
-Use grep once again to count how many contigs passed both filtering. For downstream analysis it is recommended to have at least 5000 contigs. 
+Use grep once again to count how many contigs passed filtering. For downstream analysis your samples should have at least 5000 base pairs. 
 
 **4. Other assemblers**
 
-These are other assemblers that were useful in the past but that we do not use anymore as SPAdes always gave up the best results. 
+These are other assemblers that were useful in the past but that we do not use anymore as SPAdes always the best results. 
 
 [IDBA](https://github.com/loneknightpy/idba). The output is a directory ending in `assembly` for each sample. In this directory you will find the contig file.  
 For DNA
@@ -107,4 +107,4 @@ More ressources :
 - [Cross-Assembly pipeline](https://linsalrob.github.io/ComputationalGenomicsManual/CrossAssembly/)
 - [Further reading](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-3918-9)
 
-***
+*** 

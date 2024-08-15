@@ -34,20 +34,9 @@ Move your bins and reference genomes in a folder together. Add the name of the b
 for i in *.fa ; do  perl -lne 'if(/^>(\S+)/){ print ">$ARGV $1"} else{ print }' $i > $i.fna ; done
 ``` 
 
-### Bash script 
-```{bash, highlight=TRUE, eval=FALSE}
-#!/bin/bash
-echo "Getting data from assembly_summary_genbank.txt based on GCA.txt" 
-for n in `cat GCA.txt`; do grep $n assembly_summary_genbank.txt  | cut -f 1,7,8,16,20 >> todownload.tab ; done
-echo "Getting ftp link to download genomes" 
-Rscript /home/SCRIPT/getFTPlink.r 
-echo "Downloading and unzipping genomes"
-wget -i ftp.links.txt
-gunzip *.gz
-```  
+**2. GToTree**
 
-## GToTree
-[Github](https://github.com/AstrobioMike/GToTree)
+[GToTree](https://github.com/AstrobioMike/GToTree)
 
 Move the file `name.txt` into the folder containing your genomes. Add to this file the name of your bins. 
 
