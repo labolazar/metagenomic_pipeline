@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="pre-assembly.html"/>
+<link rel="next" href="pre-process.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,22 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Metagenomic sequencing data analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a></li>
-<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="assembly.html"><a href="assembly.html#idba"><i class="fa fa-check"></i><b>3.1.1</b> IDBA</a></li>
-<li class="chapter" data-level="3.1.2" data-path="assembly.html"><a href="assembly.html#megahit"><i class="fa fa-check"></i><b>3.1.2</b> Megahit</a></li>
-<li class="chapter" data-level="3.1.3" data-path="assembly.html"><a href="assembly.html#metaspades"><i class="fa fa-check"></i><b>3.1.3</b> Metaspades</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="assembly.html"><a href="assembly.html#post-assembly-stat"><i class="fa fa-check"></i><b>3.2</b> Post assembly-stat</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
+<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a></li>
 <li class="chapter" data-level="4" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>4</b> Binning</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="binning.html"><a href="binning.html#mapping"><i class="fa fa-check"></i><b>4.1</b> Mapping</a>
@@ -253,8 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>moving / copying (<code>mv</code>/<code>cp</code>) files from one directory to the other.</li>
 </ul></li>
 </ol>
-<div id="setting-up-your-environment" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Setting up your environment<a href="index.html#setting-up-your-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>1. Setting up your environment</strong></p>
 <p>Keeping your files organized is a skill that has a high long-term payoff. As you are in the thick of an analysis, you may underestimate how many files/folders you have floating around. But a short time later, you may return to your files and realize your organization was not as clear as you hoped, which can ultimately lead to significantly slower research progress. Furthermore, one must keep in mind that someone unfamiliar with your project should be able to look at your computer files and understand in detail what you did and why.</p>
 <p>While there’s a lot of ways to keep your files organized, and there’s not a “one size fits all” organizational solution, below we propose a simple organizational scheme which is project-oriented, maintainable and ultimately follows consistent patterns for amplicon sequence analysis. Please note that the proposed workflow assumes such organization.</p>
 <pre><code>┌─ ~ -------------------------------- Your home directory
@@ -276,9 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><a href="https://www.reddit.com/r/bioinformatics/comments/3rdlhf/help_how_do_you_organize_your_projectsfiles/">Reddit post</a></p></li>
 <li><p><a href="https://www.mdc-berlin.de/research-data-management/organizing-your-data">Organizing your data</a> by The Max Delbrück Center</p></li>
 </ul>
-</div>
-<div id="download-fastqs-files-from-illumina-basespace-sequence-hub" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Download fastqs files from Illumina BaseSpace Sequence Hub<a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>2. Download fastqs files from Illumina BaseSpace Sequence Hub</strong></p>
 <ol style="list-style-type: decimal">
 <li><p>Open the link found in the email sent by the sequencing center.</p>
 <p>If this is your first time downloading your fastqs create a new BaseSpace Sequence Hub account using the email address to which the email from the sequencing center was addressed (normally this would be your UQAM’s email)</p></li>
@@ -295,9 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> name_of_foler_with_fastqs username@server.bio.uqam.ca:/path/to/copy/folder</span></code></pre></div>
 
-<p>Some program may take some time to process, we therefor recommend running the command using a shell script with <strong>nohup</strong>. For example on how to use, see section <code>Nohup</code>. Furthermore, two ways of running most command are described; (<strong>1</strong>) for one or two samples and (<strong>2</strong>) for multiple samples using Bash For Loop.</p>
-<p>Conda and all the required environment have all been previously installed by Karine Villeneuve.</p>
-</div>
+<p>Most process take all lot of time complete and therefore <strong>nohup</strong> should be used to execute the commands. For more details on how to use and examples see section <code>Nohup</code>.</p>
 </div>
             </section>
 
@@ -305,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 
-<a href="pre-assembly.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pre-process.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

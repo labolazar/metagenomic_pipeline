@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="pre-assembly.html"/>
+<link rel="prev" href="pre-process.html"/>
 <link rel="next" href="binning.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -140,22 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Metagenomic sequencing data analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a></li>
-<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="assembly.html"><a href="assembly.html#idba"><i class="fa fa-check"></i><b>3.1.1</b> IDBA</a></li>
-<li class="chapter" data-level="3.1.2" data-path="assembly.html"><a href="assembly.html#megahit"><i class="fa fa-check"></i><b>3.1.2</b> Megahit</a></li>
-<li class="chapter" data-level="3.1.3" data-path="assembly.html"><a href="assembly.html#metaspades"><i class="fa fa-check"></i><b>3.1.3</b> Metaspades</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="assembly.html"><a href="assembly.html#post-assembly-stat"><i class="fa fa-check"></i><b>3.2</b> Post assembly-stat</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
+<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a></li>
 <li class="chapter" data-level="4" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>4</b> Binning</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="binning.html"><a href="binning.html#mapping"><i class="fa fa-check"></i><b>4.1</b> Mapping</a>
@@ -234,78 +221,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="assembly" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> Assembly<a href="assembly.html#assembly" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="assemblers" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Assemblers<a href="assembly.html#assemblers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For the moment, there is no way of knowing which assembly program is best suited for your sample. Therefor, I recommend trying different assemblers and looking at (1) the total number of contigs, (2) the number of contigs &gt; 2000 bp and (3) the number of contigs &gt; 1000 bp. Because the assembly process is quite long I recommend always using nohup. Most assembler will produce a file called <strong>contig.fa</strong> or <strong>contigs.fa</strong> which is the file we will be using to generate bins.</p>
-<p><a href="https://angus.readthedocs.io/en/2019/recovering-rep-genomes-from-mgs.html">About co-assembly</a></p>
-<p><a href="https://linsalrob.github.io/ComputationalGenomicsManual/CrossAssembly/">Cross-Assembly pipeline</a></p>
-<p><a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-3918-9">Further reading</a></p>
-<p>From the same directory containing <code>01_Pre-Assembly</code>, create a new directory called <code>02_assembly</code>. In this new directory create a directory for every assembly program (<code>IDBA</code>, <code>Megahit</code>, <code>Metaspades</code>)</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="assembly.html#cb10-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb10-2"><a href="assembly.html#cb10-2" tabindex="-1"></a><span class="fu">mkdir</span> 02_assembly</span>
-<span id="cb10-3"><a href="assembly.html#cb10-3" tabindex="-1"></a><span class="bu">cd</span> 02_assembly</span>
-<span id="cb10-4"><a href="assembly.html#cb10-4" tabindex="-1"></a><span class="fu">mkdir</span> IDBA</span>
-<span id="cb10-5"><a href="assembly.html#cb10-5" tabindex="-1"></a><span class="fu">mkdir</span> Megahit</span>
-<span id="cb10-6"><a href="assembly.html#cb10-6" tabindex="-1"></a><span class="fu">mkdir</span> Metaspades </span>
-<span id="cb10-7"><a href="assembly.html#cb10-7" tabindex="-1"></a><span class="bu">cd</span> ..</span></code></pre></div>
-<div id="idba" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> IDBA<a href="assembly.html#idba" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><a href="https://github.com/loneknightpy/idba">Github</a>. The output is a directory ending in <code>assembly</code> for each sample. In this directory you will find the contig file.</p>
-<p>Run IDBA using nohup</p>
-<p>For DNA</p>
+<p><strong>1. Running SPAdes</strong></p>
+<p><a href="https://github.com/ablab/spades">SPAdes</a> - St. Petersburg genome assembler - is a versatile toolkit designed for assembling and analyzing sequencing data from Illumina and IonTorrent technologies. SPAdes package provides pipelines for DNA assembly of isolates and single-cell bacteria, as well as of metagenomic and transcriptomic data.</p>
+<p>Before running SPAdes you need to add the location of the program to your path with the following command :</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="assembly.html#cb10-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span>/home/SCRIPT/SPAdes-3.15.5-Linux/bin:<span class="va">$PATH</span></span></code></pre></div>
+<p>SPAdes takes as input paired-end reads, mate-pairs and single (unpaired) reads in FASTA and FASTQ (can be gzipped) formats. From the directory <code>03_trim_interleave</code> create a bash script called <code>run_spades.sh</code> with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where you want to output the results from SPAdes.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="assembly.html#cb11-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb11-2"><a href="assembly.html#cb11-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
-<span id="cb11-3"><a href="assembly.html#cb11-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">idba_ud</span> <span class="at">-l</span> <span class="at">-r</span> <span class="va">$i</span> <span class="at">-o</span> /home/kvilleneuve/Shotgun_Project/saumure_grotte/02_assembly/IDBA/<span class="va">$i</span> <span class="at">--pre_correction</span> <span class="at">--mink</span> 65 <span class="at">--maxk</span> 115 <span class="at">--step</span> 10 <span class="at">--seed_kmer</span> 55 <span class="at">--num_threads</span> 40 </span>
+<span id="cb11-2"><a href="assembly.html#cb11-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq </span>
+<span id="cb11-3"><a href="assembly.html#cb11-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metaspades.py</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/spades_out/<span class="va">$i</span> <span class="at">-t</span> 40 </span>
 <span id="cb11-4"><a href="assembly.html#cb11-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<p>For RNA</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="assembly.html#cb12-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb12-2"><a href="assembly.html#cb12-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
-<span id="cb12-3"><a href="assembly.html#cb12-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">idba_tran</span> <span class="at">-l</span> <span class="at">-r</span> <span class="va">$i</span> <span class="at">-o</span> /home/kvilleneuve/Shotgun_Project/saumure_grotte/02_assembly/IDBA/<span class="va">$i</span> <span class="at">--pre_correction</span> <span class="at">--mink</span> 65 <span class="at">--maxk</span> 115 <span class="at">--step</span> 10 <span class="at">--seed_kmer</span> 55 <span class="at">--num_threads</span> 40 </span>
-<span id="cb12-4"><a href="assembly.html#cb12-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-</div>
-<div id="megahit" class="section level3 hasAnchor" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Megahit<a href="assembly.html#megahit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><a href="https://github.com/voutcn/megahit">Github</a>
-Run Megahit using nohup</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="assembly.html#cb13-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb13-2"><a href="assembly.html#cb13-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
-<span id="cb13-3"><a href="assembly.html#cb13-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">megahit</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">--k-list</span> 21,33,55,77,99,121 <span class="at">--min-count</span> 2 <span class="at">--verbose</span> <span class="at">-t</span> 40 <span class="at">-o</span> /home/kvilleneuve/Shotgun_Project/saumure_grotte/02_assembly/Megahit/<span class="va">$i</span> <span class="at">--out-prefix</span> megahit_<span class="va">$i</span>  </span>
-<span id="cb13-4"><a href="assembly.html#cb13-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-</div>
-<div id="metaspades" class="section level3 hasAnchor" number="3.1.3">
-<h3><span class="header-section-number">3.1.3</span> Metaspades<a href="assembly.html#metaspades" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><a href="https://github.com/ablab/spades">Github</a>. We are using the <strong>fastq</strong> files.</p>
-<p>To run Metaspades you will need to add the location of the program to your path using the following command</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="assembly.html#cb14-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span>/home/SCRIPT/SPAdes-3.15.5-Linux/bin:<span class="va">$PATH</span></span></code></pre></div>
-<p>Run Metaspades using nohup</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="assembly.html#cb15-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb15-2"><a href="assembly.html#cb15-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq </span>
-<span id="cb15-3"><a href="assembly.html#cb15-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metaspades.py</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">-o</span> /home/kvilleneuve/Shotgun_Project/saumure_grotte/02_assembly/Metaspades/<span class="va">$i</span> <span class="at">-t</span> 40 </span>
+<p>For each file given to SPAdes, the program will generate in specified directory (here <code>spades_out</code>) a new folder with the full sample name (which should be quite long at this point) and inside each folder the assembled fasta file (called <code>contigs.fasta</code>).</p>
+<p>The following section will allow the user to rename each folder created by SPAdes to a shorter name and then be paste this name in front of each <code>contigs.fasta</code> file.</p>
+<p><strong>2. Rename SPAdes folder output</strong></p>
+<ol style="list-style-type: lower-alpha">
+<li>Start by by first creating csv file called <code>rename_folders.csv</code> containing for each folder the old file name and the new file name separated by a comma. Here is an example :</li>
+</ol>
+<pre class="verbose"><code>old_file_name,new_file_name
+sample_1_R1.fastq.interleave.fastq.trim.fastq,sample_01
+sample_2_R1.fastq.interleave.fastq.trim.fastq,sample_02
+sample_3_R1.fastq.interleave.fastq.trim.fastq,sample_03
+sample_10_R1.fastq.interleave.fastq.trim.fastq,sample_10
+sample_11_R1.fastq.interleave.fastq.trim.fastq,sample_11</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Convert csv to unix format using <code>dos2unix</code> :</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="assembly.html#cb13-1" tabindex="-1"></a><span class="ex">dos2unix</span> rename_folders.csv</span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Rename folders using <code>awk</code> :</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="assembly.html#cb14-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">&#39;,&#39;</span> <span class="st">&#39;system(&quot;mv &quot; $1 &quot; &quot; $2)&#39;</span> rename_folders.csv</span></code></pre></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>From the directory containing all the renamed folders (here <code>spades_out</code>) use the following <em>for loop</em> to (1) go through every folder and find a file called <code>contigs.fasta</code>, (2) add to the beginning of this file name it’s current directory name, and (3) move the file one folder up :</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="assembly.html#cb15-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb15-2"><a href="assembly.html#cb15-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">contigs.fasta</span><span class="kw">)</span>  </span>
+<span id="cb15-3"><a href="assembly.html#cb15-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/contigs.fasta&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_contigs.fasta&quot;</span></span>
 <span id="cb15-4"><a href="assembly.html#cb15-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-</div>
-</div>
-<div id="post-assembly-stat" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Post assembly-stat<a href="assembly.html#post-assembly-stat" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To determine which assembly method gave you the best results you need to look at the output of every sample individually. For every sample, the assembler will generate a folder containing a file called contig.fa. To know how many contigs were generated we use this command which counts the number of “&gt;” (every contig start with this symbol):</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="assembly.html#cb16-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;&gt;&quot;</span> contig.fa </span></code></pre></div>
-<p>We also want to know how many contig have more than 2000 base pairs (2KB) and 1000 base pairs (1KB). For each of your sample, run the following script which will output two files :
-- 2kb.fasta (the number of contigs with length greater than 2000 basepair)
-- 1kb.fasta (the number of contigs with length greater than 1000 basepair)</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="assembly.html#cb17-1" tabindex="-1"></a><span class="fu">bash</span> /home/SCRIPT/countBP.sh</span></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Move all the <code>_contigs.fasta</code> file to the directory <code>04_contigs</code> and move into this directory.</li>
+</ol>
+<p><strong>3. Post assembly statistics</strong></p>
+<ol style="list-style-type: lower-alpha">
+<li>To count how many contigs were generated we use <code>grep</code> to count (<code>-c</code>) the occurrences of the symbol <code>&gt;</code> (every contig starts with this symbol) :</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="assembly.html#cb16-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;&gt;&quot;</span> <span class="pp">*</span>.fasta</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Use <a href="https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbmap-guide/">BBMap</a> to filter out short contigs (&lt; 1000 base pairs).</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="assembly.html#cb17-1" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> <span class="pp">*</span>.fasta <span class="kw">;</span> <span class="cf">do</span> <span class="ex">~/bbmap/reformat.sh</span> in=<span class="va">$file</span> out=1kbp_<span class="va">$file</span> minlength=1000 <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<p>Use grep once again to count how many contigs passed both filtering. For downstream analysis it is recommended to have at least 5000 contigs.</p>
+<p><strong>4. Other assemblers</strong></p>
+<p>These are other assemblers that were useful in the past but that we do not use anymore as SPAdes always gave up the best results.</p>
+<p><a href="https://github.com/loneknightpy/idba">IDBA</a>. The output is a directory ending in <code>assembly</code> for each sample. In this directory you will find the contig file.<br />
+For DNA</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="assembly.html#cb18-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb18-2"><a href="assembly.html#cb18-2" tabindex="-1"></a><span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^(&gt;.*)/){ $head=$1 } else { $fa{$head} .= $_ } END{ foreach $s (keys(%fa)){ print &quot;$s\n$fa{$s}\n&quot; if(length($fa{$s})&gt;1000) }}&#39;</span> contig.fa <span class="op">&gt;</span> 1kb.fa</span>
-<span id="cb18-3"><a href="assembly.html#cb18-3" tabindex="-1"></a><span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^(&gt;.*)/){ $head=$1 } else { $fa{$head} .= $_ } END{ foreach $s (keys(%fa)){ print &quot;$s\n$fa{$s}\n&quot; if(length($fa{$s})&gt;2000) }}&#39;</span> contig.fa <span class="op">&gt;</span> 2kb.fa</span>
-<span id="cb18-4"><a href="assembly.html#cb18-4" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="assembly.html#cb18-5" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;&gt;&quot;</span> 1kb.fa</span>
-<span id="cb18-6"><a href="assembly.html#cb18-6" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;&gt;&quot;</span> 2kb.fa</span></code></pre></div>
-</div>
+<span id="cb18-2"><a href="assembly.html#cb18-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb18-3"><a href="assembly.html#cb18-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">idba_ud</span> <span class="at">-l</span> <span class="at">-r</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/idba/<span class="va">$i</span> <span class="at">--pre_correction</span> <span class="at">--mink</span> 65 <span class="at">--maxk</span> 115 <span class="at">--step</span> 10 <span class="at">--seed_kmer</span> 55 <span class="at">--num_threads</span> 40 </span>
+<span id="cb18-4"><a href="assembly.html#cb18-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>For RNA</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="assembly.html#cb19-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb19-2"><a href="assembly.html#cb19-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb19-3"><a href="assembly.html#cb19-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">idba_tran</span> <span class="at">-l</span> <span class="at">-r</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/idba/<span class="va">$i</span> <span class="at">--pre_correction</span> <span class="at">--mink</span> 65 <span class="at">--maxk</span> 115 <span class="at">--step</span> 10 <span class="at">--seed_kmer</span> 55 <span class="at">--num_threads</span> 40 </span>
+<span id="cb19-4"><a href="assembly.html#cb19-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p><a href="https://github.com/voutcn/megahit">Megahit</a></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="assembly.html#cb20-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb20-2"><a href="assembly.html#cb20-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb20-3"><a href="assembly.html#cb20-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">megahit</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">--k-list</span> 21,33,55,77,99,121 <span class="at">--min-count</span> 2 <span class="at">--verbose</span> <span class="at">-t</span> 40 <span class="at">-o</span> /home/genomics/user/03_trim_interleave/Megahit/<span class="va">$i</span> <span class="at">--out-prefix</span> megahit_<span class="va">$i</span>  </span>
+<span id="cb20-4"><a href="assembly.html#cb20-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>More ressources :</p>
+<ul>
+<li><a href="https://angus.readthedocs.io/en/2019/recovering-rep-genomes-from-mgs.html">About co-assembly</a></li>
+<li><a href="https://linsalrob.github.io/ComputationalGenomicsManual/CrossAssembly/">Cross-Assembly pipeline</a></li>
+<li><a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-3918-9">Further reading</a></li>
+</ul>
+<hr />
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="pre-assembly.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pre-process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="binning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -327,7 +324,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01_Pipeline.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02_assembly.Rmd",
 "text": "Edit"
 },
 "history": {

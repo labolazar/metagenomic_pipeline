@@ -1,0 +1,110 @@
+# Assembly 
+
+**1. Running SPAdes**
+
+[SPAdes](https://github.com/ablab/spades) - St. Petersburg genome assembler - is a versatile toolkit designed for assembling and analyzing sequencing data from Illumina and IonTorrent technologies. SPAdes package provides pipelines for DNA assembly of isolates and single-cell bacteria, as well as of metagenomic and transcriptomic data. 
+
+Before running SPAdes you need to add the location of the program to your path with the following command : 
+```{bash, eval = FALSE}
+export PATH=/home/SCRIPT/SPAdes-3.15.5-Linux/bin:$PATH
+```
+
+SPAdes takes as input paired-end reads, mate-pairs and single (unpaired) reads in FASTA and FASTQ (can be gzipped) formats. From the directory `03_trim_interleave` create a bash script called `run_spades.sh` with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where you want to output the results from SPAdes.  
+
+```{bash, eval = FALSE}
+#!/bin/bash
+for i in *.fastq 
+  do metaspades.py --12 $i -o /home/genomics/user/03_trim_interleave/spades_out/$i -t 40 
+done
+``` 
+
+For each file given to SPAdes, the program will generate in specified directory (here `spades_out`) a new folder with the full sample name (which should be quite long at this point) and inside each folder the assembled fasta file (called `contigs.fasta`). 
+
+The following section will allow the user to rename each folder created by SPAdes to a shorter name and then be paste this name in front of each `contigs.fasta` file.
+
+**2. Rename SPAdes folder output**
+
+a) Start by by first creating csv file called `rename_folders.csv` containing for each folder the old file name and the new file name separated by a comma. Here is an example : 
+
+```{verbose}
+old_file_name,new_file_name
+sample_1_R1.fastq.interleave.fastq.trim.fastq,sample_01
+sample_2_R1.fastq.interleave.fastq.trim.fastq,sample_02
+sample_3_R1.fastq.interleave.fastq.trim.fastq,sample_03
+sample_10_R1.fastq.interleave.fastq.trim.fastq,sample_10
+sample_11_R1.fastq.interleave.fastq.trim.fastq,sample_11
+```
+
+b) Convert csv to unix format using `dos2unix` : 
+```{bash, eval = FALSE} 
+dos2unix rename_folders.csv
+```
+
+c) Rename folders using `awk` :
+
+```{bash, eval = FALSE} 
+awk -F',' 'system("mv " $1 " " $2)' rename_folders.csv
+```
+
+d) From the directory containing all the renamed folders (here `spades_out`) use the following *for loop* to (1) go through every folder and find a file called `contigs.fasta`, (2) add to the beginning of this file name it's current directory name, and (3) move the file one folder up : 
+
+```{bash, eval=FALSE}
+for folder in *; do
+    (cd "$folder" && contigs.fasta)  
+    mv "$folder/contigs.fasta" "${folder}_contigs.fasta"
+done
+```
+
+e) Move all the `_contigs.fasta` file to the directory `04_contigs` and move into this directory. 
+
+**3. Post assembly statistics**
+
+a) To count how many contigs were generated we use `grep` to count (`-c`) the occurrences of the symbol `>` (every contig starts with this symbol) : 
+
+```{bash, eval = FALSE}
+grep -c ">" *.fasta
+```
+
+b) Use [BBMap](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbmap-guide/) to filter out short contigs (< 1000 base pairs). 
+
+```{bash, eval=FALSE}
+for file in *.fasta ; do ~/bbmap/reformat.sh in=$file out=1kbp_$file minlength=1000 ; done
+``` 
+
+Use grep once again to count how many contigs passed both filtering. For downstream analysis it is recommended to have at least 5000 contigs. 
+
+**4. Other assemblers**
+
+These are other assemblers that were useful in the past but that we do not use anymore as SPAdes always gave up the best results. 
+
+[IDBA](https://github.com/loneknightpy/idba). The output is a directory ending in `assembly` for each sample. In this directory you will find the contig file.  
+For DNA
+```{bash, eval=FALSE}
+#!/bin/bash
+for i in *.fasta
+  do idba_ud -l -r $i -o /home/genomics/user/03_trim_interleave/idba/$i --pre_correction --mink 65 --maxk 115 --step 10 --seed_kmer 55 --num_threads 40 
+done
+```
+For RNA 
+```{bash, eval=FALSE}
+#!/bin/bash
+for i in *.fasta
+  do idba_tran -l -r $i -o /home/genomics/user/03_trim_interleave/idba/$i --pre_correction --mink 65 --maxk 115 --step 10 --seed_kmer 55 --num_threads 40 
+done
+```
+
+[Megahit](https://github.com/voutcn/megahit)
+```{bash, eval=FALSE}
+#!/bin/bash
+for i in *.fasta
+  do megahit --12 $i --k-list 21,33,55,77,99,121 --min-count 2 --verbose -t 40 -o /home/genomics/user/03_trim_interleave/Megahit/$i --out-prefix megahit_$i  
+done
+``` 
+
+More ressources :
+
+- [About co-assembly](https://angus.readthedocs.io/en/2019/recovering-rep-genomes-from-mgs.html)
+- [Cross-Assembly pipeline](https://linsalrob.github.io/ComputationalGenomicsManual/CrossAssembly/)
+- [Further reading](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-3918-9)
+
+***

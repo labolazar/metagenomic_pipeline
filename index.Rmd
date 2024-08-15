@@ -29,7 +29,7 @@ This guide assumes the following :
     - creating new directory (`mkdir`) ; and 
     - moving / copying (`mv`/`cp`) files from one directory to the other. 
 
-## Setting up your environment
+**1. Setting up your environment**
 
 Keeping your files organized is a skill that has a high long-term payoff. As you are in the thick of an analysis, you may underestimate how many files/folders you have floating around. But a short time later, you may return to your files and realize your organization was not as clear as you hoped, which can ultimately lead to significantly slower research progress. Furthermore, one must keep in mind that someone unfamiliar with your project should be able to look at your computer files and understand in detail what you did and why. 
 
@@ -60,7 +60,7 @@ Further reading about organizing files and folders :
 
 - [Organizing your data](https://www.mdc-berlin.de/research-data-management/organizing-your-data) by The Max Delbrück Center 
 
-## Download fastqs files from Illumina BaseSpace Sequence Hub 
+**2. Download fastqs files from Illumina BaseSpace Sequence Hub**
 
 1. Open the link found in the email sent by the sequencing center. 
 

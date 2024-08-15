@@ -1,13 +1,6 @@
 introduction
-setting-up-your-environment
-download-fastqs-files-from-illumina-basespace-sequence-hub
-pre-assembly
+pre-process
 assembly
-assemblers
-idba
-megahit
-metaspades
-post-assembly-stat
 binning
 mapping
 scons-wrapper-genome-mapping

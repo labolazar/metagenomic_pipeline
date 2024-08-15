@@ -140,22 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Metagenomic sequencing data analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a></li>
-<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="assembly.html"><a href="assembly.html#idba"><i class="fa fa-check"></i><b>3.1.1</b> IDBA</a></li>
-<li class="chapter" data-level="3.1.2" data-path="assembly.html"><a href="assembly.html#megahit"><i class="fa fa-check"></i><b>3.1.2</b> Megahit</a></li>
-<li class="chapter" data-level="3.1.3" data-path="assembly.html"><a href="assembly.html#metaspades"><i class="fa fa-check"></i><b>3.1.3</b> Metaspades</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="assembly.html"><a href="assembly.html#post-assembly-stat"><i class="fa fa-check"></i><b>3.2</b> Post assembly-stat</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
+<li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a></li>
 <li class="chapter" data-level="4" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>4</b> Binning</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="binning.html"><a href="binning.html#mapping"><i class="fa fa-check"></i><b>4.1</b> Mapping</a>
@@ -238,12 +225,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.1</span> GTDBTK<a href="taxonomy.html#gtdbtk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><a href="https://github.com/Ecogenomics/GTDBTk">Github</a></p>
 <p>Activate the GTDBTK environment</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="taxonomy.html#cb29-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="taxonomy.html#cb31-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
 <p>I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="taxonomy.html#cb30-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="taxonomy.html#cb32-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
 <p>In the folder with all your clean and completed genomes run this command with nohup</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="taxonomy.html#cb31-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb31-2"><a href="taxonomy.html#cb31-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="taxonomy.html#cb33-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb33-2"><a href="taxonomy.html#cb33-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
 <p>Once it is done running, you can open the folder called <code>gtdbk_output</code> and copy the folder <code>gtdbtk.bac120.summary.tsv</code> to your local computer in order to open it with excel. Use this folder to identify the phylum, class, order, family and genus that you need to download in order to construct your tree.</p>
 </div>
 <div id="basic-rapid-ribosomal-rna-predictor-barrnap" class="section level2 hasAnchor" number="7.2">
@@ -251,12 +238,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://github.com/tseemann/barrnap">Github</a></p>
 <p>Barrnap predicts the location of ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea (5S,5.8S,23S,16S), metazoan mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S). You can run barrnap on both the assembled contigs (community) and MAGs.</p>
 <p>Add the name of the sample at the beginning of every contig and change the file type to <code>.fna</code>. Then for each of your file, change the space between the name and the scaffhold number to an underscore</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="taxonomy.html#cb32-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span>
-<span id="cb32-2"><a href="taxonomy.html#cb32-2" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/ /_/g&#39;</span> <span class="pp">*</span>.fna</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="taxonomy.html#cb34-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span>
+<span id="cb34-2"><a href="taxonomy.html#cb34-2" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/ /_/g&#39;</span> <span class="pp">*</span>.fna</span></code></pre></div>
 <p>Run barrnap</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="taxonomy.html#cb33-1" tabindex="-1"></a><span class="ex">barrnap</span> 1kb.fasta.fna <span class="op">&gt;</span> barrnap_hits.txt <span class="at">--threads</span> 20</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="taxonomy.html#cb35-1" tabindex="-1"></a><span class="ex">barrnap</span> 1kb.fasta.fna <span class="op">&gt;</span> barrnap_hits.txt <span class="at">--threads</span> 20</span></code></pre></div>
 <p>One very useful tool or parsing GFF files is called BEDtool (to install:sudo apt install bedtools). There are many different utilities in bedtools. Here we will want to use the “getfasta” option, which will allow us to supply the fasta file and the barrnap GFF file to obtain the rRNA sequences. Note that the GFF file has the coordinates of where the rRNA genes are encoded, so between the GFF file and the .FNA file we have all the information we need.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="taxonomy.html#cb34-1" tabindex="-1"></a><span class="ex">bedtools</span> getfasta <span class="at">-fi</span> 1kb.fasta.fna <span class="at">-bed</span> barrnap_hits.gff <span class="at">-fo</span> out.rRNA.fasta</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="taxonomy.html#cb36-1" tabindex="-1"></a><span class="ex">bedtools</span> getfasta <span class="at">-fi</span> 1kb.fasta.fna <span class="at">-bed</span> barrnap_hits.gff <span class="at">-fo</span> out.rRNA.fasta</span></code></pre></div>
 <p>Use NCBI-BLAST to classify the rRNA sequences identified by barrnap.</p>
 </div>
 </div>
@@ -287,7 +274,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01_Pipeline.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03_binning.Rmd",
 "text": "Edit"
 },
 "history": {

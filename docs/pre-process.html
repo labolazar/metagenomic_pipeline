@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Bin cleaning | Protocol for metagenomic analyses</title>
-  <meta name="description" content="6 Bin cleaning | Protocol for metagenomic analyses" />
+  <title>2 Pre-process | Protocol for metagenomic analyses</title>
+  <meta name="description" content="2 Pre-process | Protocol for metagenomic analyses" />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Bin cleaning | Protocol for metagenomic analyses" />
+  <meta property="og:title" content="2 Pre-process | Protocol for metagenomic analyses" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Bin cleaning | Protocol for metagenomic analyses" />
+  <meta name="twitter:title" content="2 Pre-process | Protocol for metagenomic analyses" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bin-quality.html"/>
-<link rel="next" href="taxonomy.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="assembly.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -219,19 +219,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bin-cleaning" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">6</span> Bin cleaning<a href="bin-cleaning.html#bin-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="vizbin" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Vizbin<a href="bin-cleaning.html#vizbin" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
+<div id="pre-process" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Pre-process<a href="pre-process.html#pre-process" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>1. Unzip</strong></p>
+<p>Copy all your raw <code>fastq.gz</code> files into the folder called <code>02_preprocess</code>. Move into the folder and unzip the files.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="pre-process.html#cb4-1" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz</span></code></pre></div>
+<p><strong>2. Interleave</strong></p>
+<p>We are using a modified version of the script <font color='green'>interleave.py</font> from this <a href="https://gist.github.com/ngcrawford/2232505">GitHub gist</a> to interleave the forward and reverse read. Create a bash script called <code>run_interleave.sh</code> with the following commands and execute the script using nohup.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="pre-process.html#cb5-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a href="pre-process.html#cb5-2" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> <span class="pp">*</span>R1<span class="pp">*</span>.fastq<span class="kw">;</span></span>
+<span id="cb5-3"><a href="pre-process.html#cb5-3" tabindex="-1"></a><span class="cf">do</span> </span>
+<span id="cb5-4"><a href="pre-process.html#cb5-4" tabindex="-1"></a>  <span class="ex">python3</span> /home/SCRIPT/interleave.py <span class="va">$R1</span> <span class="st">&quot;</span><span class="va">${R1</span><span class="op">/</span><span class="ss">R1</span><span class="op">/</span>R2<span class="va">}</span><span class="st">&quot;</span>  <span class="op">&gt;</span> <span class="va">$R1</span>.interleave.fastq <span class="kw">;</span> </span>
+<span id="cb5-5"><a href="pre-process.html#cb5-5" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<ul>
+<li><strong>Output</strong> : For each <strong>sample</strong> given as input (not file) the script generates a new file ending in <code>.interleave.fastq</code>.</li>
+<li>Create a new directory called <code>interleave</code> and move all the <code>.interleave.fastq</code> in this new directory. Move into this new directory or downstream analysis.</li>
+</ul>
+<p>View the top of the new interleaved files to make sure your reads alternate between R1 and R2. Replace sample-name with the name of the sample you want to verify. For sample sequenced on the NovaSeq replace <code>@M</code> for <code>@A</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="pre-process.html#cb6-1" tabindex="-1"></a><span class="fu">grep</span> @M sample-name.interleave.fastq <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
+<p><strong>3. Trim</strong></p>
+<p><a href="https://github.com/najoshi/sickle">Sickle</a> is a tool that uses sliding windows along with quality and length thresholds to determine when quality is sufficiently low to trim the 3’-end of reads and also determines when the quality is sufficiently high enough to trim the 5’-end of reads. Create a bash script called <code>run_sickle.sh</code> with the following commands and execute the script using nohup.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="pre-process.html#cb7-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a href="pre-process.html#cb7-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.interleave.fastq</span>
+<span id="cb7-3"><a href="pre-process.html#cb7-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">sickle</span> pe <span class="at">-c</span> <span class="va">$i</span> <span class="at">-t</span> sanger <span class="at">-m</span> <span class="va">$i</span>.trim.fastq <span class="at">-s</span> <span class="va">$i</span>.singles.fastq</span>
+<span id="cb7-4"><a href="pre-process.html#cb7-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p><em>sickle pe (paired end) -c (inputfile) -t sanger (from illumina) -m (outputfilename) -s (exclutedreadsfilename)</em></p>
+<ul>
+<li><strong>Output</strong> : For each given file Sickle generates two files (one ending in <code>.interleave.fastq.trim.fastq</code> and the other ending in <code>.interleave.fastq.singles.fastq</code>).</li>
+<li>For downstream processing we only need the <code>.interleave.fastq.trim.fastq</code> and therefore you can move all the <code>.single</code> into a new directory called <code>single</code>.</li>
+</ul>
+<p><strong>4. Quality check</strong></p>
+<p><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQc</a> provides a modular set of analyses which you can use to get a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.</p>
+<p>Create a new folder directory called <code>fastqc</code> which is where the HTLM output of FastQc will be saved. Create a bash script called <code>run_fastqc.sh</code> with the following commands and execute the script using nohup.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="pre-process.html#cb8-1" tabindex="-1"></a><span class="co">#!/bin/bash </span></span>
+<span id="cb8-2"><a href="pre-process.html#cb8-2" tabindex="-1"></a><span class="ex">fastqc</span> <span class="pp">*</span>.interleave.fastq.trim.fastq <span class="at">--outdir</span><span class="op">=</span>fastqc</span></code></pre></div>
+<ul>
+<li><strong>Output</strong> : For each given file FastQc generates an HTML file. The quality of the samples can be assessed by transferring the HTML files to your local computer.</li>
+<li>To determine if trimming caused any issue you can also run FastQc on the unzipped raw file and compare the results with the interleaved-trimmed file.</li>
+</ul>
+<p><strong>5. Transfer to Fasta</strong></p>
+<p><a href="https://github.com/lh3/seqtk">Seqtk</a> is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format.</p>
+<p>Move all the <code>.interleave.fastq.trim.fastq</code> to the folder <code>03_trim_interleave</code> and move into this folder. Create a bash script called <code>run_seqtk.sh</code> with the following commands and execute the script using nohup.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="pre-process.html#cb9-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb9-2"><a href="pre-process.html#cb9-2" tabindex="-1"></a><span class="fu">gzip</span> <span class="pp">*</span>.fastq</span>
+<span id="cb9-3"><a href="pre-process.html#cb9-3" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gz <span class="kw">;</span> </span>
+<span id="cb9-4"><a href="pre-process.html#cb9-4" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">seqtk</span> seq <span class="at">-a</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fasta <span class="kw">;</span> </span>
+<span id="cb9-5"><a href="pre-process.html#cb9-5" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<hr />
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="bin-quality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="taxonomy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assembly.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -252,7 +295,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/03_binning.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01_Pipeline.Rmd",
 "text": "Edit"
 },
 "history": {
