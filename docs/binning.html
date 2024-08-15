@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-07-11" />
+<meta name="date" content="2024-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Workflow for amplicon sequence analysis</a></li>
+<li><a href="./">Metagenomic sequencing data analysis</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
@@ -145,23 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="pre-assembly.html"><a href="pre-assembly.html#pre-scripted-method"><i class="fa fa-check"></i><b>2.1</b> Pre-Scripted method</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="pre-assembly.html"><a href="pre-assembly.html#interleave"><i class="fa fa-check"></i><b>2.1.1</b> Interleave</a></li>
-<li class="chapter" data-level="2.1.2" data-path="pre-assembly.html"><a href="pre-assembly.html#trim-check-quality-with-fastqc-and-convert-to-fasta-format"><i class="fa fa-check"></i><b>2.1.2</b> Trim, check quality with FastQc and convert to Fasta format</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="pre-assembly.html"><a href="pre-assembly.html#the-scripts"><i class="fa fa-check"></i><b>2.2</b> The scripts</a></li>
-<li class="chapter" data-level="2.3" data-path="pre-assembly.html"><a href="pre-assembly.html#manually"><i class="fa fa-check"></i><b>2.3</b> Manually</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="pre-assembly.html"><a href="pre-assembly.html#unzip"><i class="fa fa-check"></i><b>2.3.1</b> Unzip</a></li>
-<li class="chapter" data-level="2.3.2" data-path="pre-assembly.html"><a href="pre-assembly.html#interleaving"><i class="fa fa-check"></i><b>2.3.2</b> Interleaving</a></li>
-<li class="chapter" data-level="2.3.3" data-path="pre-assembly.html"><a href="pre-assembly.html#sickle"><i class="fa fa-check"></i><b>2.3.3</b> Sickle</a></li>
-<li class="chapter" data-level="2.3.4" data-path="pre-assembly.html"><a href="pre-assembly.html#quality-check-with-fastqc"><i class="fa fa-check"></i><b>2.3.4</b> Quality check with Fastqc</a></li>
-<li class="chapter" data-level="2.3.5" data-path="pre-assembly.html"><a href="pre-assembly.html#fastq-to-fasta"><i class="fa fa-check"></i><b>2.3.5</b> Fastq to Fasta</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a></li>
 <li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
@@ -218,7 +202,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#gtotree"><i class="fa fa-check"></i><b>9.2</b> GToTree</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nohup.html"><a href="nohup.html"><i class="fa fa-check"></i><b>10</b> Nohup</a></li>
+<li class="chapter" data-level="10" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>10</b> Using nohup and other tips and tricks</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html#bash-scripting-using-nohup"><i class="fa fa-check"></i><b>10.1</b> Bash scripting using nohup</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html"><i class="fa fa-check"></i><b>11</b> Other tips and tricks</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#moving-files-using-scp"><i class="fa fa-check"></i><b>11.1</b> Moving files using SCP</a></li>
@@ -261,22 +248,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Go to your home directory and clone the git repository</li>
 </ol>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="binning.html#cb24-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/imrambo/genome_mapping.git</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="binning.html#cb19-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/imrambo/genome_mapping.git</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Go to the new directory created <code>genome_mapping</code> and activate the scons_maps conda environment</li>
 </ol>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="binning.html#cb25-1" tabindex="-1"></a><span class="ex">conda</span> activate scons_map</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="binning.html#cb20-1" tabindex="-1"></a><span class="ex">conda</span> activate scons_map</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Run a dry run to ensure everything runs smoothly (you must run this from the <code>genome_mapping</code> directory)</li>
 </ol>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="binning.html#cb26-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--dry-run</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/ <span class="at">--assembly</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/V01_2_1000bp.fa <span class="at">--outdir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/output <span class="at">--sampleids</span><span class="op">=</span>V01_2_S7_L001_R1_001.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>8 <span class="at">--tmpdir</span><span class="op">=</span>/home/kvilleneuve/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="binning.html#cb21-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--dry-run</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/ <span class="at">--assembly</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/V01_2_1000bp.fa <span class="at">--outdir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/output <span class="at">--sampleids</span><span class="op">=</span>V01_2_S7_L001_R1_001.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>8 <span class="at">--tmpdir</span><span class="op">=</span>/home/kvilleneuve/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Run the script from the <code>genome_mapping</code> directory.</li>
 </ol>
 <p>–fastq_dir=directory where the interleave_trim_fastq and assembled_long_contig_fasta files are.</p>
 <p>–assembly=path to the assembled_long_contig_fasta files. Must include the name of the file at the end.</p>
 <p>–sampleids=the name of the interleave_trim_fastq.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="binning.html#cb27-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/ <span class="at">--assembly</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/V01_2_1000bp.fa <span class="at">--outdir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/output <span class="at">--sampleids</span><span class="op">=</span>V01_2_S7_L001_R1_001.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>8 <span class="at">--tmpdir</span><span class="op">=</span>/home/kvilleneuve/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="binning.html#cb22-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/ <span class="at">--assembly</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/V01_2_1000bp.fa <span class="at">--outdir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/output <span class="at">--sampleids</span><span class="op">=</span>V01_2_S7_L001_R1_001.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>8 <span class="at">--tmpdir</span><span class="op">=</span>/home/kvilleneuve/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
 <p>In the specified output directory you will find a <code>.sorted.bam</code> which contains the depth information required for mmgenome and metabat.</p>
 <p><font color='red'>Currently looking for a way to loop this. Tried specifying only the input folder and the sampleids as proposed in the README but it does not work. <code>sampleids</code> <strong>must</strong> be the exact name as the <code>fastq</code> or <code>fastq.gz</code> file.</font></p>
 </div>
@@ -285,10 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.2</span> Depth file<a href="binning.html#depth-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The depth allows you to know how many sequence you can align with certain sections of your contigs. Section with very little depth (few sequences) are not reputable to use. We use the script <code>jgi_summarize_bam_contig_depths</code>.</p>
 <p>Move all the <code>sorted.bam</code> files into a new folder called <code>Sorted_Bam</code> and from this folder use nohup to run the script <code>jgi_summarize_bam_contig_depths</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="binning.html#cb28-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb28-2"><a href="binning.html#cb28-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.sorted.bam</span>
-<span id="cb28-3"><a href="binning.html#cb28-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">/home/SCRIPT/jgi_summarize_bam_contig_depths</span> <span class="at">--outputDepth</span> <span class="va">$i</span>.depth.txt <span class="at">--pairedContigs</span> <span class="va">$i</span>.paired.txt <span class="va">$i</span></span>
-<span id="cb28-4"><a href="binning.html#cb28-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="binning.html#cb23-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb23-2"><a href="binning.html#cb23-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.sorted.bam</span>
+<span id="cb23-3"><a href="binning.html#cb23-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">/home/SCRIPT/jgi_summarize_bam_contig_depths</span> <span class="at">--outputDepth</span> <span class="va">$i</span>.depth.txt <span class="at">--pairedContigs</span> <span class="va">$i</span>.paired.txt <span class="va">$i</span></span>
+<span id="cb23-4"><a href="binning.html#cb23-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
 </div>
 <div id="create-bins" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Create bins<a href="binning.html#create-bins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -297,15 +284,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://bitbucket.org/berkeleylab/metabat/src/master/">Github</a> / <a href="https://peerj.com/articles/1165/">Article</a>
 Efficient tool for accurately reconstructing single genomes from complex microbial communities</p>
 <p>MetaBAT2 requires that your python environment be activate (base). If required, first deactivate <code>scons_map</code> and then activate conda</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="binning.html#cb29-1" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
-<span id="cb29-2"><a href="binning.html#cb29-2" tabindex="-1"></a><span class="ex">conda</span> activate</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="binning.html#cb24-1" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb24-2"><a href="binning.html#cb24-2" tabindex="-1"></a><span class="ex">conda</span> activate</span></code></pre></div>
 <p>In order to be able to loop this for all my samples, I renamed each depth file in the following format : <code>sample1.fa.depth.txt</code>. The output is a folder called <code>bins_dir</code> containing all the bins created. I recommend using nohup as the binning process can be very long.</p>
 <p>**copy all your 1kb or 2 kb fasta into the folder containing the depth file.</p>
 <p><strong>Multiple samples</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="binning.html#cb30-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb30-2"><a href="binning.html#cb30-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
-<span id="cb30-3"><a href="binning.html#cb30-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metabat2</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-a</span> <span class="va">$i</span>.depth.txt <span class="at">-o</span> bins <span class="at">-t</span> 0 <span class="at">--minCVSum</span> 0 <span class="at">--saveCls</span> <span class="at">-d</span> <span class="at">-v</span> <span class="at">--minCV</span> 0.1 <span class="at">-m</span> 2000</span>
-<span id="cb30-4"><a href="binning.html#cb30-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="binning.html#cb25-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb25-2"><a href="binning.html#cb25-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
+<span id="cb25-3"><a href="binning.html#cb25-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metabat2</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-a</span> <span class="va">$i</span>.depth.txt <span class="at">-o</span> bins <span class="at">-t</span> 0 <span class="at">--minCVSum</span> 0 <span class="at">--saveCls</span> <span class="at">-d</span> <span class="at">-v</span> <span class="at">--minCV</span> 0.1 <span class="at">-m</span> 2000</span>
+<span id="cb25-4"><a href="binning.html#cb25-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
 <p><code>minCVsum</code> : assigning number of tetranucleotide frequency graphs, don’t grab negative numbers
 <code>-m</code> : min size of contig to be considered for binning</p>
 </div>
@@ -338,7 +325,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/Pipeline.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01_Pipeline.Rmd",
 "text": "Edit"
 },
 "history": {

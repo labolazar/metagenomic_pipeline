@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-07-11" />
+<meta name="date" content="2024-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Workflow for amplicon sequence analysis</a></li>
+<li><a href="./">Metagenomic sequencing data analysis</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
@@ -145,23 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="pre-assembly.html"><a href="pre-assembly.html#pre-scripted-method"><i class="fa fa-check"></i><b>2.1</b> Pre-Scripted method</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="pre-assembly.html"><a href="pre-assembly.html#interleave"><i class="fa fa-check"></i><b>2.1.1</b> Interleave</a></li>
-<li class="chapter" data-level="2.1.2" data-path="pre-assembly.html"><a href="pre-assembly.html#trim-check-quality-with-fastqc-and-convert-to-fasta-format"><i class="fa fa-check"></i><b>2.1.2</b> Trim, check quality with FastQc and convert to Fasta format</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="pre-assembly.html"><a href="pre-assembly.html#the-scripts"><i class="fa fa-check"></i><b>2.2</b> The scripts</a></li>
-<li class="chapter" data-level="2.3" data-path="pre-assembly.html"><a href="pre-assembly.html#manually"><i class="fa fa-check"></i><b>2.3</b> Manually</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="pre-assembly.html"><a href="pre-assembly.html#unzip"><i class="fa fa-check"></i><b>2.3.1</b> Unzip</a></li>
-<li class="chapter" data-level="2.3.2" data-path="pre-assembly.html"><a href="pre-assembly.html#interleaving"><i class="fa fa-check"></i><b>2.3.2</b> Interleaving</a></li>
-<li class="chapter" data-level="2.3.3" data-path="pre-assembly.html"><a href="pre-assembly.html#sickle"><i class="fa fa-check"></i><b>2.3.3</b> Sickle</a></li>
-<li class="chapter" data-level="2.3.4" data-path="pre-assembly.html"><a href="pre-assembly.html#quality-check-with-fastqc"><i class="fa fa-check"></i><b>2.3.4</b> Quality check with Fastqc</a></li>
-<li class="chapter" data-level="2.3.5" data-path="pre-assembly.html"><a href="pre-assembly.html#fastq-to-fasta"><i class="fa fa-check"></i><b>2.3.5</b> Fastq to Fasta</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a></li>
 <li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
@@ -218,7 +202,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#gtotree"><i class="fa fa-check"></i><b>9.2</b> GToTree</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nohup.html"><a href="nohup.html"><i class="fa fa-check"></i><b>10</b> Nohup</a></li>
+<li class="chapter" data-level="10" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>10</b> Using nohup and other tips and tricks</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html#bash-scripting-using-nohup"><i class="fa fa-check"></i><b>10.1</b> Bash scripting using nohup</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html"><i class="fa fa-check"></i><b>11</b> Other tips and tricks</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#moving-files-using-scp"><i class="fa fa-check"></i><b>11.1</b> Moving files using SCP</a></li>
@@ -253,9 +240,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>You have to go back one folder in the terminal as checkm will run on all the files in the folder you give it as input. Checkm will automatically create a folder called checkm in the specified directory, therefor if you must run checkm again make sure to delete the newly created checkm folder, otherwise checkm will give you an error message.</strong></p>
 <p>You need to specify the extension of your file for it to work. For example, for file finishing is <code>.fa</code> the command will be <code>checkm lineage_wf -x fa</code>…</p>
 <p>If checkm is already installed on your system simply activate the environment</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="bin-quality.html#cb31-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="bin-quality.html#cb26-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
 <p>Run checkm using nohup</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="bin-quality.html#cb32-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="bin-quality.html#cb27-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
 <p>checkm lineage_wf -x fa 1500bp_bins 1500bp_bins/checkm -f 1500bp_bins/output.txt -t 48 –noAdd</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Open the <code>output.txt</code> document with excel to verify the <strong>completeness</strong> and <strong>contamination</strong> of your bins.
@@ -269,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> Installing Checkm<a href="bin-quality.html#installing-checkm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Install Checkm using the <a href="https://github.com/Ecogenomics/CheckM/wiki/Installation#how-to-install-checkm">Installation through Conda</a> steps.
 After installation is complete run the following to inform where the checkm databases are installed*:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="bin-quality.html#cb33-1" tabindex="-1"></a><span class="ex">checkm</span> data setRoot /usr/local/lib/checkm</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="bin-quality.html#cb28-1" tabindex="-1"></a><span class="ex">checkm</span> data setRoot /usr/local/lib/checkm</span></code></pre></div>
 <p>*I downloaded the <a href="https://data.ace.uq.edu.au/public/CheckM_databases/">checkm databases</a> and moved them to /usr/local/lib/checkm.
 I decompressed the file using <code>sudo tar -xf checkm_data_2015_01_16.tar.gz</code>.
 I changed the File Ownership to root <code>sudo chown -R root /usr/local/lib/checkm</code> and Group Ownership to me <code>sudo chgrp kvilleneuve /usr/local/lib/checkm</code>.
@@ -303,7 +290,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/Pipeline.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01_Pipeline.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-07-11" />
+<meta name="date" content="2024-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Workflow for amplicon sequence analysis</a></li>
+<li><a href="./">Metagenomic sequencing data analysis</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
@@ -145,23 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-your-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up your environment</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-fastqs-files-from-illumina-basespace-sequence-hub"><i class="fa fa-check"></i><b>1.2</b> Download fastqs files from Illumina BaseSpace Sequence Hub</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="pre-assembly.html"><a href="pre-assembly.html#pre-scripted-method"><i class="fa fa-check"></i><b>2.1</b> Pre-Scripted method</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="pre-assembly.html"><a href="pre-assembly.html#interleave"><i class="fa fa-check"></i><b>2.1.1</b> Interleave</a></li>
-<li class="chapter" data-level="2.1.2" data-path="pre-assembly.html"><a href="pre-assembly.html#trim-check-quality-with-fastqc-and-convert-to-fasta-format"><i class="fa fa-check"></i><b>2.1.2</b> Trim, check quality with FastQc and convert to Fasta format</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="pre-assembly.html"><a href="pre-assembly.html#the-scripts"><i class="fa fa-check"></i><b>2.2</b> The scripts</a></li>
-<li class="chapter" data-level="2.3" data-path="pre-assembly.html"><a href="pre-assembly.html#manually"><i class="fa fa-check"></i><b>2.3</b> Manually</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="pre-assembly.html"><a href="pre-assembly.html#unzip"><i class="fa fa-check"></i><b>2.3.1</b> Unzip</a></li>
-<li class="chapter" data-level="2.3.2" data-path="pre-assembly.html"><a href="pre-assembly.html#interleaving"><i class="fa fa-check"></i><b>2.3.2</b> Interleaving</a></li>
-<li class="chapter" data-level="2.3.3" data-path="pre-assembly.html"><a href="pre-assembly.html#sickle"><i class="fa fa-check"></i><b>2.3.3</b> Sickle</a></li>
-<li class="chapter" data-level="2.3.4" data-path="pre-assembly.html"><a href="pre-assembly.html#quality-check-with-fastqc"><i class="fa fa-check"></i><b>2.3.4</b> Quality check with Fastqc</a></li>
-<li class="chapter" data-level="2.3.5" data-path="pre-assembly.html"><a href="pre-assembly.html#fastq-to-fasta"><i class="fa fa-check"></i><b>2.3.5</b> Fastq to Fasta</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="pre-assembly.html"><a href="pre-assembly.html"><i class="fa fa-check"></i><b>2</b> Pre-Assembly</a></li>
 <li class="chapter" data-level="3" data-path="assembly.html"><a href="assembly.html"><i class="fa fa-check"></i><b>3</b> Assembly</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="assembly.html"><a href="assembly.html#assemblers"><i class="fa fa-check"></i><b>3.1</b> Assemblers</a>
@@ -218,7 +202,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#gtotree"><i class="fa fa-check"></i><b>9.2</b> GToTree</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nohup.html"><a href="nohup.html"><i class="fa fa-check"></i><b>10</b> Nohup</a></li>
+<li class="chapter" data-level="10" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>10</b> Using nohup and other tips and tricks</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html#bash-scripting-using-nohup"><i class="fa fa-check"></i><b>10.1</b> Bash scripting using nohup</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html"><i class="fa fa-check"></i><b>11</b> Other tips and tricks</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#moving-files-using-scp"><i class="fa fa-check"></i><b>11.1</b> Moving files using SCP</a></li>
@@ -245,137 +232,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pre-assembly" class="section level1 tabset hasAnchor" number="2">
+<div id="pre-assembly" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">2</span> Pre-Assembly<a href="pre-assembly.html#pre-assembly" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="pre-scripted-method" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Pre-Scripted method<a href="pre-assembly.html#pre-scripted-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="interleave" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Interleave<a href="pre-assembly.html#interleave" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Move all your raw files into the folder <code>01_Pre-Assembly</code> and from this folder run the following command :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="pre-assembly.html#cb4-1" tabindex="-1"></a><span class="fu">bash</span> /home/SCRIPT/interleave.sh </span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Unzip</li>
+</ol>
+<p>Copy all your raw <code>fastq.gz</code> files into a folder called <code>02_preprocess</code>. Move into the folder and unzip the files.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="pre-assembly.html#cb4-1" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Interleave</li>
+</ol>
+<p>We are using a modified version of the script <font color='green'>interleave.py</font> from this <a href="https://gist.github.com/ngcrawford/2232505">GitHub gist</a> to interleave the forward and reverse read. Create bash script called <code>run_interleave.sh</code> with the following commands and execute the script using nohup.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="pre-assembly.html#cb5-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a href="pre-assembly.html#cb5-2" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> <span class="pp">*</span>R1<span class="pp">*</span>.fastq<span class="kw">;</span></span>
+<span id="cb5-3"><a href="pre-assembly.html#cb5-3" tabindex="-1"></a><span class="cf">do</span> </span>
+<span id="cb5-4"><a href="pre-assembly.html#cb5-4" tabindex="-1"></a>  <span class="ex">python3</span> /home/SCRIPT/interleave.py <span class="va">$R1</span> <span class="st">&quot;</span><span class="va">${R1</span><span class="op">/</span><span class="ss">R1</span><span class="op">/</span>R2<span class="va">}</span><span class="st">&quot;</span>  <span class="op">&gt;</span> <span class="va">$R1</span>.interleave.fastq <span class="kw">;</span> </span>
+<span id="cb5-5"><a href="pre-assembly.html#cb5-5" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<p><strong>Output</strong> : For each given <strong>sample</strong> (not file) as input it generates a new file ending in <code>.interleave.fastq</code> will be generated. Create a new directory called <code>interleave</code> and move all the <code>.interleave.fastq</code> in this new directory. Move into this new directory or downstream analysis.</p>
 <p>View the top of the new interleaved files to make sure your reads alternate between R1 and R2. Replace sample-name with the name of the sample you want to verify. For sample sequenced on the NovaSeq replace <code>@M</code> for <code>@A</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="pre-assembly.html#cb5-1" tabindex="-1"></a><span class="fu">grep</span> @M sample-name.fastq <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
-</div>
-<div id="trim-check-quality-with-fastqc-and-convert-to-fasta-format" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Trim, check quality with FastQc and convert to Fasta format<a href="pre-assembly.html#trim-check-quality-with-fastqc-and-convert-to-fasta-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>From the folder <code>01_Pre-Assembly</code> run the following command :</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="pre-assembly.html#cb6-1" tabindex="-1"></a><span class="fu">bash</span> /home/SCRIPT/sickle.sh </span></code></pre></div>
-<p><strong>Sickle</strong></p>
-<p>The sequences are trimmed using <a href="https://github.com/najoshi/sickle">Sickle</a>. Sickle is a tool that uses sliding windows along with quality and length thresholds to determine when quality is sufficiently low to trim the 3’-end of reads and also determines when the quality is sufficiently high enough to trim the 5’-end of reads.</p>
-<p><strong>FastQc</strong></p>
-<p><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQc</a> generates an HTML files for every sample. The quality of the samples can be assessed by transferring the HTML files to your computer and opening them using your web browser.</p>
-<p><strong>Seqtk</strong></p>
-<p>We use <a href="https://github.com/lh3/seqtk">Seqtk</a> to convert FASTQ data to FASTA format.</p>
-</div>
-</div>
-<div id="the-scripts" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> The scripts<a href="pre-assembly.html#the-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <code>interleave.sh</code> script :</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="pre-assembly.html#cb6-1" tabindex="-1"></a><span class="fu">grep</span> @M sample-name.interleave.fastq <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Trim</li>
+</ol>
+<p><a href="https://github.com/najoshi/sickle">Sickle</a> is a tool that uses sliding windows along with quality and length thresholds to determine when quality is sufficiently low to trim the 3’-end of reads and also determines when the quality is sufficiently high enough to trim the 5’-end of reads. Create bash script called <code>run_sickle.sh</code> with the following commands and execute the script using nohup.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="pre-assembly.html#cb7-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb7-2"><a href="pre-assembly.html#cb7-2" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;creating gzipped folder and moving files there...&quot;</span> </span>
-<span id="cb7-3"><a href="pre-assembly.html#cb7-3" tabindex="-1"></a><span class="co"># unzipping the file and keeping a copy of the raw zipped file into the folder call gzipped  </span></span>
-<span id="cb7-4"><a href="pre-assembly.html#cb7-4" tabindex="-1"></a><span class="fu">mkdir</span> gzipped </span>
-<span id="cb7-5"><a href="pre-assembly.html#cb7-5" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">*</span>.gz gzipped</span>
-<span id="cb7-6"><a href="pre-assembly.html#cb7-6" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Unzipping files...&quot;</span> </span>
-<span id="cb7-7"><a href="pre-assembly.html#cb7-7" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz </span>
-<span id="cb7-8"><a href="pre-assembly.html#cb7-8" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="pre-assembly.html#cb7-9" tabindex="-1"></a><span class="co"># Interleave the R1 and R2 file </span></span>
-<span id="cb7-10"><a href="pre-assembly.html#cb7-10" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Interleaving files...&quot;</span> </span>
-<span id="cb7-11"><a href="pre-assembly.html#cb7-11" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> <span class="pp">*</span>R1<span class="pp">*</span>.fastq <span class="kw">;</span> <span class="cf">do</span> <span class="ex">python3</span> /home/SCRIPT/interleave.py <span class="va">$R1</span> <span class="st">&quot;</span><span class="va">${R1</span><span class="op">/</span><span class="ss">R1</span><span class="op">/</span>R2<span class="va">}</span><span class="st">&quot;</span>  <span class="op">&gt;</span> <span class="va">$R1</span>.interleave.fastq <span class="kw">;</span> <span class="cf">done</span> </span>
-<span id="cb7-12"><a href="pre-assembly.html#cb7-12" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="pre-assembly.html#cb7-13" tabindex="-1"></a><span class="co"># Move the interleaved files into a new folder called interleave and the original R1 and R2 into a folder called RAW. </span></span>
-<span id="cb7-14"><a href="pre-assembly.html#cb7-14" tabindex="-1"></a><span class="fu">mkdir</span> interleave</span>
-<span id="cb7-15"><a href="pre-assembly.html#cb7-15" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">*</span>.interleave.fastq interleave </span>
-<span id="cb7-16"><a href="pre-assembly.html#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="pre-assembly.html#cb7-17" tabindex="-1"></a><span class="fu">mkdir</span> RAW</span>
-<span id="cb7-18"><a href="pre-assembly.html#cb7-18" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">*</span>.fastq RAW</span>
-<span id="cb7-19"><a href="pre-assembly.html#cb7-19" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="pre-assembly.html#cb7-20" tabindex="-1"></a><span class="co"># Shorten the name of the sample (remove the sequencing information and the interleave)</span></span>
-<span id="cb7-21"><a href="pre-assembly.html#cb7-21" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Renaming files...&quot;</span></span>
-<span id="cb7-22"><a href="pre-assembly.html#cb7-22" tabindex="-1"></a><span class="bu">cd</span> interleave </span>
-<span id="cb7-23"><a href="pre-assembly.html#cb7-23" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span> <span class="fu">mv</span> <span class="va">$i</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">sed</span> s/<span class="st">&quot;_S.*001.fastq.interleave.&quot;</span>/./<span class="va">)</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">done</span></span>
-<span id="cb7-24"><a href="pre-assembly.html#cb7-24" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="pre-assembly.html#cb7-25" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Done!&quot;</span> </span></code></pre></div>
-<p>The <code>sickle.sh</code> script :</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="pre-assembly.html#cb8-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb8-2"><a href="pre-assembly.html#cb8-2" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Running sickle...&quot;</span></span>
-<span id="cb8-3"><a href="pre-assembly.html#cb8-3" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> interleave/<span class="pp">*</span>.fastq</span>
-<span id="cb8-4"><a href="pre-assembly.html#cb8-4" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">sickle</span> pe <span class="at">-c</span> <span class="va">$i</span> <span class="at">-t</span> sanger <span class="at">-m</span> <span class="va">$i</span>.trim.fastq <span class="at">-s</span> <span class="va">$i</span>.singles.fastq</span>
-<span id="cb8-5"><a href="pre-assembly.html#cb8-5" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb8-6"><a href="pre-assembly.html#cb8-6" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="pre-assembly.html#cb8-7" tabindex="-1"></a><span class="fu">mkdir</span> interleave/singles</span>
-<span id="cb8-8"><a href="pre-assembly.html#cb8-8" tabindex="-1"></a><span class="fu">mv</span> interleave/<span class="pp">*</span>.singles.fastq interleave/singles </span>
-<span id="cb8-9"><a href="pre-assembly.html#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="pre-assembly.html#cb8-10" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Checking quality with FastQc...&quot;</span> x</span>
-<span id="cb8-11"><a href="pre-assembly.html#cb8-11" tabindex="-1"></a><span class="co"># Fastqc</span></span>
-<span id="cb8-12"><a href="pre-assembly.html#cb8-12" tabindex="-1"></a><span class="fu">mkdir</span> interleave/fastqc</span>
-<span id="cb8-13"><a href="pre-assembly.html#cb8-13" tabindex="-1"></a><span class="ex">fastqc</span> interleave/<span class="pp">*</span>.fastq <span class="at">--outdir</span><span class="op">=</span>interleave/fastqc</span>
-<span id="cb8-14"><a href="pre-assembly.html#cb8-14" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="pre-assembly.html#cb8-15" tabindex="-1"></a><span class="fu">mkdir</span> interleaved_trim_fastq </span>
-<span id="cb8-16"><a href="pre-assembly.html#cb8-16" tabindex="-1"></a><span class="fu">cp</span> interleave/<span class="pp">*</span>.trim.fastq interleaved_trim_fastq </span>
-<span id="cb8-17"><a href="pre-assembly.html#cb8-17" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="pre-assembly.html#cb8-18" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Creating Fasta...&quot;</span> </span>
-<span id="cb8-19"><a href="pre-assembly.html#cb8-19" tabindex="-1"></a><span class="fu">mkdir</span> fasta </span>
-<span id="cb8-20"><a href="pre-assembly.html#cb8-20" tabindex="-1"></a><span class="fu">gzip</span> interleave/<span class="pp">*</span>.trim.fastq</span>
-<span id="cb8-21"><a href="pre-assembly.html#cb8-21" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> interleave/<span class="pp">*</span>.gz <span class="kw">;</span> </span>
-<span id="cb8-22"><a href="pre-assembly.html#cb8-22" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">seqtk</span> seq <span class="at">-a</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fasta <span class="kw">;</span> </span>
-<span id="cb8-23"><a href="pre-assembly.html#cb8-23" tabindex="-1"></a><span class="cf">done</span> </span>
-<span id="cb8-24"><a href="pre-assembly.html#cb8-24" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="pre-assembly.html#cb8-25" tabindex="-1"></a><span class="fu">mv</span> interleave/<span class="pp">*</span>.fasta fasta </span>
-<span id="cb8-26"><a href="pre-assembly.html#cb8-26" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="pre-assembly.html#cb8-27" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Renaming fasta files...&quot;</span></span>
-<span id="cb8-28"><a href="pre-assembly.html#cb8-28" tabindex="-1"></a><span class="bu">cd</span> fasta </span>
-<span id="cb8-29"><a href="pre-assembly.html#cb8-29" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta<span class="kw">;</span> <span class="cf">do</span> <span class="fu">mv</span> <span class="va">$i</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">sed</span> s/<span class="st">&quot;.fastq.trim.fastq.gz.&quot;</span>/./<span class="va">)</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">done</span></span>
-<span id="cb8-30"><a href="pre-assembly.html#cb8-30" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="pre-assembly.html#cb8-31" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Done!&quot;</span> </span></code></pre></div>
-</div>
-<div id="manually" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Manually<a href="pre-assembly.html#manually" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="unzip" class="section level3 hasAnchor" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Unzip<a href="pre-assembly.html#unzip" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Move all your raw <code>fastq.gz</code> files into a folder called <code>01_Pre-Assembly</code>. Move into the folder and unzip the files.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="pre-assembly.html#cb9-1" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz</span></code></pre></div>
-</div>
-<div id="interleaving" class="section level3 hasAnchor" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Interleaving<a href="pre-assembly.html#interleaving" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We are using a modified version of the script <font color='green'>interleave.py</font> from this <a href="https://gist.github.com/ngcrawford/2232505">GitHub gist</a>. If you have many samples the script can take a long time to run therefor run the following Bash’s for loop using nohup.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="pre-assembly.html#cb10-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb10-2"><a href="pre-assembly.html#cb10-2" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> <span class="pp">*</span>R1<span class="pp">*</span>.fastq<span class="kw">;</span></span>
-<span id="cb10-3"><a href="pre-assembly.html#cb10-3" tabindex="-1"></a><span class="cf">do</span> </span>
-<span id="cb10-4"><a href="pre-assembly.html#cb10-4" tabindex="-1"></a>  <span class="ex">python3</span> /home/SCRIPT/interleave.py <span class="va">$R1</span> <span class="st">&quot;</span><span class="va">${R1</span><span class="op">/</span><span class="ss">R1</span><span class="op">/</span>R2<span class="va">}</span><span class="st">&quot;</span>  <span class="op">&gt;</span> <span class="va">$R1</span>.interleave.fastq <span class="kw">;</span> </span>
-<span id="cb10-5"><a href="pre-assembly.html#cb10-5" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
-<p>View the top of the new interleaved files to make sure your reads alternate between R1 and R2. Replace sample-name with the name of the sample you want to verify. For sample sequenced on the NovaSeq replace <code>@M</code> for <code>@A</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="pre-assembly.html#cb11-1" tabindex="-1"></a><span class="fu">grep</span> @M sample-name.interleave.fastq <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
-<p>Move all the <code>interleave.fastq</code> to a new folder called <code>interleaved</code></p>
-</div>
-<div id="sickle" class="section level3 hasAnchor" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> Sickle<a href="pre-assembly.html#sickle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Sickle is a tool that uses sliding windows along with quality and length thresholds to determine when quality is sufficiently low to trim the 3’-end of reads and also determines when the quality is sufficiently high enough to trim the 5’-end of reads. It generates two files for each fastq you input : <code>.trim.fastq</code> and <code>.singles.fastq</code>. We only need the <code>.trim.fastq</code> and therefor you can move the <code>.singles.fastq</code> into another folder.</p>
-<p>Use nohup to run the following for loop on all the interleave.fastq :</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="pre-assembly.html#cb12-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb12-2"><a href="pre-assembly.html#cb12-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq</span>
-<span id="cb12-3"><a href="pre-assembly.html#cb12-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">sickle</span> pe <span class="at">-c</span> <span class="va">$i</span> <span class="at">-t</span> sanger <span class="at">-m</span> <span class="va">$i</span>.trim.fastq <span class="at">-s</span> <span class="va">$i</span>.singles.fastq</span>
-<span id="cb12-4"><a href="pre-assembly.html#cb12-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<span id="cb7-2"><a href="pre-assembly.html#cb7-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.interleave.fastq</span>
+<span id="cb7-3"><a href="pre-assembly.html#cb7-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">sickle</span> pe <span class="at">-c</span> <span class="va">$i</span> <span class="at">-t</span> sanger <span class="at">-m</span> <span class="va">$i</span>.trim.fastq <span class="at">-s</span> <span class="va">$i</span>.singles.fastq</span>
+<span id="cb7-4"><a href="pre-assembly.html#cb7-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p><em>sickle pe (paired end) -c (inputfile) -t sanger (from illumina) -m (outputfilename) -s (exclutedreadsfilename)</em></p>
-</div>
-<div id="quality-check-with-fastqc" class="section level3 hasAnchor" number="2.3.4">
-<h3><span class="header-section-number">2.3.4</span> Quality check with Fastqc<a href="pre-assembly.html#quality-check-with-fastqc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Create a new folder directory called <code>fastqc</code> which is where the HTLM output of FastQc will be saved. Run the following Bash’s for loop from a directory containing the <code>trim.fastq</code> and the non-trimmed file (<code>fastq</code>). The process can take a lot of time so I recommend using nohup.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="pre-assembly.html#cb13-1" tabindex="-1"></a><span class="co">#!/bin/bash </span></span>
-<span id="cb13-2"><a href="pre-assembly.html#cb13-2" tabindex="-1"></a><span class="ex">fastqc</span> <span class="pp">*</span>.fastq <span class="at">--outdir</span><span class="op">=</span>fastqc</span></code></pre></div>
-<p>Transfer the HTML files from the fastqc directory to your computer in order to view them in your a browser.</p>
-</div>
-<div id="fastq-to-fasta" class="section level3 hasAnchor" number="2.3.5">
-<h3><span class="header-section-number">2.3.5</span> Fastq to Fasta<a href="pre-assembly.html#fastq-to-fasta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Copy the trimmed-interleaved fastq file (<em>sample1.interleave.trim.fastq</em>) to a new folder called <code>fasta</code> and then gzip all the files and convert to fasta.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="pre-assembly.html#cb14-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb14-2"><a href="pre-assembly.html#cb14-2" tabindex="-1"></a><span class="fu">gzip</span> <span class="pp">*</span>.fastq</span>
-<span id="cb14-3"><a href="pre-assembly.html#cb14-3" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gz <span class="kw">;</span> </span>
-<span id="cb14-4"><a href="pre-assembly.html#cb14-4" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">seqtk</span> seq <span class="at">-a</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fasta <span class="kw">;</span> </span>
-<span id="cb14-5"><a href="pre-assembly.html#cb14-5" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<p><strong>Output</strong> : For each given file it generates two files (one ending in <code>.interleave.fastq.trim.fastq</code> and the other ending in <code>.interleave.fastq.singles.fastq</code>). For downstream processing we only need the <code>.interleave.fastq.trim.fastq</code> and therefore you can move all the <code>.single</code> into a new directory called <code>single</code>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Quality check</li>
+</ol>
+<p><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQc</a> provides a modular set of analyses which you can use to get a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.</p>
+<p>Create a new folder directory called <code>fastqc</code> which is where the HTLM output of FastQc will be saved. Create bash script called <code>run_fastqc.sh</code> with the following commands and execute the script using nohup.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="pre-assembly.html#cb8-1" tabindex="-1"></a><span class="co">#!/bin/bash </span></span>
+<span id="cb8-2"><a href="pre-assembly.html#cb8-2" tabindex="-1"></a><span class="ex">fastqc</span> <span class="pp">*</span>.interleave.fastq.trim.fastq <span class="at">--outdir</span><span class="op">=</span>fastqc</span></code></pre></div>
+<p><strong>Output</strong> : For each given file it generates an HTML file. The quality of the samples can be assessed by transferring the HTML files to your local computer. To determine if trimming caused any issue you can also run FastQc on the unzipped raw file and compare the results with the interleaved-trimmed file.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Transfer to Fasta</li>
+</ol>
+<p><a href="https://github.com/lh3/seqtk">Seqtk</a> is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format.</p>
+<p>Move all the <code>.interleave.fastq.trim.fastq</code> to a new folder called <code>03_trim_interleave</code></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="pre-assembly.html#cb9-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb9-2"><a href="pre-assembly.html#cb9-2" tabindex="-1"></a><span class="fu">gzip</span> <span class="pp">*</span>.fastq</span>
+<span id="cb9-3"><a href="pre-assembly.html#cb9-3" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gz <span class="kw">;</span> </span>
+<span id="cb9-4"><a href="pre-assembly.html#cb9-4" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">seqtk</span> seq <span class="at">-a</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fasta <span class="kw">;</span> </span>
+<span id="cb9-5"><a href="pre-assembly.html#cb9-5" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
 <hr />
-</div>
-</div>
 </div>
             </section>
 
@@ -404,7 +308,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/Pipeline.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01_Pipeline.Rmd",
 "text": "Edit"
 },
 "history": {

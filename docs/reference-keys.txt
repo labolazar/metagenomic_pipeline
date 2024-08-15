@@ -2,16 +2,6 @@ introduction
 setting-up-your-environment
 download-fastqs-files-from-illumina-basespace-sequence-hub
 pre-assembly
-pre-scripted-method
-interleave
-trim-check-quality-with-fastqc-and-convert-to-fasta-format
-the-scripts
-manually
-unzip
-interleaving
-sickle
-quality-check-with-fastqc
-fastq-to-fasta
 assembly
 assemblers
 idba
@@ -42,7 +32,8 @@ phylogenetic-tree
 downloading-reference-genomes
 bash-script
 gtotree
-nohup
+using-nohup-and-other-tips-and-tricks
+bash-scripting-using-nohup
 other-tips-and-tricks
 moving-files-using-scp
 renaiming-files

@@ -1,0 +1,72 @@
+# Using nohup and other tips and tricks
+
+## Bash scripting using nohup
+
+Fist step is to write your script into a text editor (`vi` or `nano`). I suggest using vi as it is a very powerful text editor with plenty of useful shortcuts. You can find more information on vi [here](https://www.tutorialspoint.com/unix/unix-vi-editor.htm). 
+
+1. To create a new file the format of the command is as follow : 
+
+```{bash, highlight=TRUE, eval=FALSE}
+vi script.sh
+``` 
+
+First we call the program `vi` followed by the name of file to create. The extension of the file needs to reflect the type of file you want to create (i.e. for a python script the extension would be `.py`, a bash script would be `.sh`, and a simple text file would be `.txt`. Since the commands we are writing are for executed by bash we need to use the extension `.sh`. 
+
+2. In the new opened window write your script. To start typing with vi press the `i` touch. 
+
+3. Once you are done exit vi by pressing `esc` then `:` followed by `w` and `q`. If you want to exit without saving your changes press `q` and `!` instead.
+
+4. Make your script executable. If you look at the file using `ll` the script should now be green and followed by `*`. 
+```{bash, highlight=TRUE, eval=FALSE}
+chmod +x script.sh
+``` 
+
+5. Run using nohup
+```{bash, highlight=TRUE, eval=FALSE}
+nohup ./script.sh & 
+``` 
+
+After pressing nohup the prompt will print your process ID in the following format [1] xxxxxxxx and print the following : `nohup: ignoring input and appending output to 'nohup.out'` Press enter again to return to the prompt. Your process is completed when you get the following `[1]+  Done    nohup ./script.sh`. If nohup `exits` there was an error running the script. To view the output and the find out the error, view the report using `less nohup.out`. Exit less with `q` 
+
+6. View jobs status
+```{bash, highlight=TRUE, eval=FALSE}
+jobs
+``` 
+
+7. Once nohup is done running your script it will write `Done` 
+
+# Other tips and tricks 
+
+To move or copy many files listed in a text files
+```{bash, highlight=TRUE, eval=FALSE}
+xargs -a file_list.txt mv -t /path/to/directory
+``` 
+
+## Moving files using SCP 
+
+To move file from your computer to the server, from your local terminal 
+```{bash, highlight=TRUE, eval=FALSE}
+scp filename.txt servername@server.bio.uqam.ca:/home/user/pathway/todirectory
+```
+
+To move file from your the server, to your computer 
+```{bash, highlight=TRUE, eval=FALSE}
+scp kvilleneuve@titan.bio.uqam.ca:/home/kvilleneuve/filename.txt .
+``` 
+
+## Renaiming files 
+
+Replace the pattern in brackets for the section of words you want to remove from the name of your file. 
+```{bash, highlight=TRUE, eval=FALSE}
+for i in *.fastq; do mv $i "$(echo $i | sed s/"_R1.fastq.interleave.fastq.trim.fastq.gz."/./)"; done
+``` 
+
+## Extract scaffhold based on nane and coordinates using samtools 
+
+Copy the scaffhold name followed by the coordinates in a vi file. Example : contig-115_1168:1-955
+
+Extract the sequence identified in the vi file into a new file using samtools 
+```{bash, highlight=TRUE, eval=FALSE}
+for i in `cat scaff`; do samtools faidx 2000kb.fa $i >>16S_2Kb.fna; done
+``` 
+
