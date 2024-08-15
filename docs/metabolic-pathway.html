@@ -169,25 +169,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="taxonomy.html"><a href="taxonomy.html#gtdbtk"><i class="fa fa-check"></i><b>7.1</b> GTDBTK</a></li>
 <li class="chapter" data-level="7.2" data-path="taxonomy.html"><a href="taxonomy.html#basic-rapid-ribosomal-rna-predictor-barrnap"><i class="fa fa-check"></i><b>7.2</b> BAsic Rapid Ribosomal RNA Predictor (Barrnap)</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>8</b> Metabolic pathway</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#dram"><i class="fa fa-check"></i><b>8.1</b> DRAM</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#installing"><i class="fa fa-check"></i><b>8.1.1</b> Installing</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#metabolic"><i class="fa fa-check"></i><b>8.2</b> Metabolic</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#installing-1"><i class="fa fa-check"></i><b>8.2.1</b> Installing</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html#mebs"><i class="fa fa-check"></i><b>8.3</b> Mebs</a></li>
-</ul></li>
+<li class="chapter" data-level="8" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>8</b> Metabolic pathway</a></li>
 <li class="chapter" data-level="9" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>9</b> Phylogenetic tree</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#downloading-reference-genomes"><i class="fa fa-check"></i><b>9.1</b> Downloading reference genomes</a>
-<ul>
-<li class="chapter" data-level="9.1.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#bash-script"><i class="fa fa-check"></i><b>9.1.1</b> Bash script</a></li>
-</ul></li>
-<li class="chapter" data-level="9.2" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#gtotree"><i class="fa fa-check"></i><b>9.2</b> GToTree</a></li>
+<li class="chapter" data-level="9.0.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#bash-script"><i class="fa fa-check"></i><b>9.0.1</b> Bash script</a></li>
+<li class="chapter" data-level="9.1" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html#gtotree"><i class="fa fa-check"></i><b>9.1</b> GToTree</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>10</b> Using nohup and other tips and tricks</a>
 <ul>
@@ -221,62 +207,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="metabolic-pathway" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> Metabolic pathway<a href="metabolic-pathway.html#metabolic-pathway" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Both DRAM and Metabolic are installed only for the user <code>genomics</code>
-- User : ssh <a href="mailto:genomics@titan.bio.uqam" class="email">genomics@titan.bio.uqam</a>
-- Password : genomics</p>
-<p>Use <code>sudo cp</code> to copy the samples to annotate into your directory under the user genomics.</p>
-<div id="dram" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> DRAM<a href="metabolic-pathway.html#dram" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><a href="https://github.com/WrightonLabCSU/DRAM">Github page</a></p>
-<p>Note : DRAM requires the full path (home/genomics/…) and won’t accept path starting from the home directory (~).</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="metabolic-pathway.html#cb37-1" tabindex="-1"></a><span class="ex">conda</span> activate DRAM</span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="metabolic-pathway.html#cb38-1" tabindex="-1"></a><span class="ex">DRAM.py</span> annotate <span class="at">-i</span> <span class="st">&#39;/home/genomics/yourname/samples/*.fa&#39;</span> <span class="at">-o</span> /home/genomics/yourname/samples/annotation <span class="at">--threads</span> 40 </span></code></pre></div>
-<p>Once annotation is done, the following command will summarize all the results from the folder <code>annotate</code></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="metabolic-pathway.html#cb39-1" tabindex="-1"></a><span class="ex">DRAM.py</span> distill <span class="at">-i</span> annotation/annotations.tsv <span class="at">-o</span> summaries <span class="at">--trna_path</span> annotation/trnas.tsv <span class="at">--rrna_path</span> annotation/rrnas.tsv</span></code></pre></div>
-<div id="installing" class="section level3 hasAnchor" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> Installing<a href="metabolic-pathway.html#installing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Because FTP connections weren’t allowed on the server, I changed the link to download the different databases from FTP to HTTPS. The file I modified is <code>/home/kvilleneuve/anaconda/envs/DRAM/lib/python3.10/site-packages/mag_annotator/database_processing.py</code>.</p>
-</div>
-</div>
-<div id="metabolic" class="section level2 tabset hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Metabolic<a href="metabolic-pathway.html#metabolic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Prodigal</strong>
-<a href="https://github.com/hyattpd/Prodigal">Github</a></p>
-<p>We use prodigal to translate nucleic acid sequences to the corresponding peptide sequences.By default prodigal takes as input fasta files with the <code>.fna</code> extension. Use perl to add the name of the sample to the beginning of every file and change the file type to <code>.fna</code>.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="metabolic-pathway.html#cb40-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
-<p>Replace space between the name of you bins and the scaffhold to underscores</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="metabolic-pathway.html#cb41-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fna <span class="kw">;</span> <span class="cf">do</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/ /_/g&#39;</span> <span class="va">$i</span> <span class="kw">;</span> <span class="cf">done</span> </span></code></pre></div>
-<p>Run <code>prodigal</code> to convert your bins to amino acid (faa) sequence</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="metabolic-pathway.html#cb42-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fna <span class="kw">;</span> <span class="cf">do</span> <span class="ex">prodigal</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-o</span> output.txt <span class="at">-a</span> <span class="va">$i</span>.faa <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
-<p>Remove all the characters after the first space in the header</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="metabolic-pathway.html#cb43-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.faa<span class="kw">;</span> <span class="cf">do</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/\s.*$//&#39;</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span> </span></code></pre></div>
-<p><strong>Metabolic</strong></p>
-<p>I am currently having issues again with running and installing metabolic….</p>
-<p><a href="https://github.com/AnantharamanLab/METABOLIC">Github</a></p>
+<p><strong>1. BlastKOALA</strong></p>
+<p><a href="https://www.kegg.jp/blastkoala/">BlastKOALA</a> is an automatic annotation servers for genome and metagenome sequences, which perform KO (KEGG Orthology) assignments to characterize individual gene functions and reconstruct KEGG pathways, BRITE hierarchies and KEGG modules to infer high-level functions of the organism or the ecosystem.</p>
+<p>BlastKOALA takes as input amino acid sequences in FASTA format. We therefore use <a href="https://github.com/hyattpd/Prodigal">prodigal</a> to translate nucleic acid sequences to the corresponding peptide sequences.By default prodigal takes as input FASTA files with the <code>.fna</code> extension.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Use perl to add the name of the sample to the beginning of every file and change the file type to <code>.fna</code>.</li>
+</ol>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="metabolic-pathway.html#cb37-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Replace space between the name of you bins and the scaffhold to underscores</li>
+</ol>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="metabolic-pathway.html#cb38-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fna <span class="kw">;</span> <span class="cf">do</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/ /_/g&#39;</span> <span class="va">$i</span> <span class="kw">;</span> <span class="cf">done</span> </span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Run <code>prodigal</code></li>
+</ol>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="metabolic-pathway.html#cb39-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fna <span class="kw">;</span> <span class="cf">do</span> <span class="ex">prodigal</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-o</span> output.txt <span class="at">-a</span> <span class="va">$i</span>.faa <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Remove all the characters after the first space in the header</li>
+</ol>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="metabolic-pathway.html#cb40-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.faa<span class="kw">;</span> <span class="cf">do</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/\s.*$//&#39;</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span> </span></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Transfer the files to your local computer and follow the instructions on the BlastKOALA website for submission.</li>
+</ol>
+<p><strong>2. Other programs we aren’t using anymore</strong></p>
+<ol style="list-style-type: decimal">
+<li>DRAM</li>
+</ol>
+<p><a href="https://github.com/WrightonLabCSU/DRAM">DRAM</a> (Distilled and Refined Annotation of Metabolism) is a tool for annotating metagenomic assembled genomes and VirSorter identified viral contigs. DRAM annotates MAGs and viral contigs using KEGG (if provided by the user), UniRef90, PFAM, dbCAN, RefSeq viral, VOGDB and the MEROPS peptidase database as well as custom user databases.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Activate environment</li>
+</ol>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="metabolic-pathway.html#cb41-1" tabindex="-1"></a><span class="ex">conda</span> activate DRAM</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Execute DRAM. Create a bash script called <code>run_dram.sh</code> with the following commands and execute the script using nohup.Note : DRAM requires the full path (home/genomics/…) and won’t accept path starting from the home directory (~).</li>
+</ol>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="metabolic-pathway.html#cb42-1" tabindex="-1"></a><span class="ex">DRAM.py</span> annotate <span class="at">-i</span> <span class="st">&#39;/home/genomics/yourname/samples/*.fa&#39;</span> <span class="at">-o</span> /home/genomics/yourname/samples/annotation <span class="at">--threads</span> 40 </span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Once annotation is done, the following command will summarize all the results from the folder <code>annotate</code></li>
+</ol>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="metabolic-pathway.html#cb43-1" tabindex="-1"></a><span class="ex">DRAM.py</span> distill <span class="at">-i</span> annotation/annotations.tsv <span class="at">-o</span> summaries <span class="at">--trna_path</span> annotation/trnas.tsv <span class="at">--rrna_path</span> annotation/rrnas.tsv</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Metabolic</li>
+</ol>
+<p><a href="https://github.com/AnantharamanLab/METABOLIC">METABOLIC</a>(METabolic And BiogeOchemistry anaLyses In miCrobes) enables the prediction of metabolic and biogeochemical functional trait profiles to any given genome datasets.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Activate environment</li>
+</ol>
 <div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="metabolic-pathway.html#cb44-1" tabindex="-1"></a><span class="ex">conda</span> activate metabolic</span></code></pre></div>
-<p>Change the path to the directory containing the genome amino acid files ending with <code>.faa</code> Run using nohup</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>METABOLIC takes as input amino acid sequences in FASTA format. Create a bash script called <code>run_metabolic.sh</code> with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where your amino acid FASTA files are located and where you want METABOLIC to store the output files.</li>
+</ol>
 <div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="metabolic-pathway.html#cb45-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb45-2"><a href="metabolic-pathway.html#cb45-2" tabindex="-1"></a><span class="fu">perl</span> /home/genomics/METABOLIC/METABOLIC-G.pl <span class="at">-in</span> /path/to/faa/ <span class="at">-o</span> output/ </span></code></pre></div>
-<div id="installing-1" class="section level3 hasAnchor" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Installing<a href="metabolic-pathway.html#installing-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To install metabolic I copied the file <code>metabolic_environment.txt</code> file from the <a href="https://github.com/AnantharamanLab/METABOLIC/issues/27#issuecomment-777138057">issue #27</a> on the server and renamed it <code>metabolic_environment.yml</code></p>
-<p>I created the environment using <code>conda env create -f metabolic_environment.yml</code> and then followed all the other step described in the <a href="https://github.com/AnantharamanLab/METABOLIC/wiki">Github wiki</a></p>
-<p>There also seemed to be issues with the run_to_setup.bash. I solved this problem by changing these commands in the script :</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="metabolic-pathway.html#cb46-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">--silent</span> ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz  <span class="at">-O</span> ko_list.gz</span>
-<span id="cb46-2"><a href="metabolic-pathway.html#cb46-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">--silent</span> ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz  <span class="at">-O</span> profiles.tar.gz</span>
-<span id="cb46-3"><a href="metabolic-pathway.html#cb46-3" tabindex="-1"></a><span class="ex">curl</span> <span class="at">--silent</span> ftp://ftp.ebi.ac.uk/pub/databases/merops/current_release/pepunit.lib <span class="at">-O</span> pepunit.lib</span></code></pre></div>
-<p>for these commands :</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="metabolic-pathway.html#cb47-1" tabindex="-1"></a><span class="ex">curl</span> https://www.genome.jp/ftp/db/kofam/ko_list.gz  <span class="at">-output</span> ko_list.gz</span>
-<span id="cb47-2"><a href="metabolic-pathway.html#cb47-2" tabindex="-1"></a><span class="ex">curl</span> https://www.genome.jp/ftp/db/kofam/profiles.tar.gz  <span class="at">-output</span> profiles.tar.gz</span>
-<span id="cb47-3"><a href="metabolic-pathway.html#cb47-3" tabindex="-1"></a><span class="ex">curl</span> https://ftp.ebi.ac.uk/pub/databases/merops/current_release/pepunit.lib <span class="at">-o</span> pepunit.lib</span></code></pre></div>
-</div>
-</div>
-<div id="mebs" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Mebs<a href="metabolic-pathway.html#mebs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>See installation and instructions on the <a href="https://github.com/valdeanda/mebs">Github page</a></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="metabolic-pathway.html#cb48-1" tabindex="-1"></a><span class="fu">perl</span> mebs.pl <span class="at">-input</span> /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/prodigal <span class="at">-type</span> genomic <span class="at">-comp</span> <span class="op">&gt;</span> rock_MAGS.tsv</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="metabolic-pathway.html#cb49-1" tabindex="-1"></a><span class="ex">python3</span> mebs_vis.py rock_assembly.tsv <span class="at">-o</span> /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/rock_assembly_MEBS <span class="at">-im_format</span> pdf <span class="at">-f</span> pdf</span></code></pre></div>
-</div>
+<span id="cb45-2"><a href="metabolic-pathway.html#cb45-2" tabindex="-1"></a><span class="fu">perl</span> /home/genomics/METABOLIC/METABOLIC-G.pl <span class="at">-in</span> /home/genomics/user/07_metabolic_pathway/ <span class="at">-o</span> /home/genomics/user/07_metabolic_pathway/metabolic_outut/</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>MEBS</li>
+</ol>
+<p><a href="https://github.com/valdeanda/mebs">MEBS</a>(Multigenomic Entropy-Based Score) allows the user to synthesizes genomic information into a single informative value. This entropy score can be used to infer the likelihood that microbial taxa perform specific metabolic-biogeochemical pathways.</p>
+<ol style="list-style-type: lower-alpha">
+<li>MEBS takes as input amino acid sequences in FASTA format.</li>
+</ol>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="metabolic-pathway.html#cb46-1" tabindex="-1"></a><span class="fu">perl</span> mebs.pl <span class="at">-input</span> /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/prodigal <span class="at">-type</span> genomic <span class="at">-comp</span> <span class="op">&gt;</span> rock_MAGS.tsv</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="metabolic-pathway.html#cb47-1" tabindex="-1"></a><span class="ex">python3</span> mebs_vis.py rock_assembly.tsv <span class="at">-o</span> /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/rock_assembly_MEBS <span class="at">-im_format</span> pdf <span class="at">-f</span> pdf</span></code></pre></div>
+
 </div>
             </section>
 
@@ -305,7 +297,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/03_binning.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05_metabolic_patways.Rmd",
 "text": "Edit"
 },
 "history": {

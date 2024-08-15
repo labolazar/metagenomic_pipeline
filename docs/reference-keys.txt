@@ -16,13 +16,7 @@ taxonomy
 gtdbtk
 basic-rapid-ribosomal-rna-predictor-barrnap
 metabolic-pathway
-dram
-installing
-metabolic
-installing-1
-mebs
 phylogenetic-tree
-downloading-reference-genomes
 bash-script
 gtotree
 using-nohup-and-other-tips-and-tricks

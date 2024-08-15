@@ -1,0 +1,78 @@
+# Metabolic pathway 
+
+**1. BlastKOALA**
+
+[BlastKOALA](https://www.kegg.jp/blastkoala/) is an automatic annotation servers for genome and metagenome sequences, which perform KO (KEGG Orthology) assignments to characterize individual gene functions and reconstruct KEGG pathways, BRITE hierarchies and KEGG modules to infer high-level functions of the organism or the ecosystem. 
+
+BlastKOALA takes as input amino acid sequences in FASTA format. We therefore use [prodigal](https://github.com/hyattpd/Prodigal) to translate nucleic acid sequences to the corresponding peptide sequences.By default prodigal takes as input FASTA files with the `.fna` extension. 
+
+a) Use perl to add the name of the sample to the beginning of every file and change the file type to `.fna`. 
+```{bash, eval=FALSE}
+for i in *.fa ; do  perl -lne 'if(/^>(\S+)/){ print ">$ARGV $1"} else{ print }' $i > $i.fna ; done
+``` 
+
+b) Replace space between the name of you bins and the scaffhold to underscores 
+```{bash, eval=FALSE}
+for i in *.fna ; do sed -i 's/ /_/g' $i ; done 
+```
+
+c) Run `prodigal`
+```{bash, eval=FALSE}
+for i in *.fna ; do prodigal -i $i -o output.txt -a $i.faa ; done
+```
+
+d) Remove all the characters after the first space in the header 
+```{bash, eval=FALSE}
+for i in *.faa; do sed -i 's/\s.*$//' $i; done 
+```
+
+e) Transfer the files to your local computer and follow the instructions on the BlastKOALA website for submission. 
+
+**2. Other programs we aren't using anymore**
+
+1. DRAM
+
+[DRAM](https://github.com/WrightonLabCSU/DRAM) (Distilled and Refined Annotation of Metabolism) is a tool for annotating metagenomic assembled genomes and VirSorter identified viral contigs. DRAM annotates MAGs and viral contigs using KEGG (if provided by the user), UniRef90, PFAM, dbCAN, RefSeq viral, VOGDB and the MEROPS peptidase database as well as custom user databases. 
+
+a) Activate environment 
+```{bash, eval=FALSE}
+conda activate DRAM
+``` 
+
+b) Execute DRAM. Create a bash script called `run_dram.sh` with the following commands and execute the script using nohup.Note : DRAM requires the full path (home/genomics/...) and won't accept path starting from the home directory (~). 
+```{bash, eval=FALSE}
+DRAM.py annotate -i '/home/genomics/yourname/samples/*.fa' -o /home/genomics/yourname/samples/annotation --threads 40 
+``` 
+
+c) Once annotation is done, the following command will summarize all the results from the folder `annotate` 
+```{bash, eval=FALSE}
+DRAM.py distill -i annotation/annotations.tsv -o summaries --trna_path annotation/trnas.tsv --rrna_path annotation/rrnas.tsv
+``` 
+
+2. Metabolic
+
+[METABOLIC](https://github.com/AnantharamanLab/METABOLIC)(METabolic And BiogeOchemistry anaLyses In miCrobes) enables the prediction of metabolic and biogeochemical functional trait profiles to any given genome datasets.
+
+a) Activate environment 
+```{bash, eval=FALSE}
+conda activate metabolic
+``` 
+
+b) METABOLIC takes as input amino acid sequences in FASTA format. Create a bash script called `run_metabolic.sh` with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where your amino acid FASTA files are located and where you want METABOLIC to store the output files. 
+```{bash, eval=FALSE}
+#!/bin/bash
+perl /home/genomics/METABOLIC/METABOLIC-G.pl -in /home/genomics/user/07_metabolic_pathway/ -o /home/genomics/user/07_metabolic_pathway/metabolic_outut/
+``` 
+
+3. MEBS
+
+[MEBS](https://github.com/valdeanda/mebs)(Multigenomic Entropy-Based Score) allows the user to synthesizes genomic information into a single informative value. This entropy score can be used to infer the likelihood that microbial taxa perform specific metabolic-biogeochemical pathways. 
+
+a) MEBS takes as input amino acid sequences in FASTA format.  
+```{bash, eval=FALSE}
+perl mebs.pl -input /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/prodigal -type genomic -comp > rock_MAGS.tsv
+```
+
+```{bash, highlight=TRUE, eval=FALSE}
+python3 mebs_vis.py rock_assembly.tsv -o /home/kvilleneuve/Shotgun_Project/Melanie_Shotgun/rock_assembly_MEBS -im_format pdf -f pdf
+``` 

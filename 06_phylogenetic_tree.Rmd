@@ -1,0 +1,62 @@
+# Phylogenetic tree 
+
+**1. Downloading reference genomes**
+
+Download the latest NCBI `assembly_summary_genbank.txt` file using wget. Note that the link might change over time. 
+```{bash, highlight=TRUE, eval=FALSE}
+wget https://ftp.ncbi.nih.gov/genomes/genbank/assembly_summary_genbank.txt
+``` 
+
+For each phylum, order, class, family of interest, search in the [NCBI database](https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/) and select 5 individuals with the most complete genome. Copy/paste the name and the assembly number in an excel document (seperate columns - Name and Assembly_GCA). From that excel document, copy the list of assembly number **including the column name (Assembly_GCA)** in a vi document called `GCA.txt`. Search for those identifiers in the assembly summary genbank file with the following command and export the columns (1,7,8,20*) we are interested in to a tabular file called `todownload.tab`. 
+
+```{bash, highlight=TRUE, eval=FALSE}
+for n in `cat GCA.txt`; do grep $n assembly_summary_genbank.txt  | cut -f 1,7,8,16,20 >> todownload.tab ; done
+```  
+* *Column  1: "assembly_accession" - Column  7: "species_taxid" - Column  8: "organism_name" - Column 16: "asm_name" - Column 20: "ftp_path"* 
+
+Run the Rscript getFTPlink.r which generates two files 
+1. `ftp.links.txt` : contains the ftp link to the genomic.fna.gz file for each genomes of interest. Download the files using wget and unzip them. 
+2. `name.txt` : contains two column, first is the name of the fasta file followed by organsim name and asm name. This file will be used to change the branch names for the tree 
+
+```{bash, highlight=TRUE, eval=FALSE}
+Rscript /home/SCRIPT/getFTPlink.r 
+wget -i ftp.links.txt
+gunzip *.gz
+``` 
+Create a new directory and move the ref files there and run CheckM on the downloaded genomes. Discard the genomes that are not completed.
+```{bash, highlight=TRUE, eval=FALSE}
+conda activate checkm
+checkm lineage_wf -x fna ref_genomes checkm -f output_table.txt -t 48
+``` 
+
+Move your bins and reference genomes in a folder together. Add the name of the bin to the beginning of every file and change the file type to .fna. 
+```{bash, highlight=TRUE, eval=FALSE}
+for i in *.fa ; do  perl -lne 'if(/^>(\S+)/){ print ">$ARGV $1"} else{ print }' $i > $i.fna ; done
+``` 
+
+### Bash script 
+```{bash, highlight=TRUE, eval=FALSE}
+#!/bin/bash
+echo "Getting data from assembly_summary_genbank.txt based on GCA.txt" 
+for n in `cat GCA.txt`; do grep $n assembly_summary_genbank.txt  | cut -f 1,7,8,16,20 >> todownload.tab ; done
+echo "Getting ftp link to download genomes" 
+Rscript /home/SCRIPT/getFTPlink.r 
+echo "Downloading and unzipping genomes"
+wget -i ftp.links.txt
+gunzip *.gz
+```  
+
+## GToTree
+[Github](https://github.com/AstrobioMike/GToTree)
+
+Move the file `name.txt` into the folder containing your genomes. Add to this file the name of your bins. 
+
+Create a txt file called `fasta_files.txt` containing the name of all the fasta files you have. 
+
+```{bash, highlight=TRUE, eval=FALSE}
+ls *.fna > fasta_files.txt
+conda activate gtotree
+GToTree -f fasta_files.txt -H Bacteria -j 4 -o out -G 0 
+``` 
+
+Upload the tree to itol
