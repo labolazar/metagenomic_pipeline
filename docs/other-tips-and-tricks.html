@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-15" />
+<meta name="date" content="2024-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -144,11 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
 <li class="chapter" data-level="3" data-path="assembly-spades.html"><a href="assembly-spades.html"><i class="fa fa-check"></i><b>3</b> Assembly SPAdes</a></li>
 <li class="chapter" data-level="4" data-path="barrnap.html"><a href="barrnap.html"><i class="fa fa-check"></i><b>4</b> Barrnap</a></li>
-<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a>
-<ul>
-<li class="chapter" data-level="5.0.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>5.0.1</b> MetaBAT2</a></li>
-<li class="chapter" data-level="5.1" data-path="binning.html"><a href="binning.html#installing-checkm"><i class="fa fa-check"></i><b>5.1</b> Installing Checkm</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a></li>
 <li class="chapter" data-level="6" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>6</b> Metabolic pathway</a></li>
 <li class="chapter" data-level="7" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic tree</a></li>
 <li class="chapter" data-level="8" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>8</b> Using nohup and other tips and tricks</a>
@@ -184,24 +180,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="other-tips-and-tricks" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">9</span> Other tips and tricks<a href="other-tips-and-tricks.html#other-tips-and-tricks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>To move or copy many files listed in a text files</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="other-tips-and-tricks.html#cb59-1" tabindex="-1"></a><span class="fu">xargs</span> <span class="at">-a</span> file_list.txt mv <span class="at">-t</span> /path/to/directory</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="other-tips-and-tricks.html#cb56-1" tabindex="-1"></a><span class="fu">xargs</span> <span class="at">-a</span> file_list.txt mv <span class="at">-t</span> /path/to/directory</span></code></pre></div>
 <div id="moving-files-using-scp" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Moving files using SCP<a href="other-tips-and-tricks.html#moving-files-using-scp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To move file from your computer to the server, from your local terminal</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="other-tips-and-tricks.html#cb60-1" tabindex="-1"></a><span class="fu">scp</span> filename.txt servername@server.bio.uqam.ca:/home/user/pathway/todirectory</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="other-tips-and-tricks.html#cb57-1" tabindex="-1"></a><span class="fu">scp</span> filename.txt servername@server.bio.uqam.ca:/home/user/pathway/todirectory</span></code></pre></div>
 <p>To move file from your the server, to your computer</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="other-tips-and-tricks.html#cb61-1" tabindex="-1"></a><span class="fu">scp</span> kvilleneuve@titan.bio.uqam.ca:/home/kvilleneuve/filename.txt .</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="other-tips-and-tricks.html#cb58-1" tabindex="-1"></a><span class="fu">scp</span> kvilleneuve@titan.bio.uqam.ca:/home/kvilleneuve/filename.txt .</span></code></pre></div>
 </div>
 <div id="renaiming-files" class="section level2 hasAnchor" number="9.2">
 <h2><span class="header-section-number">9.2</span> Renaiming files<a href="other-tips-and-tricks.html#renaiming-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Replace the pattern in brackets for the section of words you want to remove from the name of your file.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="other-tips-and-tricks.html#cb62-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span> <span class="fu">mv</span> <span class="va">$i</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">sed</span> s/<span class="st">&quot;_R1.fastq.interleave.fastq.trim.fastq.gz.&quot;</span>/./<span class="va">)</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="other-tips-and-tricks.html#cb59-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span> <span class="fu">mv</span> <span class="va">$i</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">sed</span> s/<span class="st">&quot;_R1.fastq.interleave.fastq.trim.fastq.gz.&quot;</span>/./<span class="va">)</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
 </div>
 <div id="extract-scaffhold-based-on-nane-and-coordinates-using-samtools" class="section level2 hasAnchor" number="9.3">
 <h2><span class="header-section-number">9.3</span> Extract scaffhold based on nane and coordinates using samtools<a href="other-tips-and-tricks.html#extract-scaffhold-based-on-nane-and-coordinates-using-samtools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Copy the scaffhold name followed by the coordinates in a vi file. Example : contig-115_1168:1-955</p>
 <p>Extract the sequence identified in the vi file into a new file using samtools</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="other-tips-and-tricks.html#cb63-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> scaff<span class="kw">`;</span> <span class="cf">do</span> <span class="ex">samtools</span> faidx 2000kb.fa <span class="va">$i</span> <span class="op">&gt;&gt;</span>16S_2Kb.fna<span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="other-tips-and-tricks.html#cb60-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> scaff<span class="kw">`;</span> <span class="cf">do</span> <span class="ex">samtools</span> faidx 2000kb.fa <span class="va">$i</span> <span class="op">&gt;&gt;</span>16S_2Kb.fna<span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
 
 </div>
 </div>

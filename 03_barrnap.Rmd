@@ -2,10 +2,9 @@
 
 **1. Barrnap**
 
-[Barrnap](https://github.com/tseemann/barrnap) (BAsic Rapid Ribosomal RNA Predictor) predicts the location of ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea (5S,5.8S,23S,16S), metazoan mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S). Barrnap takes FASTA DNA sequence as input and can be used on both the assembled contigs (community) and MAGs. 
+[Barrnap](https://github.com/tseemann/barrnap) (BAsic Rapid Ribosomal RNA Predictor) predicts the location of ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea (5S,5.8S,23S,16S), metazoan mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S). Barrnap takes FASTA DNA sequence as input and can be used on both the assembled contigs (community) (directory `04_contigs`) and MAGs (directory `06_mags`). 
 
-
-a) Add the name of the sample at the beginning of every contig and change the extension type to `.fna` (same as .fasta, we are simply using a different extension to distinguish new file with the sample name in front of each contig from the old file). 
+a) Add the name of the sample at the beginning of every scaffhold ID and change the extension type to `.fna` (same as .fasta, we are simply using a different extension to distinguish new file with the sample name in front of each scaffhold from the old file). 
 ```{bash, eval=FALSE}
 for i in *.fasta ; do  perl -lne 'if(/^>(\S+)/){ print ">$ARGV $1"} else{ print }' $i > $i.fna ; done
 ```

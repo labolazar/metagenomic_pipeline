@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-15" />
+<meta name="date" content="2024-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -144,11 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
 <li class="chapter" data-level="3" data-path="assembly-spades.html"><a href="assembly-spades.html"><i class="fa fa-check"></i><b>3</b> Assembly SPAdes</a></li>
 <li class="chapter" data-level="4" data-path="barrnap.html"><a href="barrnap.html"><i class="fa fa-check"></i><b>4</b> Barrnap</a></li>
-<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a>
-<ul>
-<li class="chapter" data-level="5.0.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>5.0.1</b> MetaBAT2</a></li>
-<li class="chapter" data-level="5.1" data-path="binning.html"><a href="binning.html#installing-checkm"><i class="fa fa-check"></i><b>5.1</b> Installing Checkm</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a></li>
 <li class="chapter" data-level="6" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>6</b> Metabolic pathway</a></li>
 <li class="chapter" data-level="7" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic tree</a></li>
 <li class="chapter" data-level="8" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>8</b> Using nohup and other tips and tricks</a>
@@ -189,62 +185,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Mapping allows you to get a rough count of the total number of reads mapping to each contig, also referred to as the depth file or read coverage. This information is required for most binning algorithm. Raw reads from each sample are mapped to the contigs (assembled reads).The idea being that if two contigs come from the same genome in your sample, so the same organism, then they would have been sequenced roughly to the same depth, they would have a similar coverage and they go together. It gets even better if you have multiple samples that vary a bit and you sequence all of them. You do your assembly on one of the samples, then you can take the reads from the other samples, map to that genome (metagenomic assembly) and you can use that as additional information.</p>
 <p>Different tools exists for mapping reads to genomic sequences. Here we are using <a href="https://github.com/imrambo/genome_mapping">Scons Wrapper</a> which maps FASTQ reads against an assembly (e.g. genome) in FASTA format using BWA-MEM. This wrapper does not produce huge intermediate files (e.g. unfiltered SAM).</p>
 <p><font color='red'>I am currently looking for a way to loop this. Tried specifying only the input folder and the sampleids as proposed in the README but it does not work. Therefore these steps must be repeated for every sample. .</font></p>
-<p>For each sample, create a new folder in the directory <code>05_binning</code> and inside each folder copy the filtered assembled contigs and the interleaved-trimed FASTQ for that sample.</p>
-<ol style="list-style-type: decimal">
-<li>Go to your home directory and clone the git repository</li>
+<p>For each sample, create a new folder in the directory <code>05_binning</code> and inside each folder copy the filtered assembled contigs FASTA and the interleaved-trimed FASTQ for that sample.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Activate the scons_maps conda environment</li>
 </ol>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="binning.html#cb25-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/imrambo/genome_mapping.git</span></code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li>Go to the new directory created <code>genome_mapping</code> and activate the scons_maps conda environment</li>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="binning.html#cb25-1" tabindex="-1"></a><span class="ex">conda</span> activate scons_map</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Execute scons from the <code>genome_mapping</code> directory (<code>/home/genomics/genome_mapping</code>). Modify the following parameters accordingly :</li>
 </ol>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="binning.html#cb26-1" tabindex="-1"></a><span class="ex">conda</span> activate scons_map</span></code></pre></div>
-<p><code>sampleids</code> <strong>must</strong> be the exact name as the <code>fastq</code> or <code>fastq.gz</code> file</p>
-<ol start="3" style="list-style-type: decimal">
-<li>Run a dry run to ensure everything runs smoothly (you must run this from the <code>genome_mapping</code> directory)</li>
-</ol>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="binning.html#cb27-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--dry-run</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/ <span class="at">--assembly</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/V01_2_1000bp.fa <span class="at">--outdir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/output <span class="at">--sampleids</span><span class="op">=</span>V01_2_S7_L001_R1_001.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>8 <span class="at">--tmpdir</span><span class="op">=</span>/home/kvilleneuve/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
-<ol start="4" style="list-style-type: decimal">
-<li>Run the script from the <code>genome_mapping</code> directory.</li>
-</ol>
-<p>–fastq_dir=directory where the interleave_trim_fastq and assembled_long_contig_fasta files are.</p>
-<p>–assembly=path to the assembled_long_contig_fasta files. Must include the name of the file at the end.</p>
-<p>–sampleids=the name of the interleave_trim_fastq.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="binning.html#cb28-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/ <span class="at">--assembly</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/V01_2_1000bp.fa <span class="at">--outdir</span><span class="op">=</span>/home/kvilleneuve/Metagenomic_analyses/mapping/V01_2/output <span class="at">--sampleids</span><span class="op">=</span>V01_2_S7_L001_R1_001.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>8 <span class="at">--tmpdir</span><span class="op">=</span>/home/kvilleneuve/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
-<p>In the specified output directory you will find a <code>.sorted.bam</code> which contains the depth information required for mmgenome and metabat.</p>
-<p><strong>2. Generate depth file</strong></p>
+<ul>
+<li><code>--fastq_dir</code> = directory where the filtered assembled contigs FASTA and the interleaved-trimed FASTQ files are.</li>
+<li><code>--assembly</code> = path to the filtered contig FASTA files including the name of the file at the end.</li>
+<li><code>--sampleids</code> = name of the interleave.trim.fastq.</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="binning.html#cb26-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/ <span class="at">--assembly</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/1kb_sample_01_contigs.fasta <span class="at">--outdir</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/output <span class="at">--sampleids</span><span class="op">=</span>sample_01.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>0 <span class="at">--tmpdir</span><span class="op">=</span>/home/genomics/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
+<p>In the specified output directory you will find a <code>.sorted.bam</code> which contains the depth information required by <code>MetaBAT2</code>. Create a directory call <code>sorted_bam</code> and move all the <code>sorted.bam</code> files into this directory.</p>
+<p><strong>2. Depth file</strong></p>
 <p>The depth allows you to know how many sequence you can align with certain sections of your contigs. Section with very little depth (few sequences) are not reputable to use. We use the script <code>jgi_summarize_bam_contig_depths</code>.</p>
-<p>Move all the <code>sorted.bam</code> files into a new folder called <code>Sorted_Bam</code> and from this folder use nohup to run the script <code>jgi_summarize_bam_contig_depths</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="binning.html#cb29-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb29-2"><a href="binning.html#cb29-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.sorted.bam</span>
-<span id="cb29-3"><a href="binning.html#cb29-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">/home/SCRIPT/jgi_summarize_bam_contig_depths</span> <span class="at">--outputDepth</span> <span class="va">$i</span>.depth.txt <span class="at">--pairedContigs</span> <span class="va">$i</span>.paired.txt <span class="va">$i</span></span>
-<span id="cb29-4"><a href="binning.html#cb29-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>From the directory <code>sorted_bam</code> create a bash script called <code>run_depthfile.sh</code> with the following commands and execute the script using nohup.</li>
+</ol>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="binning.html#cb27-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb27-2"><a href="binning.html#cb27-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.sorted.bam</span>
+<span id="cb27-3"><a href="binning.html#cb27-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">/home/SCRIPT/jgi_summarize_bam_contig_depths</span> <span class="at">--outputDepth</span> <span class="va">$i</span>.depth.txt <span class="at">--pairedContigs</span> <span class="va">$i</span>.paired.txt <span class="va">$i</span></span>
+<span id="cb27-4"><a href="binning.html#cb27-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<ul>
+<li><strong>Output</strong> : For each given file the script generates a file ending with <code>.depth.txt</code> as output.</li>
+<li>Move these files into a directory call <code>metabat2</code> and also copy into this folder the filtered contig FASTA.</li>
+</ul>
 <p><strong>3. Create bins</strong></p>
-<div id="metabat2" class="section level3 hasAnchor" number="5.0.1">
-<h3><span class="header-section-number">5.0.1</span> MetaBAT2<a href="binning.html#metabat2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><a href="https://bitbucket.org/berkeleylab/metabat/src/master/">Github</a> / <a href="https://peerj.com/articles/1165/">Article</a>
-Efficient tool for accurately reconstructing single genomes from complex microbial communities</p>
-<p>MetaBAT2 requires that your python environment be activate (base). If required, first deactivate <code>scons_map</code> and then activate conda</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="binning.html#cb30-1" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
-<span id="cb30-2"><a href="binning.html#cb30-2" tabindex="-1"></a><span class="ex">conda</span> activate</span></code></pre></div>
-<p>In order to be able to loop this for all my samples, I renamed each depth file in the following format : <code>sample1.fa.depth.txt</code>. The output is a folder called <code>bins_dir</code> containing all the bins created. I recommend using nohup as the binning process can be very long.</p>
-<p>**copy all your 1kb or 2 kb fasta into the folder containing the depth file.</p>
-<p><strong>Multiple samples</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="binning.html#cb31-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb31-2"><a href="binning.html#cb31-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
-<span id="cb31-3"><a href="binning.html#cb31-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metabat2</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-a</span> <span class="va">$i</span>.depth.txt <span class="at">-o</span> bins <span class="at">-t</span> 0 <span class="at">--minCVSum</span> 0 <span class="at">--saveCls</span> <span class="at">-d</span> <span class="at">-v</span> <span class="at">--minCV</span> 0.1 <span class="at">-m</span> 2000</span>
-<span id="cb31-4"><a href="binning.html#cb31-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
-<p><code>minCVsum</code> : assigning number of tetranucleotide frequency graphs, don’t grab negative numbers
-<code>-m</code> : min size of contig to be considered for binning</p>
-<p><strong>4. Check quality</strong>
-## Checkm
-<a href="https://github.com/Ecogenomics/CheckM/wiki">Github</a></p>
+<p><a href="https://bitbucket.org/berkeleylab/metabat/src/master/">MetaBAT2</a> is an efficient tool for accurately reconstructing single genomes from complex microbial communities.</p>
+<ol style="list-style-type: lower-alpha">
+<li>If required, first deactivate <code>scons_map</code> and then activate conda.</li>
+</ol>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="binning.html#cb28-1" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb28-2"><a href="binning.html#cb28-2" tabindex="-1"></a><span class="ex">conda</span> activate</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>In order to be able to loop this for throught all samples, the name of filtered contig FASTA file must match exactly the beginning of the depths file. Example :</li>
+</ol>
+<ul>
+<li>Filtered contig FASTA : <code>1kb_sample_01_contigs.fasta</code></li>
+<li>Depth file : <code>1kb_sample_01_contigs.fasta.depth.txt</code></li>
+</ul>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Create a bash script called <code>run_metabat2.sh</code> with the following commands and execute the script using nohup.</li>
+</ol>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="binning.html#cb29-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb29-2"><a href="binning.html#cb29-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb29-3"><a href="binning.html#cb29-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metabat2</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-a</span> <span class="va">$i</span>.depth.txt <span class="at">-o</span> bins_<span class="va">$i</span> <span class="at">-t</span> 0 <span class="at">--minCVSum</span> 0 <span class="at">--saveCls</span> <span class="at">-d</span> <span class="at">-v</span> <span class="at">--minCV</span> 0.1 <span class="at">-m</span> 1000</span>
+<span id="cb29-4"><a href="binning.html#cb29-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<ul>
+<li><strong>Output</strong> - for each given file metabat2 generates a directory containing all the bins created.</li>
+</ul>
+<p><strong>4. Check quality</strong></p>
+<p><a href="https://github.com/Ecogenomics/CheckM/wiki">Checkm</a></p>
 <p><strong>You have to go back one folder in the terminal as checkm will run on all the files in the folder you give it as input. Checkm will automatically create a folder called checkm in the specified directory, therefor if you must run checkm again make sure to delete the newly created checkm folder, otherwise checkm will give you an error message.</strong></p>
-<p>You need to specify the extension of your file for it to work. For example, for file finishing is <code>.fa</code> the command will be <code>checkm lineage_wf -x fa</code>…</p>
-<p>If checkm is already installed on your system simply activate the environment</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="binning.html#cb32-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
-<p>Run checkm using nohup</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="binning.html#cb33-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
-<p>checkm lineage_wf -x fa 1500bp_bins 1500bp_bins/checkm -f 1500bp_bins/output.txt -t 48 –noAdd</p>
+<ol style="list-style-type: lower-alpha">
+<li>Activate the environment</li>
+</ol>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="binning.html#cb30-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Create a bash script called <code>run_checkm.sh</code> with the following commands and execute the script using nohup.</li>
+</ol>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="binning.html#cb31-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li><p>Open the <code>output.txt</code> document with excel to verify the <strong>completeness</strong> and <strong>contamination</strong> of your bins.
 <strong>Standard : Completeness &gt; 50 % and Contamination &lt; 10 %</strong></p></li>
@@ -252,37 +255,27 @@ Efficient tool for accurately reconstructing single genomes from complex microbi
 <li><p>Filter the columns by Completeness, and separate the ones &lt; 50 % by adding a line in excel</p></li>
 <li><p>Filter by Contamination, and highlight all the ones &gt; 10 % - These are the bins you want to clean</p></li>
 </ol>
-</div>
-<div id="installing-checkm" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Installing Checkm<a href="binning.html#installing-checkm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Install Checkm using the <a href="https://github.com/Ecogenomics/CheckM/wiki/Installation#how-to-install-checkm">Installation through Conda</a> steps.
-After installation is complete run the following to inform where the checkm databases are installed*:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="binning.html#cb34-1" tabindex="-1"></a><span class="ex">checkm</span> data setRoot /usr/local/lib/checkm</span></code></pre></div>
-<p>*I downloaded the <a href="https://data.ace.uq.edu.au/public/CheckM_databases/">checkm databases</a> and moved them to /usr/local/lib/checkm.
-I decompressed the file using <code>sudo tar -xf checkm_data_2015_01_16.tar.gz</code>.
-I changed the File Ownership to root <code>sudo chown -R root /usr/local/lib/checkm</code> and Group Ownership to me <code>sudo chgrp kvilleneuve /usr/local/lib/checkm</code>.
-I ran the following to inform CheckM of where the files have been placed: <code>checkm data setRoot /usr/local/lib/checkm</code></p>
 <p><strong>5. Metagenome assembled genome statistics</strong></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb35-2"><a href="binning.html#cb35-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
-<span id="cb35-3"><a href="binning.html#cb35-3" tabindex="-1"></a>  <span class="cf">do</span>  <span class="ex">python</span> /home/genomics/quast-5.2.0/quast.py <span class="va">$i</span> <span class="at">-o</span> /home/genomics/karine/stleonard/E4-2/quast_out/<span class="va">$i</span> <span class="at">--threads</span> 48 <span class="at">--no-check</span> <span class="at">--no-plots</span> <span class="at">--no-html</span> <span class="at">--no-icarus</span></span>
-<span id="cb35-4"><a href="binning.html#cb35-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb36-2"><a href="binning.html#cb36-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">report.txt</span><span class="kw">)</span>  </span>
-<span id="cb36-3"><a href="binning.html#cb36-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/report.txt&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_report.txt&quot;</span></span>
-<span id="cb36-4"><a href="binning.html#cb36-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p><a href="">Quast</a></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="binning.html#cb32-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb32-2"><a href="binning.html#cb32-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
+<span id="cb32-3"><a href="binning.html#cb32-3" tabindex="-1"></a>  <span class="cf">do</span>  <span class="ex">python</span> /home/genomics/quast-5.2.0/quast.py <span class="va">$i</span> <span class="at">-o</span> /home/genomics/karine/stleonard/E4-2/quast_out/<span class="va">$i</span> <span class="at">--threads</span> 48 <span class="at">--no-check</span> <span class="at">--no-plots</span> <span class="at">--no-html</span> <span class="at">--no-icarus</span></span>
+<span id="cb32-4"><a href="binning.html#cb32-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="binning.html#cb33-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb33-2"><a href="binning.html#cb33-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">report.txt</span><span class="kw">)</span>  </span>
+<span id="cb33-3"><a href="binning.html#cb33-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/report.txt&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_report.txt&quot;</span></span>
+<span id="cb33-4"><a href="binning.html#cb33-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p><strong>6. Taxonomy</strong></p>
 <p><a href="https://github.com/Ecogenomics/GTDBTk">GTDBTK</a></p>
 <p>Activate the GTDBTK environment</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="binning.html#cb37-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="binning.html#cb34-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
 <p>I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="binning.html#cb38-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
 <p>In the folder with all your clean and completed genomes run this command with nohup</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="binning.html#cb39-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb39-2"><a href="binning.html#cb39-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb36-2"><a href="binning.html#cb36-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
 <p>Once it is done running, you can open the folder called <code>gtdbk_output</code> and copy the folder <code>gtdbtk.bac120.summary.tsv</code> to your local computer in order to open it with excel. Use this folder to identify the phylum, class, order, family and genus that you need to download in order to construct your tree.</p>
 
-</div>
 </div>
             </section>
 

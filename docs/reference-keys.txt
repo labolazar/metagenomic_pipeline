@@ -3,8 +3,6 @@ pre-process
 assembly-spades
 barrnap
 binning
-metabat2
-installing-checkm
 metabolic-pathway
 phylogenetic-tree
 using-nohup-and-other-tips-and-tricks

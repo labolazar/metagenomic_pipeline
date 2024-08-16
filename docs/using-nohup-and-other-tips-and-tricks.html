@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-15" />
+<meta name="date" content="2024-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -144,11 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
 <li class="chapter" data-level="3" data-path="assembly-spades.html"><a href="assembly-spades.html"><i class="fa fa-check"></i><b>3</b> Assembly SPAdes</a></li>
 <li class="chapter" data-level="4" data-path="barrnap.html"><a href="barrnap.html"><i class="fa fa-check"></i><b>4</b> Barrnap</a></li>
-<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a>
-<ul>
-<li class="chapter" data-level="5.0.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>5.0.1</b> MetaBAT2</a></li>
-<li class="chapter" data-level="5.1" data-path="binning.html"><a href="binning.html#installing-checkm"><i class="fa fa-check"></i><b>5.1</b> Installing Checkm</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a></li>
 <li class="chapter" data-level="6" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>6</b> Metabolic pathway</a></li>
 <li class="chapter" data-level="7" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic tree</a></li>
 <li class="chapter" data-level="8" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>8</b> Using nohup and other tips and tricks</a>
@@ -189,23 +185,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>To create a new file the format of the command is as follow :</li>
 </ol>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb55-1" tabindex="-1"></a><span class="fu">vi</span> script.sh</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb52-1" tabindex="-1"></a><span class="fu">vi</span> script.sh</span></code></pre></div>
 <p>First we call the program <code>vi</code> followed by the name of file to create. The extension of the file needs to reflect the type of file you want to create (i.e. for a python script the extension would be <code>.py</code>, a bash script would be <code>.sh</code>, and a simple text file would be <code>.txt</code>. Since the commands we are writing are for executed by bash we need to use the extension <code>.sh</code>.</p>
 <ol start="2" style="list-style-type: decimal">
 <li><p>In the new opened window write your script. To start typing with vi press the <code>i</code> touch.</p></li>
 <li><p>Once you are done exit vi by pressing <code>esc</code> then <code>:</code> followed by <code>w</code> and <code>q</code>. If you want to exit without saving your changes press <code>q</code> and <code>!</code> instead.</p></li>
 <li><p>Make your script executable. If you look at the file using <code>ll</code> the script should now be green and followed by <code>*</code>.</p></li>
 </ol>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb56-1" tabindex="-1"></a><span class="fu">chmod</span> +x script.sh</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb53-1" tabindex="-1"></a><span class="fu">chmod</span> +x script.sh</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Run using nohup</li>
 </ol>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb57-1" tabindex="-1"></a><span class="fu">nohup</span> ./script.sh <span class="kw">&amp;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb54-1" tabindex="-1"></a><span class="fu">nohup</span> ./script.sh <span class="kw">&amp;</span> </span></code></pre></div>
 <p>After pressing nohup the prompt will print your process ID in the following format [1] xxxxxxxx and print the following : <code>nohup: ignoring input and appending output to 'nohup.out'</code> Press enter again to return to the prompt. Your process is completed when you get the following <code>[1]+  Done    nohup ./script.sh</code>. If nohup <code>exits</code> there was an error running the script. To view the output and the find out the error, view the report using <code>less nohup.out</code>. Exit less with <code>q</code></p>
 <ol start="6" style="list-style-type: decimal">
 <li>View jobs status</li>
 </ol>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb58-1" tabindex="-1"></a><span class="bu">jobs</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb55-1" tabindex="-1"></a><span class="bu">jobs</span></span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>Once nohup is done running your script it will write <code>Done</code></li>
 </ol>

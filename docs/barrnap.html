@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-15" />
+<meta name="date" content="2024-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -144,11 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
 <li class="chapter" data-level="3" data-path="assembly-spades.html"><a href="assembly-spades.html"><i class="fa fa-check"></i><b>3</b> Assembly SPAdes</a></li>
 <li class="chapter" data-level="4" data-path="barrnap.html"><a href="barrnap.html"><i class="fa fa-check"></i><b>4</b> Barrnap</a></li>
-<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a>
-<ul>
-<li class="chapter" data-level="5.0.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>5.0.1</b> MetaBAT2</a></li>
-<li class="chapter" data-level="5.1" data-path="binning.html"><a href="binning.html#installing-checkm"><i class="fa fa-check"></i><b>5.1</b> Installing Checkm</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a></li>
 <li class="chapter" data-level="6" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>6</b> Metabolic pathway</a></li>
 <li class="chapter" data-level="7" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic tree</a></li>
 <li class="chapter" data-level="8" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>8</b> Using nohup and other tips and tricks</a>
@@ -184,9 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="barrnap" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Barrnap<a href="barrnap.html#barrnap" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>1. Barrnap</strong></p>
-<p><a href="https://github.com/tseemann/barrnap">Barrnap</a> (BAsic Rapid Ribosomal RNA Predictor) predicts the location of ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea (5S,5.8S,23S,16S), metazoan mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S). Barrnap takes FASTA DNA sequence as input and can be used on both the assembled contigs (community) and MAGs.</p>
+<p><a href="https://github.com/tseemann/barrnap">Barrnap</a> (BAsic Rapid Ribosomal RNA Predictor) predicts the location of ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea (5S,5.8S,23S,16S), metazoan mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S). Barrnap takes FASTA DNA sequence as input and can be used on both the assembled contigs (community) (directory <code>04_contigs</code>) and MAGs (directory <code>06_mags</code>).</p>
 <ol style="list-style-type: lower-alpha">
-<li>Add the name of the sample at the beginning of every contig and change the extension type to <code>.fna</code> (same as .fasta, we are simply using a different extension to distinguish new file with the sample name in front of each contig from the old file).</li>
+<li>Add the name of the sample at the beginning of every scaffhold ID and change the extension type to <code>.fna</code> (same as .fasta, we are simply using a different extension to distinguish new file with the sample name in front of each scaffhold from the old file).</li>
 </ol>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="barrnap.html#cb21-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">

@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-15" />
+<meta name="date" content="2024-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -144,11 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="pre-process.html"><a href="pre-process.html"><i class="fa fa-check"></i><b>2</b> Pre-process</a></li>
 <li class="chapter" data-level="3" data-path="assembly-spades.html"><a href="assembly-spades.html"><i class="fa fa-check"></i><b>3</b> Assembly SPAdes</a></li>
 <li class="chapter" data-level="4" data-path="barrnap.html"><a href="barrnap.html"><i class="fa fa-check"></i><b>4</b> Barrnap</a></li>
-<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a>
-<ul>
-<li class="chapter" data-level="5.0.1" data-path="binning.html"><a href="binning.html#metabat2"><i class="fa fa-check"></i><b>5.0.1</b> MetaBAT2</a></li>
-<li class="chapter" data-level="5.1" data-path="binning.html"><a href="binning.html#installing-checkm"><i class="fa fa-check"></i><b>5.1</b> Installing Checkm</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="binning.html"><a href="binning.html"><i class="fa fa-check"></i><b>5</b> Binning</a></li>
 <li class="chapter" data-level="6" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>6</b> Metabolic pathway</a></li>
 <li class="chapter" data-level="7" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic tree</a></li>
 <li class="chapter" data-level="8" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>8</b> Using nohup and other tips and tricks</a>
@@ -185,30 +181,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">7</span> Phylogenetic tree<a href="phylogenetic-tree.html#phylogenetic-tree" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>1. Downloading reference genomes</strong></p>
 <p>Download the latest NCBI <code>assembly_summary_genbank.txt</code> file using wget. Note that the link might change over time.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="phylogenetic-tree.html#cb49-1" tabindex="-1"></a><span class="fu">wget</span> https://ftp.ncbi.nih.gov/genomes/genbank/assembly_summary_genbank.txt</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="phylogenetic-tree.html#cb46-1" tabindex="-1"></a><span class="fu">wget</span> https://ftp.ncbi.nih.gov/genomes/genbank/assembly_summary_genbank.txt</span></code></pre></div>
 <p>For each phylum, order, class, family of interest, search in the <a href="https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/">NCBI database</a> and select 5 individuals with the most complete genome. Copy/paste the name and the assembly number in an excel document (seperate columns - Name and Assembly_GCA). From that excel document, copy the list of assembly number <strong>including the column name (Assembly_GCA)</strong> in a vi document called <code>GCA.txt</code>. Search for those identifiers in the assembly summary genbank file with the following command and export the columns (1,7,8,20*) we are interested in to a tabular file called <code>todownload.tab</code>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="phylogenetic-tree.html#cb50-1" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> GCA.txt<span class="kw">`;</span> <span class="cf">do</span> <span class="fu">grep</span> <span class="va">$n</span> assembly_summary_genbank.txt  <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,7,8,16,20 <span class="op">&gt;&gt;</span> todownload.tab <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="phylogenetic-tree.html#cb47-1" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> GCA.txt<span class="kw">`;</span> <span class="cf">do</span> <span class="fu">grep</span> <span class="va">$n</span> assembly_summary_genbank.txt  <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,7,8,16,20 <span class="op">&gt;&gt;</span> todownload.tab <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
 <ul>
 <li><em>Column 1: “assembly_accession” - Column 7: “species_taxid” - Column 8: “organism_name” - Column 16: “asm_name” - Column 20: “ftp_path”</em></li>
 </ul>
 <p>Run the Rscript getFTPlink.r which generates two files
 1. <code>ftp.links.txt</code> : contains the ftp link to the genomic.fna.gz file for each genomes of interest. Download the files using wget and unzip them.
 2. <code>name.txt</code> : contains two column, first is the name of the fasta file followed by organsim name and asm name. This file will be used to change the branch names for the tree</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="phylogenetic-tree.html#cb51-1" tabindex="-1"></a><span class="ex">Rscript</span> /home/SCRIPT/getFTPlink.r </span>
-<span id="cb51-2"><a href="phylogenetic-tree.html#cb51-2" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-i</span> ftp.links.txt</span>
-<span id="cb51-3"><a href="phylogenetic-tree.html#cb51-3" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="phylogenetic-tree.html#cb48-1" tabindex="-1"></a><span class="ex">Rscript</span> /home/SCRIPT/getFTPlink.r </span>
+<span id="cb48-2"><a href="phylogenetic-tree.html#cb48-2" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-i</span> ftp.links.txt</span>
+<span id="cb48-3"><a href="phylogenetic-tree.html#cb48-3" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz</span></code></pre></div>
 <p>Create a new directory and move the ref files there and run CheckM on the downloaded genomes. Discard the genomes that are not completed.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="phylogenetic-tree.html#cb52-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span>
-<span id="cb52-2"><a href="phylogenetic-tree.html#cb52-2" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fna ref_genomes checkm <span class="at">-f</span> output_table.txt <span class="at">-t</span> 48</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="phylogenetic-tree.html#cb49-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span>
+<span id="cb49-2"><a href="phylogenetic-tree.html#cb49-2" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fna ref_genomes checkm <span class="at">-f</span> output_table.txt <span class="at">-t</span> 48</span></code></pre></div>
 <p>Move your bins and reference genomes in a folder together. Add the name of the bin to the beginning of every file and change the file type to .fna.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="phylogenetic-tree.html#cb53-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="phylogenetic-tree.html#cb50-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa <span class="kw">;</span> <span class="cf">do</span>  <span class="fu">perl</span> <span class="at">-lne</span> <span class="st">&#39;if(/^&gt;(\S+)/){ print &quot;&gt;$ARGV $1&quot;} else{ print }&#39;</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fna <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
 <p><strong>2. GToTree</strong></p>
 <p><a href="https://github.com/AstrobioMike/GToTree">GToTree</a></p>
 <p>Move the file <code>name.txt</code> into the folder containing your genomes. Add to this file the name of your bins.</p>
 <p>Create a txt file called <code>fasta_files.txt</code> containing the name of all the fasta files you have.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="phylogenetic-tree.html#cb54-1" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.fna <span class="op">&gt;</span> fasta_files.txt</span>
-<span id="cb54-2"><a href="phylogenetic-tree.html#cb54-2" tabindex="-1"></a><span class="ex">conda</span> activate gtotree</span>
-<span id="cb54-3"><a href="phylogenetic-tree.html#cb54-3" tabindex="-1"></a><span class="ex">GToTree</span> <span class="at">-f</span> fasta_files.txt <span class="at">-H</span> Bacteria <span class="at">-j</span> 4 <span class="at">-o</span> out <span class="at">-G</span> 0 </span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="phylogenetic-tree.html#cb51-1" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.fna <span class="op">&gt;</span> fasta_files.txt</span>
+<span id="cb51-2"><a href="phylogenetic-tree.html#cb51-2" tabindex="-1"></a><span class="ex">conda</span> activate gtotree</span>
+<span id="cb51-3"><a href="phylogenetic-tree.html#cb51-3" tabindex="-1"></a><span class="ex">GToTree</span> <span class="at">-f</span> fasta_files.txt <span class="at">-H</span> Bacteria <span class="at">-j</span> 4 <span class="at">-o</span> out <span class="at">-G</span> 0 </span></code></pre></div>
 <p>Upload the tree to itol</p>
 
 </div>
