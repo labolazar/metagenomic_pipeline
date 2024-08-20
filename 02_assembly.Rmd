@@ -9,11 +9,11 @@ Before running SPAdes you need to add the location of the program to your path w
 export PATH=/home/SCRIPT/SPAdes-3.15.5-Linux/bin:$PATH
 ```
 
-SPAdes takes as input paired-end reads, mate-pairs and single (unpaired) reads in FASTA and FASTQ (can be gzipped) formats. From the directory `03_trim_interleave` create a bash script called `run_spades.sh` with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where you want to output the results from SPAdes.  
+SPAdes takes as input paired-end reads, mate-pairs and single (unpaired) reads in FASTQ gzipped formats. From the directory `03_trim_interleave` create a bash script called `run_spades.sh` with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where you want to output the results from SPAdes.  
 
 ```{bash, eval = FALSE}
 #!/bin/bash
-for i in *.fastq 
+for i in *.gz 
   do metaspades.py --12 $i -o /home/genomics/user/03_trim_interleave/spades_out/$i -t 40 
 done
 ``` 

@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="viromes.html"/>
-<link rel="next" href="other-tips-and-tricks.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -148,16 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="metabolic-pathway.html"><a href="metabolic-pathway.html"><i class="fa fa-check"></i><b>6</b> Metabolic pathway</a></li>
 <li class="chapter" data-level="7" data-path="phylogenetic-tree.html"><a href="phylogenetic-tree.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic tree</a></li>
 <li class="chapter" data-level="8" data-path="viromes.html"><a href="viromes.html"><i class="fa fa-check"></i><b>8</b> Viromes</a></li>
-<li class="chapter" data-level="9" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>9</b> Using nohup and other tips and tricks</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html#bash-scripting-using-nohup"><i class="fa fa-check"></i><b>9.1</b> Bash scripting using nohup</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html"><i class="fa fa-check"></i><b>10</b> Other tips and tricks</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#moving-files-using-scp"><i class="fa fa-check"></i><b>10.1</b> Moving files using SCP</a></li>
-<li class="chapter" data-level="10.2" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#renaiming-files"><i class="fa fa-check"></i><b>10.2</b> Renaiming files</a></li>
-<li class="chapter" data-level="10.3" data-path="other-tips-and-tricks.html"><a href="other-tips-and-tricks.html#extract-scaffhold-based-on-nane-and-coordinates-using-samtools"><i class="fa fa-check"></i><b>10.3</b> Extract scaffhold based on nane and coordinates using samtools</a></li>
-</ul></li>
+<li class="chapter" data-level="9" data-path="using-nohup-and-other-tips-and-tricks.html"><a href="using-nohup-and-other-tips-and-tricks.html"><i class="fa fa-check"></i><b>9</b> Using nohup and other tips and tricks</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -180,8 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="using-nohup-and-other-tips-and-tricks" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">9</span> Using nohup and other tips and tricks<a href="using-nohup-and-other-tips-and-tricks.html#using-nohup-and-other-tips-and-tricks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="bash-scripting-using-nohup" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Bash scripting using nohup<a href="using-nohup-and-other-tips-and-tricks.html#bash-scripting-using-nohup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Bash scripting using nohup</strong></p>
 <p>Fist step is to write your script into a text editor (<code>vi</code> or <code>nano</code>). I suggest using vi as it is a very powerful text editor with plenty of useful shortcuts. You can find more information on vi <a href="https://www.tutorialspoint.com/unix/unix-vi-editor.htm">here</a>.</p>
 <ol style="list-style-type: decimal">
 <li>To create a new file the format of the command is as follow :</li>
@@ -206,15 +196,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="7" style="list-style-type: decimal">
 <li>Once nohup is done running your script it will write <code>Done</code></li>
 </ol>
-</div>
+<p><strong>Other tips and tricks</strong></p>
+<p>To move or copy many files listed in a text files</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb56-1" tabindex="-1"></a><span class="fu">xargs</span> <span class="at">-a</span> file_list.txt mv <span class="at">-t</span> /path/to/directory</span></code></pre></div>
+<p><strong>Moving files using SCP</strong></p>
+<p>To move file from your computer to the server, from your local terminal</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb57-1" tabindex="-1"></a><span class="fu">scp</span> filename.txt servername@server.bio.uqam.ca:/home/user/pathway/todirectory</span></code></pre></div>
+<p>To move file from your the server, to your computer</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb58-1" tabindex="-1"></a><span class="fu">scp</span> kvilleneuve@titan.bio.uqam.ca:/home/kvilleneuve/filename.txt .</span></code></pre></div>
+<p><strong>Renaming files</strong></p>
+<p>Replace the pattern in brackets for the section of words you want to remove from the name of your file.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb59-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span> <span class="fu">mv</span> <span class="va">$i</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">sed</span> s/<span class="st">&quot;_R1.fastq.interleave.fastq.trim.fastq.gz.&quot;</span>/./<span class="va">)</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<p><strong>Extract scaffholds based on name and coordinates using samtools</strong></p>
+<p>Copy the scaffhold name followed by the coordinates in a vi file. Example : contig-115_1168:1-955</p>
+<p>Extract the sequence identified in the vi file into a new file using samtools</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="using-nohup-and-other-tips-and-tricks.html#cb60-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> scaff<span class="kw">`;</span> <span class="cf">do</span> <span class="ex">samtools</span> faidx 2000kb.fa <span class="va">$i</span> <span class="op">&gt;&gt;</span>16S_2Kb.fna<span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="viromes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="other-tips-and-tricks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="viromes.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

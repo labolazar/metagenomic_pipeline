@@ -1,6 +1,6 @@
 # Using nohup and other tips and tricks
 
-## Bash scripting using nohup
+**Bash scripting using nohup**
 
 Fist step is to write your script into a text editor (`vi` or `nano`). I suggest using vi as it is a very powerful text editor with plenty of useful shortcuts. You can find more information on vi [here](https://www.tutorialspoint.com/unix/unix-vi-editor.htm). 
 
@@ -35,14 +35,14 @@ jobs
 
 7. Once nohup is done running your script it will write `Done` 
 
-# Other tips and tricks 
+**Other tips and tricks**
 
 To move or copy many files listed in a text files
 ```{bash, highlight=TRUE, eval=FALSE}
 xargs -a file_list.txt mv -t /path/to/directory
 ``` 
 
-## Moving files using SCP 
+**Moving files using SCP**
 
 To move file from your computer to the server, from your local terminal 
 ```{bash, highlight=TRUE, eval=FALSE}
@@ -54,14 +54,14 @@ To move file from your the server, to your computer
 scp kvilleneuve@titan.bio.uqam.ca:/home/kvilleneuve/filename.txt .
 ``` 
 
-## Renaiming files 
+**Renaming files**
 
 Replace the pattern in brackets for the section of words you want to remove from the name of your file. 
 ```{bash, highlight=TRUE, eval=FALSE}
 for i in *.fastq; do mv $i "$(echo $i | sed s/"_R1.fastq.interleave.fastq.trim.fastq.gz."/./)"; done
 ``` 
 
-## Extract scaffhold based on nane and coordinates using samtools 
+**Extract scaffholds based on name and coordinates using samtools**
 
 Copy the scaffhold name followed by the coordinates in a vi file. Example : contig-115_1168:1-955
 

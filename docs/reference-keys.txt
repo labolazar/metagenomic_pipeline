@@ -7,8 +7,3 @@ metabolic-pathway
 phylogenetic-tree
 viromes
 using-nohup-and-other-tips-and-tricks
-bash-scripting-using-nohup
-other-tips-and-tricks
-moving-files-using-scp
-renaiming-files
-extract-scaffhold-based-on-nane-and-coordinates-using-samtools
