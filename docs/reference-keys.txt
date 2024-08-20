@@ -5,6 +5,7 @@ barrnap
 binning
 metabolic-pathway
 phylogenetic-tree
+viromes
 using-nohup-and-other-tips-and-tricks
 bash-scripting-using-nohup
 other-tips-and-tricks

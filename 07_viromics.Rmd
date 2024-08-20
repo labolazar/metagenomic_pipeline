@@ -1,0 +1,6 @@
+# Viromes 
+
+Useful links from the JGI workshop : 
+
+- [ Get Started with KBase](https://docs.google.com/document/d/1JZBApVeCDV_TMg1hPVQW1OvI-YeQ8bXNr6ZtQHpCnxQ/edit#heading=h.euv7s7c0l0iy)
+- [Viral Genomics Webinar Q & A](https://docs.google.com/document/d/1TPXetRHruFJFB9vStTpp2Ldoe-9CW5ewRGZGEpYT4j4/edit)

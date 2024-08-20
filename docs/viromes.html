@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10 Other tips and tricks | Protocol for metagenomic analyses</title>
-  <meta name="description" content="10 Other tips and tricks | Protocol for metagenomic analyses" />
+  <title>8 Viromes | Protocol for metagenomic analyses</title>
+  <meta name="description" content="8 Viromes | Protocol for metagenomic analyses" />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10 Other tips and tricks | Protocol for metagenomic analyses" />
+  <meta property="og:title" content="8 Viromes | Protocol for metagenomic analyses" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10 Other tips and tricks | Protocol for metagenomic analyses" />
+  <meta name="twitter:title" content="8 Viromes | Protocol for metagenomic analyses" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="using-nohup-and-other-tips-and-tricks.html"/>
-
+<link rel="prev" href="phylogenetic-tree.html"/>
+<link rel="next" href="using-nohup-and-other-tips-and-tricks.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -178,37 +178,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="other-tips-and-tricks" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">10</span> Other tips and tricks<a href="other-tips-and-tricks.html#other-tips-and-tricks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>To move or copy many files listed in a text files</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="other-tips-and-tricks.html#cb56-1" tabindex="-1"></a><span class="fu">xargs</span> <span class="at">-a</span> file_list.txt mv <span class="at">-t</span> /path/to/directory</span></code></pre></div>
-<div id="moving-files-using-scp" class="section level2 hasAnchor" number="10.1">
-<h2><span class="header-section-number">10.1</span> Moving files using SCP<a href="other-tips-and-tricks.html#moving-files-using-scp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To move file from your computer to the server, from your local terminal</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="other-tips-and-tricks.html#cb57-1" tabindex="-1"></a><span class="fu">scp</span> filename.txt servername@server.bio.uqam.ca:/home/user/pathway/todirectory</span></code></pre></div>
-<p>To move file from your the server, to your computer</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="other-tips-and-tricks.html#cb58-1" tabindex="-1"></a><span class="fu">scp</span> kvilleneuve@titan.bio.uqam.ca:/home/kvilleneuve/filename.txt .</span></code></pre></div>
-</div>
-<div id="renaiming-files" class="section level2 hasAnchor" number="10.2">
-<h2><span class="header-section-number">10.2</span> Renaiming files<a href="other-tips-and-tricks.html#renaiming-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Replace the pattern in brackets for the section of words you want to remove from the name of your file.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="other-tips-and-tricks.html#cb59-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span> <span class="fu">mv</span> <span class="va">$i</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">sed</span> s/<span class="st">&quot;_R1.fastq.interleave.fastq.trim.fastq.gz.&quot;</span>/./<span class="va">)</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
-</div>
-<div id="extract-scaffhold-based-on-nane-and-coordinates-using-samtools" class="section level2 hasAnchor" number="10.3">
-<h2><span class="header-section-number">10.3</span> Extract scaffhold based on nane and coordinates using samtools<a href="other-tips-and-tricks.html#extract-scaffhold-based-on-nane-and-coordinates-using-samtools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Copy the scaffhold name followed by the coordinates in a vi file. Example : contig-115_1168:1-955</p>
-<p>Extract the sequence identified in the vi file into a new file using samtools</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="other-tips-and-tricks.html#cb60-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> scaff<span class="kw">`;</span> <span class="cf">do</span> <span class="ex">samtools</span> faidx 2000kb.fa <span class="va">$i</span> <span class="op">&gt;&gt;</span>16S_2Kb.fna<span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<div id="viromes" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Viromes<a href="viromes.html#viromes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Useful links from the JGI workshop :</p>
+<ul>
+<li><a href="https://docs.google.com/document/d/1JZBApVeCDV_TMg1hPVQW1OvI-YeQ8bXNr6ZtQHpCnxQ/edit#heading=h.euv7s7c0l0iy">Get Started with KBase</a></li>
+<li><a href="https://docs.google.com/document/d/1TPXetRHruFJFB9vStTpp2Ldoe-9CW5ewRGZGEpYT4j4/edit">Viral Genomics Webinar Q &amp; A</a></li>
+</ul>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="using-nohup-and-other-tips-and-tricks.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="phylogenetic-tree.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="using-nohup-and-other-tips-and-tricks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +214,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/08_nohup.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07_viromics.Rmd",
 "text": "Edit"
 },
 "history": {
