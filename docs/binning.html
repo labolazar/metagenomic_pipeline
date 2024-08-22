@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-20" />
+<meta name="date" content="2024-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: lower-alpha">
 <li>Activate the scons_maps conda environment</li>
 </ol>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="binning.html#cb25-1" tabindex="-1"></a><span class="ex">conda</span> activate scons_map</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="binning.html#cb26-1" tabindex="-1"></a><span class="ex">conda</span> activate scons_map</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Execute scons from the <code>genome_mapping</code> directory (<code>/home/genomics/genome_mapping</code>). Modify the following parameters accordingly :</li>
 </ol>
@@ -190,17 +190,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>--assembly</code> = path to the filtered contig FASTA files including the name of the file at the end.</li>
 <li><code>--sampleids</code> = name of the interleave.trim.fastq.</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="binning.html#cb26-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/ <span class="at">--assembly</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/1kb_sample_01_contigs.fasta <span class="at">--outdir</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/output <span class="at">--sampleids</span><span class="op">=</span>sample_01.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>0 <span class="at">--tmpdir</span><span class="op">=</span>/home/genomics/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="binning.html#cb27-1" tabindex="-1"></a><span class="ex">scons</span> <span class="at">--fastq_dir</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/ <span class="at">--assembly</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/1kb_sample_01_contigs.fasta <span class="at">--outdir</span><span class="op">=</span>/home/genomics/user/05_binning/sample_01/output <span class="at">--sampleids</span><span class="op">=</span>sample_01.fastq.interleave.fastq.trim.fastq <span class="at">--align_thread</span><span class="op">=</span>5 <span class="at">--samsort_thread</span><span class="op">=</span>5 <span class="at">--samsort_mem</span><span class="op">=</span>768M <span class="at">--nheader</span><span class="op">=</span>0 <span class="at">--tmpdir</span><span class="op">=</span>/home/genomics/tmp <span class="at">--logfile</span><span class="op">=</span>mapping.log</span></code></pre></div>
 <p>In the specified output directory you will find a <code>.sorted.bam</code> which contains the depth information required by <code>MetaBAT2</code>. Create a directory call <code>sorted_bam</code> and move all the <code>sorted.bam</code> files into this directory.</p>
 <p><strong>2. Depth file</strong></p>
 <p>The depth allows you to know how many sequence you can align with certain sections of your contigs. Section with very little depth (few sequences) are not reputable to use. We use the script <code>jgi_summarize_bam_contig_depths</code>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>From the directory <code>sorted_bam</code> create a bash script called <code>run_depthfile.sh</code> with the following commands and execute the script using nohup.</li>
 </ol>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="binning.html#cb27-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb27-2"><a href="binning.html#cb27-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.sorted.bam</span>
-<span id="cb27-3"><a href="binning.html#cb27-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">/home/SCRIPT/jgi_summarize_bam_contig_depths</span> <span class="at">--outputDepth</span> <span class="va">$i</span>.depth.txt <span class="at">--pairedContigs</span> <span class="va">$i</span>.paired.txt <span class="va">$i</span></span>
-<span id="cb27-4"><a href="binning.html#cb27-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="binning.html#cb28-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb28-2"><a href="binning.html#cb28-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.sorted.bam</span>
+<span id="cb28-3"><a href="binning.html#cb28-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">/home/SCRIPT/jgi_summarize_bam_contig_depths</span> <span class="at">--outputDepth</span> <span class="va">$i</span>.depth.txt <span class="at">--pairedContigs</span> <span class="va">$i</span>.paired.txt <span class="va">$i</span></span>
+<span id="cb28-4"><a href="binning.html#cb28-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
 <ul>
 <li><strong>Output</strong> : For each given file the script generates a file ending with <code>.depth.txt</code> as output.</li>
 <li>Move these files into a directory call <code>metabat2</code> and also copy into this folder the filtered contig FASTA.</li>
@@ -210,8 +210,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: lower-alpha">
 <li>If required, first deactivate <code>scons_map</code> and then activate conda.</li>
 </ol>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="binning.html#cb28-1" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
-<span id="cb28-2"><a href="binning.html#cb28-2" tabindex="-1"></a><span class="ex">conda</span> activate</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="binning.html#cb29-1" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb29-2"><a href="binning.html#cb29-2" tabindex="-1"></a><span class="ex">conda</span> activate</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>In order to be able to loop this for throught all samples, the name of filtered contig FASTA file must match exactly the beginning of the depths file. Example :</li>
 </ol>
@@ -222,10 +222,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Create a bash script called <code>run_metabat2.sh</code> with the following commands and execute the script using nohup.</li>
 </ol>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="binning.html#cb29-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb29-2"><a href="binning.html#cb29-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
-<span id="cb29-3"><a href="binning.html#cb29-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metabat2</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-a</span> <span class="va">$i</span>.depth.txt <span class="at">-o</span> bins_<span class="va">$i</span> <span class="at">-t</span> 0 <span class="at">--minCVSum</span> 0 <span class="at">--saveCls</span> <span class="at">-d</span> <span class="at">-v</span> <span class="at">--minCV</span> 0.1 <span class="at">-m</span> 1000</span>
-<span id="cb29-4"><a href="binning.html#cb29-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="binning.html#cb30-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb30-2"><a href="binning.html#cb30-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fasta</span>
+<span id="cb30-3"><a href="binning.html#cb30-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metabat2</span> <span class="at">-i</span> <span class="va">$i</span> <span class="at">-a</span> <span class="va">$i</span>.depth.txt <span class="at">-o</span> bins_<span class="va">$i</span> <span class="at">-t</span> 0 <span class="at">--minCVSum</span> 0 <span class="at">--saveCls</span> <span class="at">-d</span> <span class="at">-v</span> <span class="at">--minCV</span> 0.1 <span class="at">-m</span> 1000</span>
+<span id="cb30-4"><a href="binning.html#cb30-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
 <ul>
 <li><strong>Output</strong> - for each given file metabat2 generates a directory containing all the bins created.</li>
 </ul>
@@ -235,11 +235,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: lower-alpha">
 <li>Activate the environment</li>
 </ol>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="binning.html#cb30-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="binning.html#cb31-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Create a bash script called <code>run_checkm.sh</code> with the following commands and execute the script using nohup.</li>
 </ol>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="binning.html#cb31-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="binning.html#cb32-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li><p>Open the <code>output.txt</code> document with excel to verify the <strong>completeness</strong> and <strong>contamination</strong> of your bins.
 <strong>Standard : Completeness &gt; 50 % and Contamination &lt; 10 %</strong></p></li>
@@ -249,23 +249,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><strong>5. Metagenome assembled genome statistics</strong></p>
 <p><a href="">Quast</a></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="binning.html#cb32-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb32-2"><a href="binning.html#cb32-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
-<span id="cb32-3"><a href="binning.html#cb32-3" tabindex="-1"></a>  <span class="cf">do</span>  <span class="ex">python</span> /home/genomics/quast-5.2.0/quast.py <span class="va">$i</span> <span class="at">-o</span> /home/genomics/karine/stleonard/E4-2/quast_out/<span class="va">$i</span> <span class="at">--threads</span> 48 <span class="at">--no-check</span> <span class="at">--no-plots</span> <span class="at">--no-html</span> <span class="at">--no-icarus</span></span>
-<span id="cb32-4"><a href="binning.html#cb32-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="binning.html#cb33-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb33-2"><a href="binning.html#cb33-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">report.txt</span><span class="kw">)</span>  </span>
-<span id="cb33-3"><a href="binning.html#cb33-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/report.txt&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_report.txt&quot;</span></span>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="binning.html#cb33-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb33-2"><a href="binning.html#cb33-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
+<span id="cb33-3"><a href="binning.html#cb33-3" tabindex="-1"></a>  <span class="cf">do</span>  <span class="ex">python</span> /home/genomics/quast-5.2.0/quast.py <span class="va">$i</span> <span class="at">-o</span> /home/genomics/karine/stleonard/E4-2/quast_out/<span class="va">$i</span> <span class="at">--threads</span> 48 <span class="at">--no-check</span> <span class="at">--no-plots</span> <span class="at">--no-html</span> <span class="at">--no-icarus</span></span>
 <span id="cb33-4"><a href="binning.html#cb33-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="binning.html#cb34-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb34-2"><a href="binning.html#cb34-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">report.txt</span><span class="kw">)</span>  </span>
+<span id="cb34-3"><a href="binning.html#cb34-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/report.txt&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_report.txt&quot;</span></span>
+<span id="cb34-4"><a href="binning.html#cb34-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p><strong>6. Taxonomy</strong></p>
 <p><a href="https://github.com/Ecogenomics/GTDBTk">GTDBTK</a></p>
 <p>Activate the GTDBTK environment</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="binning.html#cb34-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
 <p>I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
 <p>In the folder with all your clean and completed genomes run this command with nohup</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb36-2"><a href="binning.html#cb36-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="binning.html#cb37-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb37-2"><a href="binning.html#cb37-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
 <p>Once it is done running, you can open the folder called <code>gtdbk_output</code> and copy the folder <code>gtdbtk.bac120.summary.tsv</code> to your local computer in order to open it with excel. Use this folder to identify the phylum, class, order, family and genus that you need to download in order to construct your tree.</p>
 
 </div>

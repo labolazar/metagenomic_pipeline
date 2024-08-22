@@ -11,6 +11,8 @@ export PATH=/home/SCRIPT/SPAdes-3.15.5-Linux/bin:$PATH
 
 SPAdes takes as input paired-end reads, mate-pairs and single (unpaired) reads in FASTQ gzipped formats. From the directory `03_trim_interleave` create a bash script called `run_spades.sh` with the following commands and execute the script using nohup. Before running update the path to reflect the actual path where you want to output the results from SPAdes.  
 
+**For DNA : **
+
 ```{bash, eval = FALSE}
 #!/bin/bash
 for i in *.gz 
@@ -20,9 +22,25 @@ done
 
 For each file given to SPAdes, the program will generate in the specified directory (here `spades_out`) a new folder with the full sample name (which should be quite long at this point) and inside each folder the assembled fasta file (called `contigs.fasta`). 
 
-The following section allows the user to rename each folder created by SPAdes to a shorter name and then paste this name in front of each `contigs.fasta` file.
+**For RNA : **
+
+```{bash, eval = FALSE}
+#!/bin/bash
+for i in *.gz 
+  do metaspades.py --rna --12 $i -o /home/genomics/user/03_trim_interleave/spades_out/$i -t 40 
+done
+``` 
+
+rnaSPAdes outputs one main FASTA file named `transcripts.fasta`. The corresponding file with paths in the assembly_graph.fastg is transcripts.paths. In addition rnaSPAdes outputs transcripts with different level of filtration :
+
+- `hard_filtered_transcripts.fasta` : includes only long and reliable transcripts with rather high expression
+- `soft_filtered_transcripts.fasta` : includes short and low-expressed transcripts, likely to contain junk sequences.
+
+We recommend using the main `transcripts.fasta` file in case you don't have any specific needs for your projects.
 
 **2. Rename SPAdes folder output**
+
+The following section allows the user to rename each folder created by SPAdes to a shorter name and then paste this name in front of each `contigs.fasta` file.
 
 a) Create a csv file called `rename_folders.csv`. In the file for each folder write the old file name followed by the new file name separated by a comma. Example : 
 
