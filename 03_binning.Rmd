@@ -121,20 +121,14 @@ done
 
 Activate the GTDBTK environment
 ```{bash, highlight=TRUE, eval=FALSE}
-conda activate gtdbtk-2.1.1
+conda activate gtdbtk-2.4.0
 ``` 
-
-I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)
-```{bash, highlight=TRUE, eval=FALSE}
-export GTDBTK_DATA_PATH=/home/genomics/release214
-```
 
 In the folder with all your clean and completed genomes run this command with nohup
 
 ```{bash, highlight=TRUE, eval=FALSE}
 #!/bin/bash
-gtdbtk classify_wf --cpus 20 --genome_dir /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp --out_dir /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output -x fa
+gtdbtk classify_wf --cpus 20 --genome_dir /home/genomics/06_mags/ --out_dir /home/genomics/06_mags/gtdbk_output -x fa
 ```
 
-
-Once it is done running, you can open the folder called `gtdbk_output` and copy the folder `gtdbtk.bac120.summary.tsv` to your local computer in order to open it with excel. Use this folder to identify the phylum, class, order, family and genus that you need to download in order to construct your tree. 
+Once it is done running, you can open the folder called `gtdbk_output` and copy the file `gtdbtk.bac120.summary.tsv` to your local computer in order to open it with excel. 

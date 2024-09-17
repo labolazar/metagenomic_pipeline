@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-21" />
+<meta name="date" content="2024-09-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -260,13 +260,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>6. Taxonomy</strong></p>
 <p><a href="https://github.com/Ecogenomics/GTDBTk">GTDBTK</a></p>
 <p>Activate the GTDBTK environment</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.1.1</span></code></pre></div>
-<p>I located the folder with the untar GTDBTK data (GTDBTk_data/release214) and I added the path to this file to my ~/.profile (using vi)</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>/home/genomics/release214</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.4.0</span></code></pre></div>
 <p>In the folder with all your clean and completed genomes run this command with nohup</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="binning.html#cb37-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb37-2"><a href="binning.html#cb37-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp <span class="at">--out_dir</span> /home/kvilleneuve/Shotgun_Project/saumure/05_binning/complete_bins_1500bp/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
-<p>Once it is done running, you can open the folder called <code>gtdbk_output</code> and copy the folder <code>gtdbtk.bac120.summary.tsv</code> to your local computer in order to open it with excel. Use this folder to identify the phylum, class, order, family and genus that you need to download in order to construct your tree.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb36-2"><a href="binning.html#cb36-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/genomics/06_mags/ <span class="at">--out_dir</span> /home/genomics/06_mags/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
+<p>Once it is done running, you can open the folder called <code>gtdbk_output</code> and copy the file <code>gtdbtk.bac120.summary.tsv</code> to your local computer in order to open it with excel.</p>
 
 </div>
             </section>

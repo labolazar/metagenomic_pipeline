@@ -27,7 +27,7 @@ For each file given to SPAdes, the program will generate in the specified direct
 ```{bash, eval = FALSE}
 #!/bin/bash
 for i in *.gz 
-  do metaspades.py --rna --12 $i -o /home/genomics/user/03_trim_interleave/spades_out/$i -t 40 
+  do spades.py --rna --12 $i -o /home/genomics/user/03_trim_interleave/spades_out/$i -t 40 
 done
 ``` 
 

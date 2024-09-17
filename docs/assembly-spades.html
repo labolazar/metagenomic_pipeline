@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2024-08-21" />
+<meta name="date" content="2024-09-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>For RNA : </strong></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="assembly-spades.html#cb12-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb12-2"><a href="assembly-spades.html#cb12-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gz </span>
-<span id="cb12-3"><a href="assembly-spades.html#cb12-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">metaspades.py</span> <span class="at">--rna</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/spades_out/<span class="va">$i</span> <span class="at">-t</span> 40 </span>
+<span id="cb12-3"><a href="assembly-spades.html#cb12-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">spades.py</span> <span class="at">--rna</span> <span class="at">--12</span> <span class="va">$i</span> <span class="at">-o</span> /home/genomics/user/03_trim_interleave/spades_out/<span class="va">$i</span> <span class="at">-t</span> 40 </span>
 <span id="cb12-4"><a href="assembly-spades.html#cb12-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p>rnaSPAdes outputs one main FASTA file named <code>transcripts.fasta</code>. The corresponding file with paths in the assembly_graph.fastg is transcripts.paths. In addition rnaSPAdes outputs transcripts with different level of filtration :</p>
 <ul>
