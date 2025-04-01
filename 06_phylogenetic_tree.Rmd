@@ -49,3 +49,5 @@ GToTree -f fasta_files.txt -H Bacteria -j 4 -o out -G 0
 ``` 
 
 Upload the tree to itol
+[iTol](https://itol.embl.de/)
+
