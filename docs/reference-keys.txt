@@ -1,7 +1,7 @@
 introduction
 pre-process
 assembly-spades
-barrnap
+taxonomic-profiles
 binning
 metabolic-pathway
 phylogenetic-tree
