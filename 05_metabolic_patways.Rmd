@@ -28,7 +28,26 @@ for i in *.faa; do sed -i 's/\s.*$//' $i; done
 
 e) Transfer the files to your local computer and follow the instructions on the BlastKOALA website for submission. 
 
-**2. Other programs we aren't using anymore**
+**2. kofamscan**
+
+a) Move or copy the generated amino acids (`.faa`) to the user `genomics2` and log in to titan under this user
+
+b) Activate the environnement
+
+```{bash, eval=FALSE}
+conda activate kofamscan
+```
+
+c) Execute the annotation using a foor loop and nohup 
+
+```{bash, eval=FALSE}
+for i in *.faa; do exec_annotation -p /home/SCRIPT/kofamscan/profiles -k /home/SCRIPT/kofamscan/ko_list \
+--cpu 40 -f detail-tsv --tmp-dir kofamscan-tmp -o ~/$i $i ; done
+```
+
+Resulting file will have the `.tsv` extension and can easily be parsed using R. 
+
+**3. Other programs we aren't using anymore**
 
 1. DRAM
 
