@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2025-12-01" />
+<meta name="date" content="2026-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -229,17 +229,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>Output</strong> - for each given file metabat2 generates a directory containing all the bins created.</li>
 </ul>
+<p><strong>MetaBAT2 - Under user genomics2</strong></p>
+<p>This MetaBAT2 installation does not require conda</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="binning.html#cb32-1" tabindex="-1"></a><span class="ex">~/metabat/bin/metabat2</span> <span class="at">-i</span> assmbly.fasta <span class="at">-o</span> ~/folder/to/export/bins/ <span class="at">-a</span> depth.txt <span class="at">-t</span> 20</span></code></pre></div>
 <p><strong>4. Check quality</strong></p>
+<p>I recommend using checkm2 which is now available under the user genomics2.</p>
 <p><a href="https://github.com/Ecogenomics/CheckM/wiki">Checkm</a></p>
 <p><strong>You have to go back one folder in the terminal as checkm will run on all the files in the folder you give it as input. Checkm will automatically create a folder called checkm in the specified directory, therefor if you must run checkm again make sure to delete the newly created checkm folder, otherwise checkm will give you an error message.</strong></p>
 <ol style="list-style-type: lower-alpha">
 <li>Activate the environment</li>
 </ol>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="binning.html#cb32-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="binning.html#cb33-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Create a bash script called <code>run_checkm.sh</code> with the following commands and execute the script using nohup.</li>
 </ol>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="binning.html#cb33-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="binning.html#cb34-1" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa 2kbp_bins/ 2kbp_bins/checkm <span class="at">-f</span> 2kbp_bins/output.txt <span class="at">-t</span> 48 </span></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li><p>Open the <code>output.txt</code> document with excel to verify the <strong>completeness</strong> and <strong>contamination</strong> of your bins.
 <strong>Standard : Completeness &gt; 50 % and Contamination &lt; 10 %</strong></p></li>
@@ -247,24 +251,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Filter the columns by Completeness, and separate the ones &lt; 50 % by adding a line in excel</p></li>
 <li><p>Filter by Contamination, and highlight all the ones &gt; 10 % - These are the bins you want to clean</p></li>
 </ol>
+<p><a href="https://github.com/chklovski/CheckM2">checkm2</a></p>
+<p>Available under the user genomics2</p>
+<ol style="list-style-type: lower-alpha">
+<li>Activate the environment</li>
+</ol>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="ex">conda</span> activate checkm2</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Set path to the databse</li>
+</ol>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">CHECKM2DB</span><span class="op">=</span><span class="st">&quot;/home/SCRIPT/CheckM2_database/uniref100.KO.1.dmnd&quot;</span></span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Create a bash script called <code>run_checkm.sh</code> with the following commands and execute the script using nohup.</li>
+</ol>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="binning.html#cb37-1" tabindex="-1"></a><span class="ex">checkm2</span> predict <span class="at">--threads</span> 30 <span class="at">--input</span> path/to/folder/with/your/bins <span class="at">--output-directory</span> path/to/folder/whereto/output <span class="at">--force</span> <span class="at">-x</span> fasta </span></code></pre></div>
 <p><strong>5. Metagenome assembled genome statistics</strong></p>
 <p><a href="">Quast</a></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="binning.html#cb34-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb34-2"><a href="binning.html#cb34-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
-<span id="cb34-3"><a href="binning.html#cb34-3" tabindex="-1"></a>  <span class="cf">do</span>  <span class="ex">python</span> /home/genomics/quast-5.2.0/quast.py <span class="va">$i</span> <span class="at">-o</span> /home/genomics/karine/stleonard/E4-2/quast_out/<span class="va">$i</span> <span class="at">--threads</span> 48 <span class="at">--no-check</span> <span class="at">--no-plots</span> <span class="at">--no-html</span> <span class="at">--no-icarus</span></span>
-<span id="cb34-4"><a href="binning.html#cb34-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="binning.html#cb35-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb35-2"><a href="binning.html#cb35-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">report.txt</span><span class="kw">)</span>  </span>
-<span id="cb35-3"><a href="binning.html#cb35-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/report.txt&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_report.txt&quot;</span></span>
-<span id="cb35-4"><a href="binning.html#cb35-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>These informations are now all generate by Checkm2 so if Checkm2 was used these steps do not need to be used.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="binning.html#cb38-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb38-2"><a href="binning.html#cb38-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.fa</span>
+<span id="cb38-3"><a href="binning.html#cb38-3" tabindex="-1"></a>  <span class="cf">do</span>  <span class="ex">python</span> /home/genomics/quast-5.2.0/quast.py <span class="va">$i</span> <span class="at">-o</span> /home/genomics/karine/stleonard/E4-2/quast_out/<span class="va">$i</span> <span class="at">--threads</span> 48 <span class="at">--no-check</span> <span class="at">--no-plots</span> <span class="at">--no-html</span> <span class="at">--no-icarus</span></span>
+<span id="cb38-4"><a href="binning.html#cb38-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="binning.html#cb39-1" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb39-2"><a href="binning.html#cb39-2" tabindex="-1"></a>    <span class="kw">(</span><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">report.txt</span><span class="kw">)</span>  </span>
+<span id="cb39-3"><a href="binning.html#cb39-3" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">/report.txt&quot;</span> <span class="st">&quot;</span><span class="va">${folder}</span><span class="st">_report.txt&quot;</span></span>
+<span id="cb39-4"><a href="binning.html#cb39-4" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p><strong>6. Taxonomy</strong></p>
 <p><a href="https://github.com/Ecogenomics/GTDBTk">GTDBTK</a></p>
 <p>Activate the GTDBTK environment</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="binning.html#cb36-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.4.0</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="binning.html#cb40-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk-2.4.0</span></code></pre></div>
 <p>In the folder with all your clean and completed genomes run this command with nohup</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="binning.html#cb37-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb37-2"><a href="binning.html#cb37-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/genomics/06_mags/ <span class="at">--out_dir</span> /home/genomics/06_mags/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="binning.html#cb41-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb41-2"><a href="binning.html#cb41-2" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--cpus</span> 20 <span class="at">--genome_dir</span> /home/genomics/06_mags/ <span class="at">--out_dir</span> /home/genomics/06_mags/gtdbk_output <span class="at">-x</span> fa</span></code></pre></div>
 <p>Once it is done running, you can open the folder called <code>gtdbk_output</code> and copy the file <code>gtdbtk.bac120.summary.tsv</code> to your local computer in order to open it with excel.</p>
+<p><strong>gtdbtk-2.5.2 - Under user genomics2</strong></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="binning.html#cb42-1" tabindex="-1"></a><span class="ex">conda</span> activate gtdbtk_v2.5.2</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="binning.html#cb43-1" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--genome_dir</span> /home/genomics2/pierre/05_bins <span class="at">--out_dir</span> /home/genomics2/pierre/05_bins <span class="at">-x</span> fa <span class="at">--cpus</span> 40</span></code></pre></div>
+<p>[INFO] - Added GTDBTK_DATA_PATH (/home/genomics2/miniconda3/envs/gtdbtk-2.5.2/share/gtdbtk-2.5.2/db) to the GTDB-Tk conda environment.</p>
+<p>conda activate gtdbtk_v2.5.2</p>
 
 </div>
             </section>

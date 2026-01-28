@@ -47,6 +47,17 @@ for i in *.faa; do exec_annotation -p /home/SCRIPT/kofamscan/profiles -k /home/S
 
 Resulting file will have the `.tsv` extension and can easily be parsed using R. 
 
+** 3. Metabolic **
+
+User genomics2 
+
+```{bash, eval = FALSE}
+conda activate METABOLIC_v4.0
+# Run this command using nohup with a script savec in the metabolic directory
+perl METABOLIC-G.pl -in-gn /home/genomics2/karine/ARC_NANO_FAA/ -o /home/genomics2/karine/arc_metabolic_out
+```
+
+
 **3. Other programs we aren't using anymore**
 
 1. DRAM

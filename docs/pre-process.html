@@ -23,7 +23,7 @@
 <meta name="author" content="Karine Villeneuve" />
 
 
-<meta name="date" content="2025-12-01" />
+<meta name="date" content="2026-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,8 +172,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="pre-process" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">2</span> Pre-process<a href="pre-process.html#pre-process" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>1. Unzip</strong></p>
-<p>Copy all your raw <code>fastq.gz</code> files into the folder called <code>02_preprocess</code>. Move into the folder and unzip the files.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="pre-process.html#cb4-1" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz</span></code></pre></div>
+<p>Copy all your raw <code>fastq.gz</code> files into the folder called <code>02_preprocess</code>. Move into the folder and unzip the files using <a href="https://github.com/madler/pigz">Parallel Implementation of GZip (pigz)</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="pre-process.html#cb4-1" tabindex="-1"></a><span class="ex">pigz</span> <span class="at">-d</span> <span class="pp">*</span></span></code></pre></div>
 <p><strong>2. Interleave</strong></p>
 <p>We are using a modified version of the script <font color='green'>interleave.py</font> from this <a href="https://gist.github.com/ngcrawford/2232505">GitHub gist</a> to interleave the forward and reverse read. Create a bash script called <code>run_interleave.sh</code> with the following commands and execute the script using nohup.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="pre-process.html#cb5-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
@@ -212,10 +212,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://github.com/lh3/seqtk">Seqtk</a> is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format.</p>
 <p>Move all the <code>.interleave.fastq.trim.fastq</code> to the folder <code>03_trim_interleave</code> and move into this folder. Create a bash script called <code>run_seqtk.sh</code> with the following commands and execute the script using nohup.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="pre-process.html#cb9-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb9-2"><a href="pre-process.html#cb9-2" tabindex="-1"></a><span class="fu">gzip</span> <span class="pp">*</span>.fastq</span>
-<span id="cb9-3"><a href="pre-process.html#cb9-3" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gz <span class="kw">;</span> </span>
-<span id="cb9-4"><a href="pre-process.html#cb9-4" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">seqtk</span> seq <span class="at">-a</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fasta <span class="kw">;</span> </span>
-<span id="cb9-5"><a href="pre-process.html#cb9-5" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
+<span id="cb9-2"><a href="pre-process.html#cb9-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gz <span class="kw">;</span> </span>
+<span id="cb9-3"><a href="pre-process.html#cb9-3" tabindex="-1"></a>  <span class="cf">do</span> <span class="ex">seqtk</span> seq <span class="at">-a</span> <span class="va">$i</span> <span class="op">&gt;</span> <span class="va">$i</span>.fasta <span class="kw">;</span> </span>
+<span id="cb9-4"><a href="pre-process.html#cb9-4" tabindex="-1"></a><span class="cf">done</span> </span></code></pre></div>
 <hr />
 
 </div>

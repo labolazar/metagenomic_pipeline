@@ -61,6 +61,13 @@ Replace the pattern in brackets for the section of words you want to remove from
 for i in *.fastq; do mv $i "$(echo $i | sed s/"_R1.fastq.interleave.fastq.trim.fastq.gz."/./)"; done
 ``` 
 
+
+Rename multiple files using a text file (example:`rename.txt`) consisting of the following 2 columns separated by a space : `old_name` `new_name` (No column name required)
+```{bash, highlight=TRUE, eval=FALSE}
+while read old new ; do mv -v "$old" "$new" ; done < rename.txt
+``` 
+
+
 **Extract scaffholds based on name and coordinates using samtools**
 
 Copy the scaffhold name followed by the coordinates in a vi file. Example : contig-115_1168:1-955

@@ -15,10 +15,10 @@ Most process take all lot of time complete and therefore **nohup** should be use
 
 **1. Unzip**
 
-Copy all your raw `fastq.gz` files into the folder called `02_preprocess`. Move into the folder and unzip the files. 
+Copy all your raw `fastq.gz` files into the folder called `02_preprocess`. Move into the folder and unzip the files using [Parallel Implementation of GZip (pigz)](https://github.com/madler/pigz). 
 
 ```{bash, eval=FALSE}
-gunzip *.gz
+pigz -d *
 ```
 
 **2. Interleave**
@@ -70,7 +70,7 @@ fastqc *.interleave.fastq.trim.fastq --outdir=fastqc
 - **Output** : For each given file FastQc generates an HTML file. The quality of the samples can be assessed by transferring the HTML files to your local computer. 
 - To determine if trimming caused any issue you can also run FastQc on the unzipped raw file and compare the results with the interleaved-trimmed file. 
 
-**5. Transfer to Fasta**
+**5. Transfer to Fasta** 
 
 [Seqtk](https://github.com/lh3/seqtk) is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format. 
 
@@ -78,7 +78,6 @@ Move all the `.interleave.fastq.trim.fastq` to the folder `03_trim_interleave` a
 
 ```{bash, eval=FALSE}
 #!/bin/bash
-gzip *.fastq
 for i in *.gz ; 
   do seqtk seq -a $i > $i.fasta ; 
 done 
